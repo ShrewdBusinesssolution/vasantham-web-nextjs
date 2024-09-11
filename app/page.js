@@ -32,21 +32,7 @@ export default function Home() {
         </SelectGroup>
       </SelectContent>
     </Select>
-    <Popover className="absolute top-0 right-0">
-      <PopoverTrigger asChild>
-        <Button variant="outline" className="rounded-full" size="icon" >l</Button>
-      </PopoverTrigger>
-      <PopoverContent  className="w-fit p-0 rounded-xl">
-        <div className="w-[150px] p-2 ">
-          <ul>
-            <li className="w-full p-2 hover:bg-gradient-to-br from-white to-blue-400 from-20% rounded-[10px]">login</li>
-            <li className="w-full p-2 hover:bg-gradient-to-br from-white to-blue-400 from-20% rounded-[10px]">login</li>
-
-            
-          </ul>
-        </div>
-      </PopoverContent>
-    </Popover>
+   
     </main>
   );
 }

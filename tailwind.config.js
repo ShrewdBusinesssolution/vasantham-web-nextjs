@@ -8,15 +8,10 @@ module.exports = {
   ],
   theme: {
   	extend: {
-  		colors: {
-  			primary: 'var(--background)',
-  			secondary: 'var(--foreground)'
-  		},
-  		borderRadius: {
-  			lg: 'var(--radius)',
-  			md: 'calc(var(--radius) - 2px)',
-  			sm: 'calc(var(--radius) - 4px)'
-  		}
+		colors: {
+			primary: '#008DF1',
+			secondary: '#FF70B8'
+		  },
   	}
   },
   plugins: [require("tailwindcss-animate")],
