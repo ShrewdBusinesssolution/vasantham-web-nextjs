@@ -186,17 +186,17 @@ export default function SignUpForm() {
                     name="terms"
                     render={({ field }) => (
                         <FormItem className="flex gap-2 flex-col">
-                            <div className="flex gap-2 items-center">
+                            {/* <div className="flex gap-2 items-center">
                                 <FormControl>
                                     <Checkbox
                                         checked={field.value}
                                         onCheckedChange={field.onChange}
                                     />
                                 </FormControl>
-                                {/* <FormLabel className="mt-0">
+                                <FormLabel className="mt-0">
                                     Use different settings for my mobile devices
-                                </FormLabel> */}
-                            </div>
+                                </FormLabel>
+                            </div> */}
                             <FormMessage />
                         </FormItem>
                     )}

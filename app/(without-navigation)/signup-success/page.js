@@ -1,0 +1,32 @@
+import React from 'react'
+import Image from 'next/image'
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
+
+const Success = () => {
+  return (
+    <main className="h-screen max-w-screen bg-white">
+    <div className="grid grid-cols-1  lg:grid-cols-2 xl:grid-cols-2">
+      <div className="h-screen bg-cover hidden md:hidden lg:block xl:block relative">
+        <Image
+          src={"/assets/login.webp"}
+          fill={true}
+          className=" object-fit"
+          priority={true}
+        />
+      </div>
+      <div className="px-5 md:px-10 xl:px-20 flex flex-col justify-center space-y-4">
+       <Image src="/assets/gif/enquery.gif" className='' width={100} height={100}/>
+        <h6 className="font-bold capitalize">Your profile has been created!</h6>
+        <p className='text-sm'>The Profile has been created to our records, Kindly back to login
+        and continue with your credentials.</p>
+        <Link href="/login">
+<Button variant="primary" className="uppercase w-fit px-5 text-xs">Back to login</Button>
+</Link>
+      </div>
+    </div>
+  </main>
+  )
+}
+
+export default Success

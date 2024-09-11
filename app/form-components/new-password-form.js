@@ -109,7 +109,7 @@ export default function NewPasswordForm() {
                     name="password"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>New Password <small className="text-primary">*</small></FormLabel>
+                            <FormLabel className="font-semibold">New Password <small className="text-primary">*</small></FormLabel>
                             <FormControl>
                                 <div className="relative ">
                                     <div className=" absolute right-0 top-0 bottom-0 z-10 h-full grid place-content-center px-5 ">
@@ -117,7 +117,7 @@ export default function NewPasswordForm() {
                                             {newPasswordVisible ? <FaEyeSlash className="text-primary" /> : <FaEye className="text-primary" />}
                                         </div>
                                     </div>
-                                    <Input className="text-md" type={newPasswordVisible ? 'password' : 'text'} placeholder="Enter new password" {...field} />
+                                    <Input className="text-md" type={newPasswordVisible ? 'password' : 'text'} placeholder="Enter Password" {...field} />
                                 </div>
                             </FormControl>
                             <FormMessage />
@@ -129,7 +129,7 @@ export default function NewPasswordForm() {
                     name="confirmPassword"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Confirm Password <small className="text-primary">*</small></FormLabel>
+                            <FormLabel className="font-semibold">Confirm Password <small className="text-primary">*</small></FormLabel>
                             <FormControl>
                                 <div className="relative ">
                                     <div className=" absolute right-0 top-0 bottom-0 z-10 h-full grid place-content-center px-5 ">
@@ -137,21 +137,21 @@ export default function NewPasswordForm() {
                                             {retypePasswordVisible ? <FaEyeSlash className="text-primary" /> : <FaEye className="text-primary" />}
                                         </div>
                                     </div>
-                                    <Input className="text-md" type={retypePasswordVisible ? 'password' : 'text'} placeholder="Re-type Password" {...field} />
+                                    <Input className="text-md" type={retypePasswordVisible ? 'password' : 'text'} placeholder="Enter Password" {...field} />
                                 </div>
                             </FormControl>
                             <FormMessage />
                         </FormItem>
                     )}
                 />
-                <Button variant="primary" className="w-full flex gap-2" type="submit" disabled={form.isSubmitting}>
+                <Button variant="primary" className="w-full flex gap-2 uppercase" type="submit" disabled={form.isSubmitting}>
                     {form.isSubmitting ?
                         <LuLoader2 className="animate-spin" /> : <></>
                     }
-                    Submit
+                    Save & Continue
                 </Button>
-                <p className="text-sm opacity-60">Your password must be at least 8 characters including a lowercase letter, an uppercase letter, and a number</p>
-                ``                <p className="text-sm opacity-60">Back to Login <Link href="/login" className="text-primary underline">Login?</Link></p>
+                {/* <p className="text-sm opacity-60">Your password must be at least 8 characters including a lowercase letter, an uppercase letter, and a number</p> */}
+                {/* ``                <p className="text-sm opacity-60">Back to Login <Link href="/login" className="text-primary underline">Login?</Link></p> */}
             </form>
         </Form>
     )

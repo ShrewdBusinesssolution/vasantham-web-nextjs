@@ -1,6 +1,8 @@
 import ForgotPasswordForm from '@/app/form-components/forgot-password-form'
 import { LOGOPATH } from '@/app/utility/helper'
 import { getServerSession } from 'next-auth'
+import { FaArrowLeft } from "react-icons/fa";
+import Link from 'next/link';
 
 import Image from 'next/image'
 import { redirect } from 'next/navigation'
@@ -20,12 +22,14 @@ export default async function ForgotPassword() {
                     priority={true}
                     />
                 </div>
-                <div className='px-5 md:px-10 xl:px-20 py-10 md:pt-10 xl:pt-10 space-y-3'>
-                    <Image src={LOGOPATH}
-                        width={100}
-                        height={75}
-                        alt='logo' />
-                        <h6 className='font-normal'>Forgot Password&#33;</h6>
+                
+                <div className='px-5 md:px-10 xl:px-20 flex flex-col justify-center space-y-3'>
+                <div className='flex gap-3 items-center text-[#07A889] font-medium uppercase pb-10 md:pb-16'>
+                <FaArrowLeft />
+                <Link href="/login" className="text-[14px]">Back to login </Link>
+                </div>
+                        <h6 className='font-bold'>Forgot Password</h6>
+                        <p className='text-[15px]'>We have sent the OTP to <span className='text-primary'>priyas2001@gmail.com</span></p>
                     <ForgotPasswordForm />
                 </div>
             </div>

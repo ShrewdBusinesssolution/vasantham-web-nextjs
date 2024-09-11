@@ -2,10 +2,12 @@
 import NewPasswordForm from '@/app/form-components/new-password-form'
 import { LOGOPATH } from '@/app/utility/helper'
 import { getServerSession } from 'next-auth'
+import Link from 'next/link'
 
 import Image from 'next/image'
 import { redirect } from 'next/navigation'
 import React from 'react'
+import { FaArrowLeft } from 'react-icons/fa'
 
 export default async function NewPassword() {
     const session = await getServerSession()
@@ -21,13 +23,13 @@ export default async function NewPassword() {
                     priority={true}
                     />
                 </div>
-                <div className='px-5 md:px-10 xl:px-20 py-10 md:pt-10 xl:pt-10 space-y-3'>
-                    <Image src={LOGOPATH}
-                        width={100}
-                        height={75}
-                        alt='logo' />
-                    <h6 className='font-medium'>Hello James&#33;</h6>
-                    <p className='text-sm'>Reset your password now&#33;</p>
+                <div className='px-5 md:px-10 xl:px-20 flex flex-col justify-center space-y-3'>
+                <div className='flex gap-3 items-center text-[#07A889] font-medium uppercase pb-10 md:pb-16'>
+                <FaArrowLeft />
+                <Link href="/login" className="text-[14px]">Back to login </Link>
+                </div>
+                <h6 className='font-bold'>Change Password</h6>
+                    <p className='text-sm'>The password will be updated to our records.</p>
                     <NewPasswordForm />
                 </div>
             </div>
