@@ -2,6 +2,9 @@ import "./globals.css";
 import {Urbanist} from "next/font/google";
 import Header from "./layout/header";
 import Footer from "./layout/footer";
+import AuthProvider from "./utility/context/context-api";
+import SessionWrapper from "./utility/SessionWrapper";
+
 
 
 const urbanist = Urbanist({ Weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"], subsets: ['latin'] })
@@ -13,14 +16,19 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
+    <SessionWrapper>
+
     <html lang="en">
       <body
         className={urbanist.className}
       >
-        <Header />
+        <AuthProvider>
+        {/* <Header /> */}
         {children}
-        <Footer />
+        {/* <Footer /> */}
+        </AuthProvider>
       </body>
     </html>
+    </SessionWrapper>
   );
 }
