@@ -5,6 +5,7 @@ import { z } from "zod"
 import { LuLoader2 } from "react-icons/lu";
 import { Button } from "@/components/ui/button"
 import { ImGoogle3 } from "react-icons/im";
+import Image from "next/image";
 import {
     Form,
     FormControl,
@@ -163,9 +164,11 @@ export default function LoginForm() {
         <LuLoader2 className="animate-spin" />
     ) : (
         <>
-            <img
+            <Image
                 src="/assets/google.webp"
                 alt="Google"
+                width={50}
+                height={50}
                 className="w-6 h-6 object-cover"
             />
             Continue with Google

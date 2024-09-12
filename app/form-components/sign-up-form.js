@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { LuLoader2 } from "react-icons/lu";
+import Image from "next/image";
 
 
 import { Button } from "@/components/ui/button"
@@ -217,9 +218,11 @@ export default function SignUpForm() {
         <LuLoader2 className="animate-spin" />
     ) : (
         <>
-            <img
+           <Image
                 src="/assets/google.webp"
                 alt="Google"
+                width={50}
+                height={50}
                 className="w-6 h-6 object-cover"
             />
             Continue with Google
