@@ -15,7 +15,7 @@ const Update = () => {
           priority={true}
         />
       </div>
-      <div className="px-5 md:px-10 xl:px-20 flex flex-col justify-center space-y-4">
+      <div className="py-10 md:py-0 px-5 md:px-10 xl:px-20 flex flex-col justify-center space-y-4">
        <Image src="/assets/gif/enquery.gif" className='' width={100} height={100}/>
         <h6 className="font-bold capitalize">Your Password Updated Successfully!</h6>
         <p className='text-sm'>The password will be updated to our records, Kindly enter your 

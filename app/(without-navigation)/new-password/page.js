@@ -23,7 +23,7 @@ export default async function NewPassword() {
                     priority={true}
                     />
                 </div>
-                <div className='px-5 md:px-10 xl:px-20 flex flex-col justify-center space-y-3'>
+                <div className='py-10 md:py-0 px-5 md:px-10 xl:px-20 flex flex-col justify-center space-y-3'>
                 <div className='flex gap-3 items-center text-[#07A889] font-medium uppercase pb-10 md:pb-16'>
                 <FaArrowLeft />
                 <Link href="/login" className="text-[14px]">Back to login </Link>

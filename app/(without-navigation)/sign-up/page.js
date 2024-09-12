@@ -20,7 +20,7 @@ export default async function SignUp() {
             priority={true}
           />
         </div>
-        <div className="px-5 md:px-10 xl:px-20 flex flex-col justify-center space-y-3">
+        <div className="py-10 md:py-0 px-5 md:px-10 xl:px-20 flex flex-col justify-center space-y-3">
          
           <h6 className="font-bold">Create your Account</h6>
 

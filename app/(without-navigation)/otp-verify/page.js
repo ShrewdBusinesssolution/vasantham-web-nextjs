@@ -19,7 +19,7 @@ export default async function ForgotPassword() {
                     priority={true}
                     />
                 </div>
-                <div className='px-5 md:px-10 xl:px-20 py-10 md:pt-10 xl:pt-10 space-y-3'>
+                <div className='py-10 md:py-0 px-5 md:px-10 xl:px-20 py-10 md:pt-10 xl:pt-10 space-y-3'>
                     <Image src={LOGOPATH}
                         width={100}
                         height={75}
