@@ -135,7 +135,7 @@ export default function SignUpForm() {
                         <FormItem className="mt-5">
                             <FormLabel className="font-semibold text-lg"> Full Name <small className="text-primary">*</small></FormLabel>
                             <FormControl>
-                                <Input className="text-sm" placeholder="Enter Name" {...field} />
+                                <Input className="text-sm placeholder:text-[#B5B6B5]" placeholder="Enter your name" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -148,7 +148,7 @@ export default function SignUpForm() {
                         <FormItem>
                             <FormLabel className="font-semibold text-lg">Email Address <small className="text-primary">*</small></FormLabel>
                             <FormControl>
-                                <Input className="text-sm" placeholder="Enter Email" {...field} />
+                                <Input className="text-sm placeholder:text-[#B5B6B5]" placeholder="Enter your email" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -175,7 +175,7 @@ export default function SignUpForm() {
                         <FormItem>
                             <FormLabel className="font-semibold text-lg">Password <small className="text-primary">*</small></FormLabel>
                             <FormControl>
-                                <Input className="text-sm" placeholder="Enter Password" {...field} />
+                                <Input className="text-sm placeholder:text-[#B5B6B5]" placeholder="Enter Password" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -205,7 +205,7 @@ export default function SignUpForm() {
                     {form.formState.isSubmitting ?
                         <LuLoader2 className="animate-spin" /> : <></>
                     }
-                    Log in
+                    Submit
                 </Button>
                 <Button
     variant="primary"

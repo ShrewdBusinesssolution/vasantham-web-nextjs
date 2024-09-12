@@ -7,7 +7,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { redirect } from 'next/navigation'
 import React from 'react'
-import { FaArrowLeft } from 'react-icons/fa'
+import { LuArrowLeft } from 'react-icons/lu'
 
 export default async function NewPassword() {
     const session = await getServerSession()
@@ -24,12 +24,12 @@ export default async function NewPassword() {
                     />
                 </div>
                 <div className='py-10 md:py-0 px-5 md:px-10 xl:px-20 flex flex-col justify-center space-y-3'>
-                <div className='flex gap-3 items-center text-[#07A889] font-medium uppercase pb-10 md:pb-16'>
-                <FaArrowLeft />
-                <Link href="/login" className="text-[14px]">Back to login </Link>
+                <div className='flex gap-3 items-center text-[#07A889] uppercase pb-10 md:pb-24'>
+                <LuArrowLeft size={22} className='font-light'/>
+                <Link href="/login" className="text-[14px] font-semibold">Back to login </Link>
                 </div>
                 <h6 className='font-bold'>Change Password</h6>
-                    <p className='text-sm'>The password will be updated to our records.</p>
+                    <p className='text-[16px]'>The password will be updated to our records.</p>
                     <NewPasswordForm />
                 </div>
             </div>

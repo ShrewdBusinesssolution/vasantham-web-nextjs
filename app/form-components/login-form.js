@@ -18,8 +18,8 @@ import { Input } from "@/components/ui/input"
 import { toast } from "sonner";
 import Link from "next/link";
 import { signIn } from 'next-auth/react';
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-
+import { VscEye } from "react-icons/vsc";
+import { PiEyeClosed } from "react-icons/pi";
 
 
 //info:- next auth login
@@ -110,9 +110,9 @@ export default function LoginForm() {
                     name="email"
                     render={({ field }) => (
                         <FormItem className="mt-5">
-                            <FormLabel className="font-semibold text-lg">Email Address<small className="text-primary">*</small></FormLabel>
+                            <FormLabel className="font-semibold text-lg">Email Address<small className="text-red-500"> *</small></FormLabel>
                             <FormControl>
-                                <Input placeholder="Enter  your email" {...field} />
+                                <Input className="placeholder:text-[#B5B6B5]" placeholder="Enter  your email" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -125,8 +125,8 @@ export default function LoginForm() {
                     render={({ field }) => (
                         <FormItem>
                             <div className="flex justify-between items-center">
-                                <FormLabel className="font-semibold text-lg">Password <small className="text-primary">*</small></FormLabel>
-                                <Link href={'/forgot-password'} className="text-sm text-primary">
+                                <FormLabel className="font-semibold text-lg">Password<small className="text-red-500"> *</small></FormLabel>
+                                <Link href={'/forgot-password'} className="text-sm text-[#07A889]">
                                     <small>
                                         Forgot Password?
                                     </small>
@@ -136,10 +136,10 @@ export default function LoginForm() {
                                 <div className="relative ">
                                     <div className=" absolute right-0 top-0 bottom-0 z-10 h-full grid place-content-center px-5 ">
                                         <div onClick={() => { setPasswordtype(!passwordtype) }} className="cursor-pointer active:opacity-30">
-                                            {passwordtype ? <FaEyeSlash className="text-primary" /> : <FaEye className="text-primary" />}
+                                            {passwordtype ? <VscEye size={20} className="hover:text-primary" /> : <PiEyeClosed size={20} className="hover:text-primary" />}
                                         </div>
                                     </div>
-                                    <Input type={passwordtype ? 'password' : 'text'} placeholder="Enter Password" {...field} className="relative" />
+                                    <Input type={passwordtype ? 'password' : 'text'} placeholder="Enter Password" {...field} className="relative placeholder:text-[#B5B6B5]" />
                                 </div>
                             </FormControl>
                             <FormMessage />

@@ -3,6 +3,8 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { LuLoader2 } from "react-icons/lu";
+import { VscEye } from "react-icons/vsc";
+import { PiEyeClosed } from "react-icons/pi";
 
 
 import { Button } from "@/components/ui/button"
@@ -19,7 +21,6 @@ import { Input } from "@/components/ui/input"
 import { toast } from "sonner";
 import Link from "next/link";
 import { useContext, useState } from "react";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { AppContext } from "../utility/context/context-api";
 // import AuthService from "../services/api-services/auth-service";
 import { useRouter } from "next/navigation";
@@ -57,14 +58,14 @@ export default function NewPasswordForm() {
     const router = useRouter();
 
     useEffect(() => {
-        if(forgotPasswordemail === '' && !forgotPasswordemailotpVerify){
-            router.push("/forgot-password")
+        if (forgotPasswordemail === '' && !forgotPasswordemailotpVerify) {
+            // router.push("/forgot-password")
         }
         // Add the beforeunload listener
         const removeBeforeUnloadListener = addBeforeUnloadListener();
         // Cleanup by removing the listener when the component unmounts
         return () => removeBeforeUnloadListener();
-       
+
     }, []);
 
 
@@ -109,15 +110,15 @@ export default function NewPasswordForm() {
                     name="password"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel className="font-semibold">New Password <small className="text-primary">*</small></FormLabel>
+                            <FormLabel className="font-semibold text-lg">New Password <small className="text-red-500">*</small></FormLabel>
                             <FormControl>
                                 <div className="relative ">
                                     <div className=" absolute right-0 top-0 bottom-0 z-10 h-full grid place-content-center px-5 ">
                                         <div onClick={() => { setNewPasswordVisible(!newPasswordVisible) }} className="cursor-pointer active:opacity-30">
-                                            {newPasswordVisible ? <FaEyeSlash className="text-primary" /> : <FaEye className="text-primary" />}
+                                            {newPasswordVisible ? <VscEye size={20} className="hover:text-primary" /> : <PiEyeClosed size={20} className="hover:text-primary" />}
                                         </div>
                                     </div>
-                                    <Input className="text-md" type={newPasswordVisible ? 'password' : 'text'} placeholder="Enter Password" {...field} />
+                                    <Input className="text-sm placeholder:text-[#B5B6B5]" type={newPasswordVisible ? 'password' : 'text'} placeholder="Enter Password" {...field} />
                                 </div>
                             </FormControl>
                             <FormMessage />
@@ -129,15 +130,15 @@ export default function NewPasswordForm() {
                     name="confirmPassword"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel className="font-semibold">Confirm Password <small className="text-primary">*</small></FormLabel>
+                            <FormLabel className="font-semibold text-lg">Confirm Password <small className="text-red-500">*</small></FormLabel>
                             <FormControl>
                                 <div className="relative ">
                                     <div className=" absolute right-0 top-0 bottom-0 z-10 h-full grid place-content-center px-5 ">
                                         <div onClick={() => { setRetypePasswordVisible(!retypePasswordVisible) }} className="cursor-pointer active:opacity-30">
-                                            {retypePasswordVisible ? <FaEyeSlash className="text-primary" /> : <FaEye className="text-primary" />}
+                                            {retypePasswordVisible ? <VscEye size={20} className="hover:text-primary" /> : <PiEyeClosed  size={20} className="hover:text-primary" />}
                                         </div>
                                     </div>
-                                    <Input className="text-md" type={retypePasswordVisible ? 'password' : 'text'} placeholder="Enter Password" {...field} />
+                                    <Input className="text-sm placeholder:text-[#B5B6B5]" type={retypePasswordVisible ? 'password' : 'text'} placeholder="Enter Password" {...field} />
                                 </div>
                             </FormControl>
                             <FormMessage />
@@ -148,10 +149,10 @@ export default function NewPasswordForm() {
                     {form.isSubmitting ?
                         <LuLoader2 className="animate-spin" /> : <></>
                     }
-                    Save & Continue
+                    save & continue
                 </Button>
-                {/* <p className="text-sm opacity-60">Your password must be at least 8 characters including a lowercase letter, an uppercase letter, and a number</p> */}
-                {/* ``                <p className="text-sm opacity-60">Back to Login <Link href="/login" className="text-primary underline">Login?</Link></p> */}
+                {/* <p className="text-sm opacity-60">Your password must be at least 8 characters including a lowercase letter, an uppercase letter, and a number</p>
+                <p className="text-sm opacity-60">Back to Login <Link href="/login" className="text-primary underline">Login?</Link></p> */}
             </form>
         </Form>
     )
