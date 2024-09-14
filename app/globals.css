@@ -97,3 +97,25 @@
     }
   }
 }
+
+/* Ensure the pagination dots are visible */
+.splide__pagination {
+  bottom: 10px !important; /* Adjust the bottom position */
+  display: flex;
+  justify-content: center;
+}
+
+.splide__pagination__page {
+  width: 12px; /* Dot size */
+  height: 12px; /* Dot size */
+  background-color: #000; /* Dot color */
+  border-radius: 50%; /* Round shape */
+  margin: 0 4px; /* Space between dots */
+  opacity: 0.5; /* Default dot opacity */
+  transition: background-color 0.3s, opacity 0.3s; /* Smooth transition */
+}
+
+.splide__pagination__page.is-active {
+  background-color: #fff; /* Active dot color */
+  opacity: 1; /* Full opacity for the active dot */
+}

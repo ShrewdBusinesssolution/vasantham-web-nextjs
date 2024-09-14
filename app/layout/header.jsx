@@ -113,10 +113,10 @@ export default function Header() {
         {/* Large Screen */}
         <div className="hidden lg:flex items-center gap-5">
           {/* Search */}
-          <div className="relative rounded-full p-1 flex items-center gap-2 border-[1px] border-[#E9E9E9] w-full max-w-[250px]">
+          <div className="relative rounded-full p-1 pl-4 px-2 flex items-center gap-2 border-[1px] border-[#E9E9E9] w-full max-w-[250px]">
             <input
               type="text"
-              className="placeholder:text-sm placeholder:px-3 w-full text-black/40 focus:outline-none"
+              className="placeholder:text-[15px] placeholder:px-1 w-full text-black/40 focus:outline-none"
               placeholder="search"
             />
             <p className="bg-primary rounded-full p-1">
