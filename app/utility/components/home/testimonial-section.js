@@ -29,7 +29,7 @@ const TestimonialsSection = () => {
   const categorySplide = useRef(null);
 
   return (
-    <section className="flex flex-col items-center justify-center py-6 md:py-12">
+    <section className="flex flex-col items-center justify-center py-6 md:py-20">
       <div>
         <HeadingSection title={"Testimonials"} subtitle={"Success Stories from person"} />
         <p className="text-base leading-8 text-center mt-4 w-full md:w-[500px]">

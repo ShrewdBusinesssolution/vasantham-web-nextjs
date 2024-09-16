@@ -1,9 +1,62 @@
-import { AboutBanner } from '@/app/utility/components/utility-components'
+import { AboutBanner, HeadingSection, StaffCard } from '@/app/utility/components/utility-components'
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+
 
 const About = () => {
+  const products = [
+    {
+      id: 1,
+      imageSrc: '/assets/about/staff.webp',
+      name: 'Saravanakumar',
+      para: 'Wireless Headphones',
+    },
+    {
+      id: 2,
+      imageSrc: '/assets/about/staff.webp',
+      name: 'Saravanakumar',
+      para: 'Air Purifier',
+    },
+    {
+      id: 3,
+      imageSrc: '/assets/about/staff.webp',
+      name: 'Saravanakumar',
+      para: 'Smart Watch',
+    },
+    {
+      id: 4,
+      imageSrc: '/assets/about/staff.webp',
+      name: 'Saravanakumar',
+      para: 'Smart Watch',
+    },
+    {
+      id: 5,
+      imageSrc: '/assets/about/staff.webp',
+      name: 'Saravanakumar',
+      para: 'Smart Watch',
+    },
+    {
+      id: 6,
+      imageSrc: '/assets/about/staff.webp',
+      name: 'Saravanakumar',
+      para: 'Smart Watch',
+    },
+    {
+      id: 7,
+      imageSrc: '/assets/about/staff.webp',
+      name: 'Saravanakumar',
+      para: 'Smart Watch',
+    },
+    {
+      id: 8,
+      imageSrc: '/assets/about/staff.webp',
+      name: 'Saravanakumar',
+      para: 'Smart Watch',
+    },
+  ];
+  
   return (
     <main>
         {/* Banner */}
@@ -37,6 +90,43 @@ const About = () => {
             </div>
         </div>
         </section>
+
+
+{/* Staffs  section*/}
+<section className='bg-gradient-to-br from-[#fff] to-[#CCF4FF] from-0%'>
+  {/* Heading */}
+  <div className='py-10'>
+    <HeadingSection title="TE GUYS BEHIND THE CURTAINS" subtitle="Whose Inspirations You Love"/>
+  </div>
+  {/* ProductCard */}
+  <div className='brand-container'>
+  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center gap-2 px-4 md:px-6 lg:px-10">
+      {products.map(staff => (
+        <div className='pb-8 md:pb-12 lg:pb-15 mt-10'>
+        <StaffCard key={staff.id} staff={staff} />
+        </div>
+      ))}
+      </div>
+    </div>
+</section>
+
+{/* Join With Us */}
+<section className="bg-white py-10">
+  <div className=' rounded-2xl p-6 md:p-10 bg-[#F7F7F7] brand-container '>
+        <div className="flex flex-col justify-center items-center space-y-4 ">
+            <div className="text-sm font-semibold leading-loose text-primary uppercase tracking-[2px]">
+            join with us
+            </div>
+            <h2 className="text-lg md:text-[22px] lg:text-[24px] font-bold leading-normal text-center text-neutral-800 px-5 w-full lg:w-[700px]">
+            Start today for getting Online Certification You can be your own 
+            guiding star with our help!
+            </h2>
+            <Button variant="primary" className="w-fit text-sm font-medium text-center text-white uppercase bg-primary rounded-md">
+            Get started now
+            </Button>
+          </div>
+          </div>
+    </section>
     </main>
   )
 }

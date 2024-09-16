@@ -116,7 +116,7 @@ const Home = () => {
 </section>
 
 {/* Course Explore */}
-<section className='bg-white'>
+<section className='bg-white py-8 md:py-12 lg:py-16'>
   <div className='brand-container'>
 <CourseExploreSection/>
 </div>
@@ -134,7 +134,7 @@ const Home = () => {
 </div>
 </section>
 
-<section className='bg-[#FCFCFC]'>
+<section className='bg-[#FCFCFC] pt-6 md:pt-10'>
   <div className='brand-container py-10'>
 <NewsletterSection/>
 </div>
