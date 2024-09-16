@@ -80,7 +80,7 @@ const About = () => {
         <section className='bg-[#FCFCFC] py-10 md:py-16 lg:py-20'>
         <div className='brand-container flex flex-col-reverse md:flex-row px-10 md:px-16 lg:px-28 gap-5 md:gap-16 lg:gap-20 items-center justify-between'>
             {/* left */}
-  <Image src={"/assets/about/about-2.webp"} className="w-full h-[350px] md:w-[400px] md:h-[402px] rounded-xl" width={500} height={500}/>
+  <Image src={"/assets/about/about-2.webp"} className="w-full h-[350px] md:w-[400px] md:h-[402px] rounded-xl" alt="Images" width={500} height={500}/>
             {/* right */}
             <div className='flex flex-col gap-2'>
             <h4 className='uppercase text-secondary text-sm font-medium'>How it works</h4>
@@ -102,8 +102,8 @@ const About = () => {
   <div className='brand-container'>
   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center gap-2 px-4 md:px-6 lg:px-10">
       {products.map(staff => (
-        <div className='pb-8 md:pb-12 lg:pb-15 mt-10'>
-        <StaffCard key={staff.id} staff={staff} />
+        <div className='pb-8 md:pb-12 lg:pb-15 mt-10' key={staff.id}>
+        <StaffCard  staff={staff} />
         </div>
       ))}
       </div>

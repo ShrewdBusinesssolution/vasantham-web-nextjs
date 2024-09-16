@@ -19,6 +19,7 @@ export default async function ForgotPassword() {
             <Image src={'/assets/login.webp'} fill={true} 
                     className=' object-fit'
                     priority={true}
+                    alt="Image"
                     />
                 </div>
                 <div className='py-10 md:py-0 px-5 md:px-10 xl:px-20 flex flex-col justify-center space-y-3'>

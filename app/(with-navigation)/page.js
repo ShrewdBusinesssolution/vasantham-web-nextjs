@@ -82,23 +82,23 @@ const Home = () => {
   goals.Effortless comfortable eye-catching unique detail</p>
   <div className='flex flex-col gap-2'>
   <div className='flex items-center gap-4'>
-  <Image src={"/assets/svg/tick.svg"}  width={50} height={50} className='w-[16px] h-[16px]'/>
+  <Image src={"/assets/svg/tick.svg"}  width={50} height={50} className='w-[16px] h-[16px]' alt="Image"/>
 <p className='text-[16px] font-semibold'>Powerful Audience</p>
   </div>
   <div className='flex items-center gap-4'>
-  <Image src={"/assets/svg/tick.svg"}  width={50} height={50} className='w-[16px] h-[16px]'/>
+  <Image src={"/assets/svg/tick.svg"}  width={50} height={50} className='w-[16px] h-[16px]' alt="Image"/>
 <p className='text-[16px] font-semibold'>Powerful Audience</p>
   </div>
   <div className='flex items-center gap-4'>
-  <Image src={"/assets/svg/tick.svg"}  width={50} height={50} className='w-[16px] h-[16px]'/>
+  <Image src={"/assets/svg/tick.svg"}  width={50} height={50} className='w-[16px] h-[16px]' alt="Image"/>
 <p className='text-[16px] font-semibold'>Powerful Audience & Best course meterials</p>
   </div>
   <div className='flex items-center gap-4'>
-  <Image src={"/assets/svg/tick.svg"}  width={50} height={50} className='w-[16px] h-[16px]'/>
+  <Image src={"/assets/svg/tick.svg"}  width={50} height={50} className='w-[16px] h-[16px]' alt="Image"/>
 <p className='text-[16px] font-semibold'>Powerful Audience & Best course meterials</p>
   </div>
   <div className='flex items-center gap-4'>
-  <Image src={"/assets/svg/tick.svg"}  width={50} height={50} className='w-[16px] h-[16px]'/>
+  <Image src={"/assets/svg/tick.svg"}  width={50} height={50} className='w-[16px] h-[16px]' alt="Image"/>
 <p className='text-[16px] font-semibold'>Powerful Audience & Best course meterials</p>
   </div>
   </div>

@@ -13,10 +13,11 @@ const Success = () => {
           fill={true}
           className=" object-fit"
           priority={true}
+          alt="Image"
         />
       </div>
       <div className="py-10 md:py-0 px-5 md:px-10 xl:px-20 flex flex-col justify-center space-y-4">
-       <Image src="/assets/gif/enquery.gif" className='' width={100} height={100}/>
+       <Image src="/assets/gif/enquery.gif" className='' width={100} height={100} alt="Image"/>
         <h6 className="font-bold capitalize">Your profile has been created!</h6>
         <p className='text-[16px]'>The Profile has been created to our records, Kindly back to login
         and continue with your credentials.</p>

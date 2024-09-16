@@ -21,6 +21,7 @@ export default async function ForgotPassword() {
             <Image src={'/assets/login.webp'} fill={true} 
                     className=' object-fit'
                     priority={true}
+                    alt="Image"
                     />
                 </div>
                 
