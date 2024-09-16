@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { HeadingSection } from '../utility/components/utility-components'
+import { HeadingSection, ProductCard } from '../utility/components/utility-components'
 import WhyChooseCard from '../utility/components/home/whychoose-card'
 import Image from 'next/image'
 import { TiTick } from "react-icons/ti";
@@ -115,6 +115,13 @@ const Home = () => {
   </div>
 </section>
 
+{/* Course Explore */}
+<section className='bg-white'>
+  <div className='brand-container'>
+<CourseExploreSection/>
+</div>
+</section>
+
 {/* About Us */}
 <section>
 <AboutSection/>
@@ -132,6 +139,7 @@ const Home = () => {
 <NewsletterSection/>
 </div>
 </section>
+
     </main>
   )
 }

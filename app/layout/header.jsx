@@ -9,6 +9,7 @@ import { FiMenu, FiX } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
 import { AnimatePresence, motion } from "framer-motion";
 import { FadeBottom } from "@/app/utility/animation";
+import { usePathname } from "next/navigation";
 import {
   Popover,
   PopoverContent,
@@ -18,6 +19,7 @@ import {
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
+  const pathname = usePathname();
 
   const handleClickOutside = (event) => {
     if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -88,22 +90,20 @@ export default function Header() {
         <div className="hidden lg:flex w-auto lg:space-x-14 items-center">
           <ul className="flex lg:flex-row space-x-8">
             <li>
-              <Link href="/" className="text-[#858585] text-[15px]">
-                Home
-              </Link>
+            <Link href={'/'} className={`${pathname === '/' ? 'text-primary' : 'text-[#858585] text-[15px]'} hover:text-primary`}>Home</Link>
             </li>
             <li>
-              <Link href="/about" className="text-[#858585] text-[15px]">
+              <Link href="/about" className={`${pathname === '/about' ? 'text-primary ' : ' text-[#858585] text-[15px]'} hover:text-primary`} >
                 About
               </Link>
             </li>
             <li>
-              <Link href="/Courses" className="text-[#858585] text-[15px]">
+              <Link href="/Courses" className={`${pathname === '/Courses' ? ' text-primary' : 'text-[#858585] text-[15px]'} hover:text-primary`}>
                 Courses
               </Link>
             </li>
             <li>
-              <Link href="/contact" className="text-[#858585] text-[15px]">
+              <Link href="/contact" className={`${pathname === '/contact' ? ' text-primary' : 'text-[#858585] text-[15px]'} hover:text-primary`}>
                 Contact
               </Link>
             </li>

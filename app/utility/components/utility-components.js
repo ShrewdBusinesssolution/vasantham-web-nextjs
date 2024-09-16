@@ -1,5 +1,8 @@
 import React from "react"
 import Image from "next/image"
+import { FaStar, FaUser } from "react-icons/fa"
+import { IoDocumentTextOutline } from "react-icons/io5";
+import { Button } from "@/components/ui/button";
 
 const HeadingSection = ({ title = "Why choose us", subtitle= "Why choose our courses?"}) => {
     return (
@@ -17,7 +20,7 @@ const AboutBanner = ({ title = "Why choose us", subtitle= "Why choose our course
 <section className='flex flex-col h-[calc(75vh-80px)]  justify-center py-24 bg-cover bg-bottom relative overflow-hidden ' style={{ backgroundImage: `url("/assets/basic/about-banner.png")` }}>
           <div className='absolute z-0 inset-0 bg-[#00518A] opacity-[70%]' />
           {/* Text */}
-          <div className="relative z-10 brand-container flex flex-col justify-center items-center gap-4">
+          <div className="relativea z-10 brand-container flex flex-col justify-center items-center gap-4">
             <h2 className='text-[#20AD96] text-sm md:text-[17px] uppercase font-medium'>{title}</h2>
             <h2 className='text-white text-center px-5 md:px-0 w-full md:w-[700px] lg:w-[800px] leading-normal md:text-[48px]'>{subtitle}</h2>
           </div>
@@ -72,4 +75,49 @@ const TestimonialCard = ({ name, content, desc, description }) => {
 };
 
 
-export { HeadingSection, AboutBanner, WorkingStaffs, StatCard, TestimonialCard}
+const ProductCard = ({}) => {
+  return(
+<div className="bg-white rounded-3xl shadow-lg overflow-hidden w-fit max-w-xs">
+      {/* Image*/}
+      <div className="relative w-full">
+        <Image 
+          src="/assets/product/product-1.webp" 
+          width={300} 
+          height={300} 
+          alt="product" 
+          className="object-cover w-full h-full"/>
+           <Button variant="primary" className="absolute bottom-0 right-0 bg-secondary text-white text-lg rounded-none rounded-tl-xl">
+           ₹120.00
+        </Button>
+      </div>
+      <div className="p-4 space-y-3 py-8">
+        <h3 className="text-[13px] text-secondary font-semibold uppercase">Science</h3>
+        {/* Reviews */}
+        <div className="flex flex-row items-center space-x-1">
+        <p className="text-sm mt-1">4.5</p>
+          <span className="text-yellow-500 text-lg">
+            <FaStar />
+          </span>
+          <span className="text-[#979797]">(20 reviews)</span>
+          
+        </div>
+        <h2 className="text-[19px] leading-normal font-bold text-gray-800">
+          Photography Crash Course for Photographers
+        </h2>
+{/* Info */}
+        <div className="flex items-center space-x-3 text-sm text-gray-600">
+          <div className="flex items-center space-x-1 mt-2">
+            <span className="text-secondary"><FaUser size={16}/></span>
+            <span className="text-[#696969] mt-1">1200 Students</span>
+          </div>
+          <div className="flex items-center space-x-1 mt-2">
+            <span className="text-secondary"><IoDocumentTextOutline size={20}/></span>
+            <span className="text-[#696969]">45 Lessons</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export { HeadingSection, AboutBanner, WorkingStaffs, StatCard, TestimonialCard, ProductCard}

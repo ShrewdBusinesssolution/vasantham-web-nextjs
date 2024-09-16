@@ -1,48 +1,114 @@
 import React from 'react';
-import { StatCard } from '../utility-components';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ProductCard } from '../utility-components';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 const CourseExploreSection = () => {
-  const classes = ['Class 6', 'Class 7', 'Class 8', 'Class 9', 'Class 10', 'Class 11', 'Class 12', 'Basic Maths'];
-
   return (
-    <section className="flex flex-col items-center self-center mt-28 max-w-full w-[1320px] max-md:mt-10">
-      <div className="flex overflow-hidden relative flex-col justify-center items-center p-8 w-full bg-sky-800 rounded-[32px] max-md:px-5">
-        <div className="flex absolute bottom-px z-0 flex-col self-start px-20 pt-20 pb-52 h-[308px] right-[-226px] w-[1773px] max-md:px-5 max-md:pb-24">
-          <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/c77952804ee13ea7dc9943c2348687881879add63a7863d4f9dade05630af310?placeholderIfAbsent=true&apiKey=e7852b233ecc4224803c76e115b48000" className="object-contain mb-0 w-px aspect-[0.05] max-md:mb-2.5" alt="" />
+    <section 
+      className="relative bg-cover rounded-2xl"
+      style={{ backgroundImage: "url('/assets/basic/explore-bg.webp')" }}
+    >
+      {/* Headings */}
+      <div className='flex flex-col justify-center items-center p-8'>
+        <div className='text-center space-y-5'>
+          <h4 className="text-[#20ad96] text-[16px] font-semibold">Explore Courses</h4>
+          <p className="text-white text-[32px] font-bold leading-[44px]">
+            Over 200+ Online Courses
+          </p>
+          <p className="text-white text-sm">
+            The ultimate planning solution for busy women who want to reach their personal goals
+          </p>
         </div>
-        <div className="flex absolute top-0 z-0 flex-col self-start px-20 pt-20 pb-52 h-[308px] right-[-226px] rotate-[3.141592653589793rad] w-[1773px] max-md:px-5 max-md:pb-24">
-          <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/50ccf101a675dc1fda13f2c627cc1b6153ca1f9d481a00f5d9909e7d4736ac65?placeholderIfAbsent=true&apiKey=e7852b233ecc4224803c76e115b48000" className="object-contain mb-0 w-px aspect-[0.05] max-md:mb-2.5" alt="" />
+      {/* Tab section */}
+      <div className='flex flex-col justify-center items-center'>
+        <Tabs defaultValue="Class1" className="w-full my-5 ">
+          <TabsList className="flex flex-row gap-3 rounded-full">
+            <TabsTrigger value="Class1" className="flex items-center bg-transparent border border-white bg-opacity-50 text-white rounded-full px-5 py-2 text-sm font-semibold  transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-secondary data-[state=active]:border-none data-[state=active]:text-white">Class6</TabsTrigger>
+            <TabsTrigger value="Class2" className="flex items-center bg-transparent border border-white bg-opacity-50 text-white rounded-full px-5 py-2 text-sm font-semibold  transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-secondary data-[state=active]:border-none data-[state=active]:text-white">Class7</TabsTrigger>
+            <TabsTrigger value="Class3" className="flex items-center bg-transparent border border-white bg-opacity-50 text-white rounded-full px-5 py-2 text-sm font-semibold  transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-secondary data-[state=active]:border-none data-[state=active]:text-white">Class8</TabsTrigger>
+            <TabsTrigger value="Class4" className="flex items-center bg-transparent border border-white bg-opacity-50 text-white rounded-full px-5 py-2 text-sm font-semibold  transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-secondary data-[state=active]:border-none data-[state=active]:text-white">Class9</TabsTrigger>
+            <TabsTrigger value="Class5" className="flex items-center bg-transparent border border-white bg-opacity-50 text-white rounded-full px-5 py-2 text-sm font-semibold  transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-secondary data-[state=active]:border-none data-[state=active]:text-white">Class10</TabsTrigger>
+            <TabsTrigger value="Class6" className="flex items-center bg-transparent border border-white bg-opacity-50 text-white rounded-full px-5 py-2 text-sm font-semibold  transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-secondary data-[state=active]:border-none data-[state=active]:text-white">Class11</TabsTrigger>
+            <TabsTrigger value="Class7" className="flex items-center bg-transparent border border-white bg-opacity-50 text-white rounded-full px-5 py-2 text-sm font-semibold  transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-secondary data-[state=active]:border-none data-[state=active]:text-white">Class12</TabsTrigger>
+            <TabsTrigger value="Class8" className="flex items-center bg-transparent border border-white bg-opacity-50 text-white rounded-full px-5 py-2 text-sm font-semibold  transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-secondary data-[state=active]:border-none data-[state=active]:text-white">Basic Maths</TabsTrigger>
+          </TabsList>
+          <TabsContent value="Class1" className="py-10">
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
+              <ProductCard/>
+              <ProductCard/>
+              <ProductCard/>
+              <ProductCard/>
+            </div>
+            </TabsContent>
+          <TabsContent value="Class2"className="py-10">
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
+              <ProductCard/>
+              <ProductCard/>
+            </div>
+            </TabsContent>
+          <TabsContent value="Class3"className="py-10">
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
+              <ProductCard/>
+              <ProductCard/>
+              <ProductCard/>
+              <ProductCard/>
+            </div>
+            </TabsContent>
+          <TabsContent value="Class4"className="py-10">
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
+              <ProductCard/>
+              <ProductCard/>
+              <ProductCard/>
+              <ProductCard/>
+            </div>
+            </TabsContent>
+          <TabsContent value="Class5"className="py-10">
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
+              <ProductCard/>
+              <ProductCard/>
+              <ProductCard/>
+              <ProductCard/>
+            </div>
+            </TabsContent>
+          <TabsContent value="Class6"className="py-10">
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
+              <ProductCard/>
+              <ProductCard/>
+              <ProductCard/>
+              <ProductCard/>
+            </div>
+            </TabsContent>
+          <TabsContent value="Class7"className="py-10">
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
+              <ProductCard/>
+              <ProductCard/>
+              <ProductCard/>
+              <ProductCard/>
+            </div>
+            </TabsContent>
+          <TabsContent value="Class8"className="py-10">
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
+              <ProductCard/>
+              <ProductCard/>
+              <ProductCard/>
+              <ProductCard/>
+            </div>
+            </TabsContent>
+          {/* Bottom Button */}
+          <div className='flex flex-col justify-center space-y-4 items-center'>
+            <p className='text-white text-[16px] font-light'>Take the control of their life back and start doing things to make their dream come true.</p>
+            <Link href="/courses">
+            <Button variant="primary" className="uppercase text-[14px]" >View All Courses</Button>
+            </Link>
+          </div>
+        </Tabs>
         </div>
-        <div className="flex z-0 flex-col items-center max-w-full text-center text-white w-[919px]">
-          <div className="text-sm font-semibold leading-8 text-teal-500 uppercase tracking-[2px]">
-            Explore Courses
-          </div>
-          <div className="flex flex-col mt-8 max-w-full w-[603px]">
-            <h2 className="self-center max-w-full text-4xl font-bold leading-none w-[468px] max-md:max-w-full">
-              Over 200+ Online Courses
-            </h2>
-            <p className="mt-3 text-base leading-8 max-md:max-w-full">
-              The ultimate planning solution for busy women who want to reach their personal goals
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-3 items-start self-stretch mt-8 w-full text-sm font-bold uppercase max-md:max-w-full">
-            {classes.map((className, index) => (
-              <button
-                key={index}
-                className={`grow shrink gap-2.5 self-stretch py-4 pr-5 pl-6 w-20 ${
-                  index === 0 ? 'bg-emerald-500' : 'bg-sky-800 border border-white border-solid'
-                } min-h-[40px] rounded-[30px] max-md:pl-5`}
-              >
-                {className}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-      <StatCard/>
-    </section>
 
+      </div>
+    </section>
   );
-};
+}
 
 export default CourseExploreSection;
