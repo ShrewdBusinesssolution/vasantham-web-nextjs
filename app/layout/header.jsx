@@ -98,7 +98,7 @@ export default function Header() {
               </Link>
             </li>
             <li>
-              <Link href="/Courses" className={`${pathname === '/Courses' ? ' text-primary' : 'text-[#858585] text-[15px]'} hover:text-primary`}>
+              <Link href="/courses" className={`${pathname === '/Courses' ? ' text-primary' : 'text-[#858585] text-[15px]'} hover:text-primary`}>
                 Courses
               </Link>
             </li>
@@ -151,8 +151,6 @@ export default function Header() {
           <ul>
             <li className="w-full p-2 hover:bg-gradient-to-br from-white to-blue-100 from-20% rounded-[10px]">My Profile</li>
             <li className="w-full p-2 hover:bg-gradient-to-br from-white to-blue-100 from-20% rounded-[10px]">Logout</li>
-
-            
           </ul>
         </div>
       </PopoverContent>
@@ -174,16 +172,14 @@ export default function Header() {
             exit="hidden"
           >
             <div className="flex flex-col gap-2 text-center p-5">
-              <Link href={"/"} onClick={() => setMenuOpen(false)}>
-                Home
-              </Link>
-              <Link href={"/about"} onClick={() => setMenuOpen(false)}>
+            <Link href={'/'} className={`${pathname === '/' ? 'text-primary' : 'text-[#858585] text-[15px]'} hover:text-primary`} onClick={() => setMenuOpen(false)}>Home</Link>
+              <Link href={"/about"} className={`${pathname === '/about' ? 'text-primary ' : ' text-[#858585] text-[15px]'} hover:text-primary`} onClick={() => setMenuOpen(false)}>
                 About Us
               </Link>
-              <Link href={"/courses"} onClick={() => setMenuOpen(false)}>
+              <Link href={"/courses"} className={`${pathname === '/Courses' ? ' text-primary' : 'text-[#858585] text-[15px]'} hover:text-primary`} onClick={() => setMenuOpen(false)}>
                 Courses
               </Link>
-              <Link href={"/contact"} onClick={() => setMenuOpen(false)}>
+              <Link href={"/contact"} className={`${pathname === '/contact' ? ' text-primary' : 'text-[#858585] text-[15px]'} hover:text-primary`} onClick={() => setMenuOpen(false)}>
                 Contact
               </Link>
             </div>

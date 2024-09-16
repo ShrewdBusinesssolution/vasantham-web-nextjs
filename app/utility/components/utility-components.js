@@ -17,11 +17,11 @@ const HeadingSection = ({ title = "Why choose us", subtitle= "Why choose our cou
 
 const AboutBanner = ({ title = "Why choose us", subtitle= "Why choose our courses?"}) => {
     return (
-<section className='flex flex-col h-[calc(75vh-80px)]  justify-center py-24 bg-cover bg-bottom relative overflow-hidden ' style={{ backgroundImage: `url("/assets/basic/about-banner.png")` }}>
+<section className='flex flex-col h-[calc(70vh-80px)]  justify-center py-24 bg-cover bg-bottom relative overflow-hidden ' style={{ backgroundImage: `url("/assets/basic/about-banner.png")` }}>
           <div className='absolute z-0 inset-0 bg-[#00518A] opacity-[70%]' />
           {/* Text */}
           <div className="relativea z-10 brand-container flex flex-col justify-center items-center gap-4">
-            <h2 className='text-[#20AD96] text-sm md:text-[17px] uppercase font-medium'>{title}</h2>
+            <h2 className='text-[#20AD96] text-sm md:text-[16px] uppercase font-medium'>{title}</h2>
             <h2 className='text-white text-center px-5 md:px-0 w-full md:w-[700px] lg:w-[800px] leading-normal md:text-[48px]'>{subtitle}</h2>
           </div>
         </section>
