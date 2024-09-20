@@ -1,8 +1,10 @@
-import React from "react"
+"use client"
+import React, { useState } from "react"
 import Image from "next/image"
-import { FaStar, FaUser } from "react-icons/fa"
-import { IoDocumentTextOutline } from "react-icons/io5";
+import { FaStar, FaUser, FaHeart } from "react-icons/fa"
+import { IoDocumentTextOutline, IoHeartSharp } from "react-icons/io5";
 import { Button } from "@/components/ui/button";
+import { HiOutlineHeart } from "react-icons/hi2";
 
 const HeadingSection = ({ title = "Why choose us", subtitle= "Why choose our courses?"}) => {
     return (
@@ -27,6 +29,44 @@ const AboutBanner = ({ title = "Why choose us", subtitle= "Why choose our course
         </section>
     )
 }
+
+const CourseBanner = ({ 
+  title = "Why choose us", 
+  subtitle = "Why choose our courses?", 
+  product = { students: "100 Students", lessons: "5 Lessons", rating: "4", reviews: "41" }
+}) => {
+  return (
+    <section className='flex flex-col h-[calc(50vh-80px)] justify-center py-16 bg-cover bg-bottom relative overflow-hidden' style={{ backgroundImage: `url("/assets/courses/coursebg.webp")` }}>
+      <div className='absolute z-0 inset-0 bg-[#00518A] opacity-[70%]' />
+      <div className="brand-container px-6">
+      {/* Text */}
+      <div className="relative z-10 flex flex-col gap-4">
+        <h2 className='text-[#20AD96] text-sm md:text-[15px] uppercase font-medium'>{title}</h2>
+        <h2 className='text-white font-semibold w-full md:w-[600px] lg:w-[700px] leading-normal md:text-[36px]'>{subtitle}</h2>
+      </div>
+
+      {/* Left Bottom Content */}
+      <div className="absolute bottom-4 left-4 md:left-8 lg:left-14 flex items-center text-white gap-2">
+        <p className="text-sm text-white">{product.rating}</p>
+        <FaStar className="text-yellow-400 pb-1" />
+        <span className="text-sm">({product.reviews} reviews)</span>
+      </div>
+
+      {/* Right Bottom Content */}
+      <div className="absolute bottom-4 right-4 md:right-8 lg:right-14 flex items-center space-x-3 text-sm text-gray-600">
+        <div className="flex items-center space-x-1">
+          <span className="text-secondary"><FaUser size={16} /></span>
+          <span className="text-white mt-1 font-light">{product.students}</span>
+        </div>
+        <div className="flex items-center space-x-1">
+          <span className="text-secondary"><IoDocumentTextOutline size={20} /></span>
+          <span className="text-white mt-1 font-light">{product.lessons}</span>
+        </div>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 // Staffs
 
@@ -75,9 +115,18 @@ const TestimonialCard = ({ name, content, desc, description }) => {
 };
 
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, homePage }) => {
+  const [isInWishlist, setIsInWishlist] = useState(false);
+
+  const handleWishlistToggle = () => {
+    if (homePage) {
+    setIsInWishlist(!isInWishlist);
+    }
+    // You can add logic here to handle the wishlist functionality, e.g., API calls or context updates
+  };
+
   return (
-    <div className="bg-white rounded-3xl shadow-lg overflow-hidden w-fit max-w-xs">
+    <div className="bg-white rounded-3xl shadow-sm overflow-hidden w-fit max-w-xs relative">
       {/* Image */}
       <div className="relative w-full">
         <Image
@@ -87,11 +136,26 @@ const ProductCard = ({ product }) => {
           alt="product"
           className="object-cover w-full h-full"
         />
-        <Button variant="primary" className="absolute bottom-0 right-0 bg-secondary text-white text-lg rounded-none rounded-tl-xl">
+        <Button variant="primary" className="absolute bottom-0 right-0 bg-secondary text-white text-sm md:text-lg rounded-none rounded-tl-xl">
           {product.price}
         </Button>
+        {/* Wishlist Button */}
+        {homePage && (
+          <button 
+          onClick={handleWishlistToggle}
+          className={`absolute top-4 right-4 p-2 rounded-full bg-[#F2F2F2] shadow-sm transition-all ${
+              isInWishlist ? 'text-primary' : 'text-black'
+          } flex items-center gap-x-1`}
+      >
+          {isInWishlist ? (
+              <IoHeartSharp className="h-5 w-5" /> 
+          ) : (
+              <HiOutlineHeart className="h-5 w-5" /> 
+          )}
+      </button>
+        )}
       </div>
-      <div className="p-4 space-y-3 py-8">
+      <div className="p-4 space-y-3 md:py-5 lg:py-8">
         <h3 className="text-[13px] text-secondary font-semibold uppercase">{product.category}</h3>
         {/* Reviews */}
         <div className="flex flex-row items-center space-x-1">
@@ -101,7 +165,7 @@ const ProductCard = ({ product }) => {
           </span>
           <span className="text-[#979797]">({product.reviewCount} reviews)</span>
         </div>
-        <h2 className="text-[19px] leading-normal font-bold text-gray-800">
+        <h2 className="text-[16px] md:text-lg lg:text-[19px] leading-normal font-bold text-gray-800">
           {product.title}
         </h2>
         {/* Info */}
@@ -143,4 +207,5 @@ const StaffCard = ({ staff }) => {
   )
 }
 
-export { HeadingSection, AboutBanner, WorkingStaffs, StatCard, TestimonialCard, ProductCard, StaffCard}
+
+export { HeadingSection, AboutBanner, WorkingStaffs, StatCard, TestimonialCard, ProductCard, StaffCard, CourseBanner}

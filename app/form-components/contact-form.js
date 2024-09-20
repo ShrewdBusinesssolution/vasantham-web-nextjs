@@ -4,8 +4,6 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { LuLoader2 } from "react-icons/lu";
 import { IoMdArrowUp } from "react-icons/io";
-
-
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 
@@ -25,6 +23,7 @@ import Link from "next/link";
 import { Textarea } from "@/components/ui/textarea";
 // import BasicService from "../services/api-services/basic-service";
 import Image from "next/image";
+import { EnquiryForm } from "./enquery-modal";
 const formSchema = z.object({
     firstName: z.string()
         .min(1, {
@@ -198,14 +197,15 @@ export default function ContactForm() {
                         </FormItem>
                     )}
                 />
-                <Button variant="primary" className="w-fit flex gap-2 rounded-md text-[16px]" type="submit" disabled={form.formState.isSubmitting}>
+                {/* <Button variant="primary" className="w-fit flex gap-2 rounded-md text-[16px]" type="submit" disabled={form.formState.isSubmitting}>
                     {form.formState.isSubmitting ?
                         <LuLoader2 className="animate-spin" /> : <></>
                     }
                   
                     Send Enquiry
                     <IoMdArrowUp />
-                </Button>
+                </Button> */}
+                <EnquiryForm/>
                 </div>
             </form>
         </Form>

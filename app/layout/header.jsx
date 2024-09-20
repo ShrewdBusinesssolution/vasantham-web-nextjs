@@ -51,7 +51,7 @@ export default function Header() {
           <div className="flex items-center gap-3 lg:hidden">
             {/* Search */}
             <button className="p-2 text-white bg-primary rounded-full ">
-              <GoSearch className="w-6 h-6" />
+              <GoSearch className="w-5 h-5" />
             </button>
             {/* Cart */}
             <button className="p-2 bg-[#F7F7F7] rounded-full">
@@ -124,11 +124,11 @@ export default function Header() {
             </p>
           </div>
           {/* Cart */}
-          <div className="p-3 bg-[#F7F7F7] rounded-full">
+          <div className="p-[10px] bg-[#F7F7F7] rounded-full">
             <Image
               src="/assets/svg/cart.svg"
-              width={25}
-              height={25}
+              width={20}
+              height={20}
               alt="cart"
             />
           </div>
@@ -137,7 +137,7 @@ export default function Header() {
 <div>
           <Popover className="absolute top-0 right-10">
       <PopoverTrigger asChild>
-        <Button variant="outline" className="rounded-full bg-[#F7F7F7]" size="icon" ><div className="">
+        <Button variant="outline" className="p-2 rounded-full bg-[#F7F7F7] border-none" size="icon" ><div className="">
             <Image
               src="/assets/svg/user.svg"
               width={20}

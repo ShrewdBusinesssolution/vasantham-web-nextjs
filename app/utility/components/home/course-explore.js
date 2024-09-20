@@ -80,7 +80,7 @@ const CourseExploreSection = () => {
             ) : displayedProducts.length > 0 ? (
               <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
                 {displayedProducts.map(product => (
-                  <ProductCard key={product.id} product={product} />
+                  <ProductCard key={product.id} product={product} homePage={false} />
                 ))}
               </div>
             ) : (

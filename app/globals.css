@@ -119,3 +119,14 @@
   background-color: #fff; /* Active dot color */
   opacity: 1; /* Full opacity for the active dot */
 }
+
+
+.hide-scrollbar {
+  overflow-y: scroll; /* Allows scrolling */
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
