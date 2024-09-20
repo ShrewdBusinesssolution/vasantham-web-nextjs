@@ -61,7 +61,7 @@ const CourseExploreSection = () => {
         </div>
         {/* Button section */}
         <div className='flex flex-col justify-center items-center my-5'>
-          <div className="flex flex-row gap-3">
+          <div className="flex flex-row gap-3 ">
             {['Class1', 'Class2', 'Class3', 'Class4', 'Class5', 'Class6', 'Class7', 'Class8'].map((tab) => (
               <Button
                 key={tab}

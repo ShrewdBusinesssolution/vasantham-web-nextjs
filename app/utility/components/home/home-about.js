@@ -83,7 +83,7 @@ const About = () => {
         {/* Right container */}
         <div className="w-full md:w-1/2 flex items-center justify-center">
           <Image
-            src="/assets/basic/container_4x.webp"
+            src="/assets/basic/course-bg.webp"
             alt="About"
             width={500}
             height={500}
