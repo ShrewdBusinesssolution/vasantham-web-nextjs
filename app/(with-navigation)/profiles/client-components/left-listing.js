@@ -4,10 +4,9 @@ import { LuPencilLine } from 'react-icons/lu'
 
 export const LeftListing = () => {
   return (
-<main className="bg-[#f7f7f7] py-6">
-    <div className="brand-container flex flex-col md:flex-row gap-5">
+<main className="">
+    <div className="">
     {/* Left Side */}
-    <div className="w-full md:w-1/3 bg-[#fff] border-r rounded-2xl p-2">
     <div className='flex flex-row justify-between items-center border-b'>
     <div className='flex gap-2 items-center'>
                 <div className='flex flex-row items-center gap-5'>
@@ -23,14 +22,6 @@ export const LeftListing = () => {
                 </div>
     </div>
 <h5>sdh</h5>
-    </div>
-
-{/* Right Side */}
-    <div className="w-full md:w-2/3">
-
-    </div>
-
-
 
     </div>
 </main>
