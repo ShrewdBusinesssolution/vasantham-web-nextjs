@@ -24,6 +24,10 @@ import { Textarea } from "@/components/ui/textarea";
 // import BasicService from "../services/api-services/basic-service";
 import Image from "next/image";
 import { EnquiryForm } from "./enquery-modal";
+import { useState } from "react";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
+import { delay } from "../utility/helper";
+import { CustomizedAlert } from "../utility/components/utility-components";
 const formSchema = z.object({
     firstName: z.string()
         .min(1, {
@@ -63,6 +67,8 @@ const formSchema = z.object({
 })
 
 export default function ContactForm() {
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -78,9 +84,13 @@ export default function ContactForm() {
     // 2. Define a submit handler.
     async function onSubmit(values) {
         try {
-            const response = await BasicService.EnquirySave(values);
-            toast.success(response.message, { position: "top-right" })
-            form.reset();
+
+            await delay(2000)
+
+            setIsDialogOpen(true)
+            // const response = await BasicService.EnquirySave(values);
+            // toast.success(response.message, { position: "top-right" })
+            // form.reset();
 
         } catch (error) {
             const message = error?.response?.data?.message ?? error.message;
@@ -171,43 +181,65 @@ export default function ContactForm() {
                     )}
                 />
 
-<div className="flex flex-col md:flex-row gap-5 justify-between items-center">
-                <FormField
-                    control={form.control}
-                    name="terms"
-                    render={({ field }) => (
-                        <FormItem className="flex gap-2 flex-col">
-                            <div className="flex gap-2 items-center">
-                                <FormControl>
-                                    <Checkbox
-                                        checked={field.value}
-                                        onCheckedChange={field.onChange}
-                                        className="accent-primary  "
-                                    />
-                                </FormControl>
-                                <FormLabel className="mt-0">
-                                    I agree the friendly <span>
-                                        <Link href={'/privacy-policy'} className="text-primary hover:underline">
-                                            Terms & Conditions
-                                        </Link>
-                                    </span>
-                                </FormLabel>
-                            </div>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                {/* <Button variant="primary" className="w-fit flex gap-2 rounded-md text-[16px]" type="submit" disabled={form.formState.isSubmitting}>
-                    {form.formState.isSubmitting ?
-                        <LuLoader2 className="animate-spin" /> : <></>
-                    }
-                  
-                    Send Enquiry
-                    <IoMdArrowUp />
-                </Button> */}
-                <EnquiryForm/>
+                <div className="flex flex-col md:flex-row gap-5 justify-between items-center">
+                    <FormField
+                        control={form.control}
+                        name="terms"
+                        render={({ field }) => (
+                            <FormItem className="flex gap-2 flex-col">
+                                <div className="flex gap-2 items-center">
+                                    <FormControl>
+                                        <Checkbox
+                                            checked={field.value}
+                                            onCheckedChange={field.onChange}
+                                            className="accent-primary  "
+                                        />
+                                    </FormControl>
+                                    <FormLabel className="mt-0">
+                                        I agree the friendly <span>
+                                            <Link href={'/privacy-policy'} className="text-primary hover:underline">
+                                                Terms & Conditions
+                                            </Link>
+                                        </span>
+                                    </FormLabel>
+                                </div>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <Button variant="primary" className="w-fit flex gap-2 rounded-md text-[16px]" type="submit" disabled={form.formState.isSubmitting}>
+
+
+                        Send Enquiry
+                        {form.formState.isSubmitting ?
+                            <LuLoader2 className="animate-spin" /> : <IoMdArrowUp />
+                        }
+
+                    </Button>
+                    {/* <EnquiryForm/> */}
+
+
                 </div>
             </form>
+
+            <CustomizedAlert isOpen={isDialogOpen} isOpenHandler={setIsDialogOpen} >
+                <div className="flex flex-col items-center gap-5">
+
+                    <div className="flex items-center justify-center">
+                        <Image src="/assets/gif/enquery.gif" className='' width={100} height={100} alt="Image" />
+                    </div>
+                    <p className="text-[#000] text-[18px] leading-normal text-center font-medium">
+                        We have received your enquiry!
+                    </p>
+                    <div className="flex flex-col justify-center items-center ">
+                        <Button
+                            onClick={() => { setIsDialogOpen(false) }}
+                            variant="primary"
+                            className={`px-5  h-fit font-medium rounded-sm bg-primary mt-4 uppercase w-fit`}>
+                            close
+                        </Button></div>
+                </div>
+            </CustomizedAlert>
         </Form>
     )
 }

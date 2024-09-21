@@ -16,11 +16,13 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { LogoutModal } from "../form-components/logout-modal";
+import { useSession } from "next-auth/react";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
   const pathname = usePathname();
+  const session = useSession();
 
   const handleClickOutside = (event) => {
     if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -91,7 +93,7 @@ export default function Header() {
         <div className="hidden lg:flex w-auto lg:space-x-14 items-center">
           <ul className="flex lg:flex-row space-x-8">
             <li>
-            <Link href={'/'} className={`${pathname === '/' ? 'text-primary' : 'text-[#858585] text-[15px]'} hover:text-primary`}>Home</Link>
+              <Link href={'/'} className={`${pathname === '/' ? 'text-primary' : 'text-[#858585] text-[15px]'} hover:text-primary`}>Home</Link>
             </li>
             <li>
               <Link href="/about" className={`${pathname === '/about' ? 'text-primary ' : ' text-[#858585] text-[15px]'} hover:text-primary`} >
@@ -134,31 +136,46 @@ export default function Header() {
             />
           </div>
           {/* User */}
-          
-<div>
-          <Popover className="absolute top-0 right-10">
-      <PopoverTrigger asChild>
-        <Button variant="outline" className="p-2 rounded-full bg-[#F7F7F7] border-none" size="icon" ><div className="">
-            <Image
-              src="/assets/svg/user.svg"
-              width={20}
-              height={20}
-              alt="user"
-            />
-          </div></Button>
-      </PopoverTrigger>
-      <PopoverContent  className="w-fit p-0 rounded-xl">
-        <div className="w-[150px] p-2 cursor-pointer">
-          <ul>
-            <Link href="/profiles"><li className="w-full p-2 hover:bg-gradient-to-br from-white to-blue-100 from-20% rounded-[10px]">My Profile</li></Link>
-            <li>
-            <LogoutModal/>
-            </li>
-          </ul>
-        </div>
-      </PopoverContent>
-    </Popover>
-    </div>
+
+          <div>
+            <Popover className="absolute top-0 right-10">
+              <PopoverTrigger asChild>
+                <Button variant="outline" className="p-2 rounded-full bg-[#F7F7F7] border-none" size="icon" ><div className="">
+                  <Image
+                    src="/assets/svg/user.svg"
+                    width={20}
+                    height={20}
+                    alt="user"
+                  />
+                </div></Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-fit p-0 rounded-xl">
+                <div className="w-[150px] p-2 cursor-pointer">
+                  {session ?
+
+                    <ul>
+                      <Link href="/profiles"><li className="w-full p-2 hover:bg-gradient-to-br from-white to-blue-100 from-20% rounded-[10px]">My Profile</li></Link>
+                      <li>
+                        <LogoutModal />
+                      </li>
+
+                    </ul>
+                    :
+                    <ul>
+                      <li>
+
+                        <Link href="/login"><li className="w-full p-2 hover:bg-gradient-to-br from-white to-blue-100 from-20% rounded-[10px]">login</li></Link>
+                      </li>
+                      <li>
+                        <Link href="/sign-up"><li className="w-full p-2 hover:bg-gradient-to-br from-white to-blue-100 from-20% rounded-[10px]">sign up</li></Link>
+
+                      </li>
+
+                    </ul>}
+                </div>
+              </PopoverContent>
+            </Popover>
+          </div>
 
         </div>
       </div>
@@ -175,7 +192,7 @@ export default function Header() {
             exit="hidden"
           >
             <div className="flex flex-col gap-2 text-center p-5">
-            <Link href={'/'} className={`${pathname === '/' ? 'text-primary' : 'text-[#858585] text-[15px]'} hover:text-primary`} onClick={() => setMenuOpen(false)}>Home</Link>
+              <Link href={'/'} className={`${pathname === '/' ? 'text-primary' : 'text-[#858585] text-[15px]'} hover:text-primary`} onClick={() => setMenuOpen(false)}>Home</Link>
               <Link href={"/about"} className={`${pathname === '/about' ? 'text-primary ' : ' text-[#858585] text-[15px]'} hover:text-primary`} onClick={() => setMenuOpen(false)}>
                 About Us
               </Link>

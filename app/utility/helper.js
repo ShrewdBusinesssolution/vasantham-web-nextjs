@@ -33,12 +33,15 @@ const scrollToSection = (id) => {
   // const openGraphImage = { images: "/opengraph-image.png" }
   
   const LOGOPATH = '/logo.svg';
-  
+  async function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
   
   export {
     scrollToSection,
     scrollToTop,
     LOGOPATH,
     isEmptyobject,
-    addBeforeUnloadListener
+    addBeforeUnloadListener,
+    delay
   }
