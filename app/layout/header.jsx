@@ -15,6 +15,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { LogoutModal } from "../form-components/logout-modal";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -150,7 +151,9 @@ export default function Header() {
         <div className="w-[150px] p-2 cursor-pointer">
           <ul>
             <Link href="/profiles"><li className="w-full p-2 hover:bg-gradient-to-br from-white to-blue-100 from-20% rounded-[10px]">My Profile</li></Link>
-            <li className="w-full p-2 hover:bg-gradient-to-br from-white to-blue-100 from-20% rounded-[10px]">Logout</li>
+            <li>
+            <LogoutModal/>
+            </li>
           </ul>
         </div>
       </PopoverContent>
