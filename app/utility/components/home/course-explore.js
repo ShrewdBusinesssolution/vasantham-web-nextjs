@@ -16,19 +16,18 @@ const CourseExploreSection = () => {
   const [displayedProducts, setDisplayedProducts] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const products = [
-    { id: 1, imageSrc: "/assets/product/product-1.webp", price: "₹120.00", category: "Science", rating: 4.5, reviewCount: 20, title: "Photography Crash Course for Photographers", students: "100 Students", lessons: "6 Lessons" },
-    { id: 2, imageSrc: "/assets/product/product-1.webp", price: "₹120.00", category: "Multi Media", rating: 4.5, reviewCount: 20, title: "Photography Crash Course for Photographers", students: "1500 Students", lessons: "4 Lessons" },
-    { id: 3, imageSrc: "/assets/product/product-1.webp", price: "₹120.00", category: "Social", rating: 4.5, reviewCount: 20, title: "Photography Crash Course for Photographers", students: "1200 Students", lessons: "5 Lessons" },
-    { id: 4, imageSrc: "/assets/product/product-1.webp", price: "₹120.00", category: "Physics", rating: 4.5, reviewCount: 20, title: "Photography Crash Course for Photographers", students: "2500 Students", lessons: "45 Lessons" },
-    { id: 5, imageSrc: "/assets/product/product-1.webp", price: "₹120.00", category: "Web Application", rating: 4.5, reviewCount: 20, title: "Photography Crash Course for Photographers", students: "3100 Students", lessons: "9 Lessons" },
-    { id: 6, imageSrc: "/assets/product/product-1.webp", price: "₹120.00", category: "Computer Science", rating: 4.5, reviewCount: 20, title: "Photography Crash Course for Photographers", students: "1800 Students", lessons: "12 Lessons" },
-    { id: 7, imageSrc: "/assets/product/product-1.webp", price: "₹120.00", category: "Chemistry", rating: 4.5, reviewCount: 20, title: "Photography Crash Course for Photographers", students: "2400 Students", lessons: "7 Lessons" },
-    { id: 8, imageSrc: "/assets/product/product-1.webp", price: "₹120.00", category: "Bio Chemistry", rating: 4.5, reviewCount: 20, title: "Photography Crash Course for Photographers", students: "1650 Students", lessons: "10 Lessons" },
-  ];
-
   useEffect(() => {
     const getRandomProducts = () => {
+      const products = [
+        { id: 1, imageSrc: "/assets/product/product-1.webp", price: "₹120.00", category: "Science", rating: 4.5, reviewCount: 20, title: "Photography Crash Course for Photographers", students: "100 Students", lessons: "6 Lessons" },
+        { id: 2, imageSrc: "/assets/product/product-1.webp", price: "₹120.00", category: "Multi Media", rating: 4.5, reviewCount: 20, title: "Photography Crash Course for Photographers", students: "1500 Students", lessons: "4 Lessons" },
+        { id: 3, imageSrc: "/assets/product/product-1.webp", price: "₹120.00", category: "Social", rating: 4.5, reviewCount: 20, title: "Photography Crash Course for Photographers", students: "1200 Students", lessons: "5 Lessons" },
+        { id: 4, imageSrc: "/assets/product/product-1.webp", price: "₹120.00", category: "Physics", rating: 4.5, reviewCount: 20, title: "Photography Crash Course for Photographers", students: "2500 Students", lessons: "45 Lessons" },
+        { id: 5, imageSrc: "/assets/product/product-1.webp", price: "₹120.00", category: "Web Application", rating: 4.5, reviewCount: 20, title: "Photography Crash Course for Photographers", students: "3100 Students", lessons: "9 Lessons" },
+        { id: 6, imageSrc: "/assets/product/product-1.webp", price: "₹120.00", category: "Computer Science", rating: 4.5, reviewCount: 20, title: "Photography Crash Course for Photographers", students: "1800 Students", lessons: "12 Lessons" },
+        { id: 7, imageSrc: "/assets/product/product-1.webp", price: "₹120.00", category: "Chemistry", rating: 4.5, reviewCount: 20, title: "Photography Crash Course for Photographers", students: "2400 Students", lessons: "7 Lessons" },
+        { id: 8, imageSrc: "/assets/product/product-1.webp", price: "₹120.00", category: "Bio Chemistry", rating: 4.5, reviewCount: 20, title: "Photography Crash Course for Photographers", students: "1650 Students", lessons: "10 Lessons" },
+      ];
       setLoading(true);
       setTimeout(() => {
         if (products.length > 0) {
@@ -46,9 +45,10 @@ const CourseExploreSection = () => {
         setLoading(false);
       }, 1000); // Loading
     };
-
+  
     getRandomProducts();
   }, [activeTab]);
+  
 
   return (
     <section className="relative bg-cover rounded-2xl" style={{ backgroundImage: "url('/assets/basic/explore-bg.webp')" }}>

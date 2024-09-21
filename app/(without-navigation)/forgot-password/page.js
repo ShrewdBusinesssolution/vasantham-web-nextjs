@@ -1,7 +1,5 @@
 import ForgotPasswordForm from '@/app/form-components/forgot-password-form'
-import { LOGOPATH } from '@/app/utility/helper'
 import { getServerSession } from 'next-auth'
-import { FaArrowLeft } from "react-icons/fa";
 import Link from 'next/link';
 
 import Image from 'next/image'

@@ -147,9 +147,9 @@ export default function Header() {
           </div></Button>
       </PopoverTrigger>
       <PopoverContent  className="w-fit p-0 rounded-xl">
-        <div className="w-[150px] p-2 ">
+        <div className="w-[150px] p-2 cursor-pointer">
           <ul>
-            <li className="w-full p-2 hover:bg-gradient-to-br from-white to-blue-100 from-20% rounded-[10px]">My Profile</li>
+            <Link href="/profiles"><li className="w-full p-2 hover:bg-gradient-to-br from-white to-blue-100 from-20% rounded-[10px]">My Profile</li></Link>
             <li className="w-full p-2 hover:bg-gradient-to-br from-white to-blue-100 from-20% rounded-[10px]">Logout</li>
           </ul>
         </div>

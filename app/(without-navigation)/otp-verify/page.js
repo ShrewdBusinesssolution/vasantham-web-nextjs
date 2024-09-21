@@ -1,5 +1,4 @@
 import OtpVerifyForm from '@/app/form-components/otp-verify-form'
-import { LOGOPATH } from '@/app/utility/helper'
 import { getServerSession } from 'next-auth'
 import Image from 'next/image'
 import { redirect } from 'next/navigation'

@@ -77,7 +77,7 @@ const About = () => {
             <p className='text-sm text-[#222222] mt-2 w-full md:w-8/12 lg:w-11/12 leading-6'>Students get counseling for their future endeavors and our institution stands as a pillar to our student’s growth. We pay special attention to the books, so we mobilize our materials created by the experts on time. Social circumstances are not a bane to the education and enrichment of the students anymore. Expert lectures and easy communication make the complex subject engaging. Practice tests, personalized reports, and our expert’s understanding of students make exams easier. We are devoted to creating an exceptional future with our services. We starting with Maths classes online in Tamil.</p>
             </div>
             {/* right */}
-  <Image src={"/assets/about/about-1.webp"} className="w-full h-[350px] md:w-[400px] md:h-[402px] rounded-xl" width={500} height={500}/>
+  <Image src={"/assets/about/about-1.webp"} className="w-full h-[350px] md:w-[400px] md:h-[402px] rounded-xl" width={500} height={500} alt="Image"/>
         </div>
         </section>
 

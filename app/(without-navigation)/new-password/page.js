@@ -1,6 +1,5 @@
 
 import NewPasswordForm from '@/app/form-components/new-password-form'
-import { LOGOPATH } from '@/app/utility/helper'
 import { getServerSession } from 'next-auth'
 import Link from 'next/link'
 
