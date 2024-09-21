@@ -15,7 +15,7 @@ const NewsletterSection = () => {
           </div>
         <div className="w-full md:w-1/2 flex flex-col justify-end">
           <form className="flex gap-5 justify-between p-2 w-full bg-white rounded border border-gray-200">
-            <label htmlFor="email" className="sr-only">Enter Your Email</label>
+            <label htmlFor="email" className="sr-only text-[#6C757D] text-sm">Enter Your Email</label>
             <input
               type="email"
               id="email"

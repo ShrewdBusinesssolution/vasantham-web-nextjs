@@ -11,7 +11,10 @@ import TestimonialsSection from '../utility/components/home/testimonial-section'
 import AboutSection from '../utility/components/home/home-about'
 import BestService from '../utility/components/home/best-service'
 
-
+export const metadata = {
+  title: "Homepage",
+  description: "Protect your home from pests with our expert pest control services. We offer safe, effective solutions to eliminate unwanted insects, rodents, and other nuisances. Book now for a pest-free environment!",
+};
 
 const Home = () => {
   return (

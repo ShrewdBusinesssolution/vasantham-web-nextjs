@@ -1,6 +1,12 @@
 import React from 'react'
 import ContactForm from '../../form-components/contact-form'
 
+export const metadata = {
+  title: "Contact",
+  description: "Learn more about our commitment to providing top-quality pest control services. With years of experience, our expert team is dedicated to safeguarding your home or business from pests using safe, eco-friendly methods. Discover how we can help you maintain a pest-free environment!",
+
+};
+
 const Contact = () => {
   return (
     <div className="px-[2rem] md:px-[6rem] lg:px-[20rem] bg-[#FCFCFC] py-10">

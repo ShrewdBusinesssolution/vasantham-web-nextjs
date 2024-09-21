@@ -43,7 +43,7 @@ export default function Header() {
       <div className="flex flex-col lg:flex-row justify-between items-center brand-container py-5">
         {/* LOGO */}
         <div className="flex items-center justify-between w-full lg:w-auto">
-          <div className="flex items-center">
+          <div className="flex items-center cursor-pointer">
             <Image src={COLORLOGOPATH} width={150} height={75} alt="logo" />
           </div>
 
@@ -78,9 +78,9 @@ export default function Header() {
               onClick={handleMenuClick}
             >
               {menuOpen ? (
-                <FiX className="text-primary w-9 h-8" />
+                <FiX className="text-primary w-8 h-8" />
               ) : (
-                <FiMenu className="text-primary w-9 h-8" />
+                <FiMenu className="text-primary w-8 h-8" />
               )}
             </Button>
           </div>
