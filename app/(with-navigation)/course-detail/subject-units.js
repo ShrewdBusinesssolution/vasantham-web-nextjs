@@ -10,7 +10,7 @@ import { GoSearch } from 'react-icons/go';
 const SubjectUnit = () => {
   return (
 <main className="">
-    <div className="brand-container px-6 flex flex-row justify-between py-10">
+    <div className="brand-container px-6 flex flex-row justify-between py-5">
         <div>
             <h3 className="uppercase text-lg">UNITS</h3>
         </div>

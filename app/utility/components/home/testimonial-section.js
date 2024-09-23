@@ -3,6 +3,10 @@ import React, { useRef } from 'react';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/splide/dist/css/splide.min.css'; // Import Splide styles
 import { HeadingSection, TestimonialCard } from '@/app/utility/components/utility-components';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper-bundle.css'; // Import Swiper styles
+import SwiperCore, { Autoplay, Pagination } from 'swiper';
+
 
 const testimonials = [
   {
@@ -36,48 +40,66 @@ const TestimonialsSection = () => {
           The ultimate planning solution for busy women who want to reach their personal goals
         </p>
       </div>
-      <div className="w-full max-w-6xl splide-container py-10 ">
-        <Splide
-          ref={categorySplide}
-          options={{
-            type: 'loop',
-            perPage: 3,
-            perMove: 1,
-            autoplay: true,
-            interval: 3000,
-            gap: '2rem',
-            pagination: true, // Ensure pagination is enabled
-            speed: 2000,
-            arrows: false,
-            easing: 'linear',
-            breakpoints: {
-              1024: {
-                perPage: 2,
-                gap: '1rem',
-                height: '300px',
-              },
-              768: {
-                perPage: 2,
-                gap: '0.5rem',
-                height: '260px',
-              },
-              640: {
-                perPage: 1,
-                gap: '0.5rem',
-                height: '380px',
-              },
-            },
-          }}
-        >
-          {testimonials.map((testimonial, index) => (
-            <SplideSlide key={index}>
-              <TestimonialCard {...testimonial} />
-            </SplideSlide>
-          ))}
-        </Splide>
-      </div>
+      <div className="w-full max-w-6xl splide-container py-10">
+      <Swiper
+        effect="coverflow" // Enable coverflow effect
+        grabCursor={true} // Enable grab cursor
+        centeredSlides={true} // Center the active slide
+        slidesPerView={3} // Show one slide at a time by default
+        spaceBetween={30} // Space between slides
+        loop={true} // Enable loop
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
+        pagination={{
+          clickable: true,
+          renderBullet: (index, className) => {
+            return `<span class="${className} rounded-full w-4 h-4 bg-gray-900 mx-1"></span>`;
+          },
+        }}
+        breakpoints={{
+          640: {
+            slidesPerView: 1, // One slide for small screens
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 2, // Two slides for medium screens
+            spaceBetween: 30,
+          },
+          1024: {
+            slidesPerView: 3, // Three slides for large screens
+            spaceBetween: 40,
+          },
+        }}
+      >
+        {testimonials.map((testimonial, index) => (
+          <SwiperSlide key={index}>
+            <TestimonialCard {...testimonial} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
+
     </section>
   );
 };
 
 export default TestimonialsSection;
+
+
+
+const CustomPagination = ({ currentIndex, totalSlides }) => {
+  return (
+    <div className="flex justify-center mt-4">
+      {Array.from({ length: totalSlides }).map((_, index) => (
+        <div
+          key={index}
+          className={`w-4 h-4 rounded-full mx-1 cursor-pointer transition duration-300 ${
+            currentIndex === index ? 'bg-blue-600' : 'bg-gray-300'
+          }`}
+        />
+      ))}
+    </div>
+  );
+};

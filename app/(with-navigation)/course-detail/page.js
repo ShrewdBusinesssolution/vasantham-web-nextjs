@@ -19,7 +19,7 @@ const productData = {
 Photographer" product={productData}/>
         </section>
 
-        <section className="pt-10 bg-[#FCFCFC]">
+        <section className="pt-16 bg-[#FCFCFC]">
         <SubjectUnit/>
         </section>
 
