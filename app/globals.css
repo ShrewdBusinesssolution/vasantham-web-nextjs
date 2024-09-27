@@ -122,11 +122,21 @@
 
 
 .hide-scrollbar {
-  overflow-y: scroll; /* Allows scrolling */
-  scrollbar-width: none; /* For Firefox */
-  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+  overflow-y: scroll;
+  scrollbar-width: none; 
+  -ms-overflow-style: none;
 }
 
 .hide-scrollbar::-webkit-scrollbar {
-  display: none; /* For Chrome, Safari, and Opera */
+  display: none;
+}
+
+.hide-y-scrollbar {
+  overflow-y: scroll;
+  scrollbar-width: none; 
+  -ms-overflow-style: none;
+}
+
+.hide-y-scrollbar::-webkit-scrollbar {
+  display: none; 
 }

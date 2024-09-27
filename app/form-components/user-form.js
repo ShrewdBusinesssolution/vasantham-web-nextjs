@@ -44,7 +44,7 @@ const UserForm = ({ onSubmit }) => {
       <div className="flex-1">
         <label className="block text-sm font-semibold">User Name</label>
         <div className="relative">
-          <FaUser className="absolute left-3 top-[18px] text-gray-500" />
+          <FaUser className="absolute left-3 top-[18px] text-[#000]" />
           <input
             type="text"
             name="userName"
@@ -59,7 +59,7 @@ const UserForm = ({ onSubmit }) => {
       <div className="flex-1">
         <label className="block text-sm font-semibold">Date of Birth</label>
         <div className="relative">
-          <FaCalendarAlt className="absolute left-3 top-[18px] text-gray-500" />
+          <FaCalendarAlt className="absolute left-3 top-[18px] text-[#000]" />
           <input
             type="date"
             name="dateOfBirth"
@@ -77,7 +77,7 @@ const UserForm = ({ onSubmit }) => {
       <div className="flex-1">
         <label className="block text-sm font-semibold">Email</label>
         <div className="relative">
-          <FaEnvelope className="absolute left-3 top-[18px] text-gray-500" />
+          <FaEnvelope className="absolute left-3 top-[18px] text-[#000]" />
           <input
             type="email"
             name="email"
@@ -109,7 +109,7 @@ const UserForm = ({ onSubmit }) => {
     <div className="mb-2">
       <label className="block text-sm font-semibold">Phone Number</label>
       <div className="relative">
-        <FaPhone className="absolute left-3 top-[18px] text-gray-500" />
+        <FaPhone className="absolute left-3 top-[18px] text-[#000]" />
         <input
           type="tel"
           name="phoneNumber"

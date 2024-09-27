@@ -30,7 +30,7 @@ const Chapters = () => {
   return (
     <main className="bg-[#FCFCFC] px-16 py-5">
       <div className="flex flex-col gap-5 brand-container">
-      <div className=" rounded-lg bg-[#f7f7f7]">
+      <div className=" rounded-lg bg-[#f7f7f7] border border-[#E9E9E9]">
         <div className="p-5 flex flex-row justify-between">
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2">
@@ -58,7 +58,7 @@ const Chapters = () => {
         </div>
       </div>
       {/* Card 2 */}
-      <div className=" rounded-lg bg-[#f7f7f7]">
+      <div className=" rounded-lg bg-[#f7f7f7] border border-[#E9E9E9]">
         <div className="p-5 flex flex-row justify-between">
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2">
@@ -86,7 +86,7 @@ const Chapters = () => {
         </div>
       </div>
       {/* Card 3 */}
-      <div className=" rounded-lg bg-[#f7f7f7]">
+      <div className=" rounded-lg bg-[#f7f7f7] border border-[#E9E9E9]">
         <div className="p-5 flex flex-row justify-between">
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2">

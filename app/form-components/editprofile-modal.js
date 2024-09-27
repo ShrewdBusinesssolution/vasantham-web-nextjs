@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { LuPencilLine } from "react-icons/lu";
+import { FaUser, FaEnvelope, FaPhone, FaCalendarAlt } from "react-icons/fa";
 
 export function EditProfile() {
   const [step, setStep] = useState("details");
@@ -56,7 +57,7 @@ export function EditProfile() {
           <LuPencilLine size={22} className="text-primary" />
         </div>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[600px] h-auto p-3 flex flex-col">
+      <DialogContent className="sm:max-w-[600px] h-auto p-3 flex flex-col md:px-5">
         <h5 className="text-[18px]">Edit Profile</h5>
 
         <div className="flex flex-col space-y-2">
@@ -64,25 +65,32 @@ export function EditProfile() {
           <div className="flex gap-4">
             <div className="flex-1">
               <label className="block text-sm font-semibold">User Name</label>
-              <input
-                type="text"
-                placeholder="User Name"
-                value={userName}
-                onChange={handleUserNameChange}
-                className="mt-2 placeholder:text-sm p-2 border rounded w-full"
-              />
+              <div className="relative">
+                <FaUser className="absolute left-3 top-[18px] text-[#000]" />
+                <input
+                  type="text"
+                  name="userName"
+                  value={userName}
+                  onChange={handleUserNameChange}
+                  className="mt-2 pl-10 p-[6px] border rounded w-full placeholder:text-sm"
+                  placeholder='User Name'
+                />
+              </div>
               {errors.userName && <p className="text-red-500 text-sm">{errors.userName}</p>}
             </div>
 
             <div className="flex-1">
               <label className="block text-sm font-semibold">Date of Birth</label>
-              <input
-                type="date"
-                value={dateOfBirth}
-                onChange={handleDateOfBirthChange}
-                className="mt-2 placeholder:text-sm p-2 border rounded w-full"
-                placeholder="DOB"
-              />
+              <div className="relative">
+                <FaCalendarAlt className="absolute left-3 top-[18px] text-[#000]" />
+                <input
+                  type="date"
+                  value={dateOfBirth}
+                  onChange={handleDateOfBirthChange}
+                  className="mt-2 pl-10 p-[6px] border rounded w-full"
+                  placeholder="Date of Birth"
+                />
+              </div>
               {errors.dateOfBirth && <p className="text-red-500 text-sm">{errors.dateOfBirth}</p>}
             </div>
           </div>
@@ -91,13 +99,16 @@ export function EditProfile() {
           <div className="flex gap-4">
             <div className="flex-1">
               <label className="block text-sm font-semibold">Email</label>
-              <input
-                type="email"
-                placeholder="priya01@gmail.com"
-                value={email}
-                onChange={handleEmailChange}
-                className="mt-2 placeholder:text-sm p-2 border rounded w-full"
-              />
+              <div className="relative">
+                <FaEnvelope className="absolute left-3 top-[18px] text-[#000]" />
+                <input
+                  type="email"
+                  value={email}
+                  onChange={handleEmailChange}
+                  className="mt-2 pl-10 p-[6px] border rounded w-full placeholder:text-sm"
+                  placeholder="Email"
+                />
+              </div>
               {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
             </div>
 
@@ -106,7 +117,7 @@ export function EditProfile() {
               <select
                 value={gender}
                 onChange={handleGenderChange}
-                className="mt-2 placeholder:text-sm p-2 border rounded w-full"
+                className="mt-2 p-2 border rounded w-full"
               >
                 <option value="">Select Gender</option>
                 <option value="male">Male</option>
@@ -117,28 +128,32 @@ export function EditProfile() {
           </div>
 
           {/* Phone Number on its own row */}
-          <div>
+          <div className="pb-5">
             <label className="block text-sm font-semibold">Phone Number</label>
-            <input
-              type="tel"
-              placeholder="Phone Number"
-              value={phoneNumber}
-              onChange={handlePhoneNumberChange}
-              className="mt-2 placeholder:text-sm p-2 border rounded w-full"
-            />
+            <div className="relative">
+              <FaPhone className="absolute left-3 top-[18px] text-[#000]" />
+              <input
+                type="tel"
+                value={phoneNumber}
+                onChange={handlePhoneNumberChange}
+                className="mt-2 pl-10 p-[6px] border rounded w-1/2 placeholder:text-sm"
+                placeholder="Phone Number"
+              />
+            </div>
             {errors.phoneNumber && <p className="text-red-500 text-sm">{errors.phoneNumber}</p>}
           </div>
 
           {/* Save button */}
           <div className="flex flex-row gap-4 justify-end">
-          <Button variant="primary" onClick={handleSaveContinue} className="uppercase text-xs w-fit bg-[#f7f7f7] text-black border px-4 font-medium" disabled={isLoading}>
-            {isLoading ? "Saving..." : "cancel"}
-          </Button>
-          <Button variant="primary" onClick={handleSaveContinue} className="uppercase text-xs w-fit" disabled={isLoading}>
-            {isLoading ? "Saving..." : "Save Changes"}
-          </Button>
+            <Button variant="primary" onClick={handleSaveContinue} className="uppercase text-xs w-fit bg-[#f7f7f7] text-black border px-4 font-medium" disabled={isLoading}>
+              {isLoading ? "Saving..." : "Cancel"}
+            </Button>
+            <Button variant="primary" onClick={handleSaveContinue} className="uppercase text-xs w-fit" disabled={isLoading}>
+              {isLoading ? "Saving..." : "Save Changes"}
+            </Button>
           </div>
-          {/* Update msg */}
+
+          {/* Update message */}
           {success && <p className="text-green-500 text-sm">Profile updated successfully!</p>}
         </div>
       </DialogContent>
