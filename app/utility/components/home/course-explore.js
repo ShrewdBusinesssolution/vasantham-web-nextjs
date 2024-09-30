@@ -13,7 +13,7 @@ const Spinner = () => (
 
 const CourseExploreSection = () => {
   const [activeTab, setActiveTab] = useState('Class1');
-  const [displayedProducts, setDisplayedProducts] = useState([]);
+  const [displayedProducts, setDisplayedProducts] = useState(0);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -56,13 +56,13 @@ const CourseExploreSection = () => {
       <div className='flex flex-col justify-center items-center p-8'>
         <div className='text-center space-y-5'>
           <h4 className="text-[#20ad96] text-[16px] font-semibold">Explore Courses</h4>
-          <p className="text-white text-[26px] md:text-[32px] font-bold leading-[44px]">Over 200+ Online Courses</p>
+          <p className="text-white text-[24px] md:text-[32px] font-bold leading-[44px]">Over 200+ Online Courses</p>
           <p className="text-white text-sm">The ultimate planning solution for busy women who want to reach their personal goals</p>
         </div>
         {/* Button section */}
         <div className='flex flex-col justify-center items-center my-5'>
-          <div className="flex flex-row gap-3 w-[370px] md:w-[500px] lg:w-[840px]  justify-center items-center overflow-x-scroll hide-scrollbar">
-            {['Class1', 'Class2', 'Class3', 'Class4', 'Class5', 'Class6', 'Class7', 'Class8', 'Class9', 'Class10'].map((tab) => (
+          <div className="flex flex-row gap-3 w-[370px] md:w-[500px] lg:w-[860px]  justify-center items-center overflow-x-scroll hide-scrollbar">
+            {['Class 1', 'Class 2', 'Class 3', 'Class 4', 'Class 5', 'Class 6', 'Class 7', 'Class 8', 'Class 9', 'Class 10'].map((tab) => (
               <Button
                 key={tab}
                 variant={activeTab === tab ? 'secondary' : 'outline'}

@@ -41,9 +41,9 @@ const CourseBanner = ({
       <div className='absolute z-0 inset-0 bg-[#00518A] opacity-[70%]' />
       <div className="brand-container px-6">
         {/* Text */}
-        <div className="relative z-10 flex flex-col gap-4">
+        <div className="relative z-10 flex flex-col gap-2 md:gap-4">
           <h2 className='text-[#20AD96] text-sm md:text-[15px] uppercase font-medium'>{title}</h2>
-          <h2 className='text-white font-semibold w-full md:w-[600px] lg:w-[700px] leading-normal md:text-[36px]'>{subtitle}</h2>
+          <h2 className='text-white font-semibold w-full md:w-[600px] lg:w-[700px] leading-normal text-[26px] md:text-[32px] lg:text-[36px]'>{subtitle}</h2>
         </div>
 
         {/* Left Bottom Content */}

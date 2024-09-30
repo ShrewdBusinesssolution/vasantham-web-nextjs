@@ -28,26 +28,26 @@ const Chapters = () => {
   }, []);
 
   return (
-    <main className="bg-[#FCFCFC] px-16 py-5">
+    <main className="bg-[#FCFCFC] px-5 md:px-12 lg:px-16 py-5">
       <div className="flex flex-col gap-5 brand-container">
       <div className=" rounded-lg bg-[#f7f7f7] border border-[#E9E9E9]">
-        <div className="p-5 flex flex-row justify-between">
+        <div className="p-5 flex flex-col md:flex-row justify-between">
           <div className="flex flex-col gap-4">
-            <div className="flex items-center gap-2">
-              <h3 className="text-[20px] font-medium text-[#535967]">Unit 1</h3>
+            <div className="flex  items-center gap-2">
+              <h3 className="text-[20px] font-medium text-nowrap text-[#535967]">Unit 1</h3>
               <p className="p-1 text-sm text-white px-4 bg-green-600 rounded-full">
                 Completed
               </p>
               
             </div>
-            <h3 className="text-[24px] text-[#222222]">
+            <h3 className="text-[22px] md:text-[24px] text-[#222222]">
               Introduction to Mathematics
             </h3>
           </div>
 
-          <div className="flex flex-col items-center justify-center">
+          <div className="flex flex-col items-start md:items-center justify-start">
             {/* Progress Bar */}
-            <div className="flex flex-row justify-center items-center gap-2">
+            <div className="flex flex-row justify-center items-center gap-2 mt-2 md:mt-0">
             <Progress value={90} className="h-2 bg-[#00FFD5] bg-gradient-to-l from-[#00FF44] to  w-[170px]" />
             <p>100%</p>
             </div>
@@ -59,7 +59,7 @@ const Chapters = () => {
       </div>
       {/* Card 2 */}
       <div className=" rounded-lg bg-[#f7f7f7] border border-[#E9E9E9]">
-        <div className="p-5 flex flex-row justify-between">
+        <div className="p-5 flex flex-col md:flex-row justify-between">
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2">
               <h3 className="text-[20px] font-medium text-[#535967]">Unit 2</h3>
@@ -73,9 +73,9 @@ const Chapters = () => {
             </h3>
           </div>
 
-          <div className="flex flex-col items-center justify-center">
+          <div className="flex flex-col items-start md:items-center justify-center">
             {/* Progress Bar */}
-            <div className="flex flex-row justify-center items-center gap-2">
+            <div className="flex flex-row justify-center items-center gap-2 mt-2 md:mt-0">
             <Progress value={90} className="h-2 bg-[#FC7B00] bg-gradient-to-l from-[#E1CA00] to  w-[170px]" />
             <p>25%</p>
             </div>
@@ -87,7 +87,7 @@ const Chapters = () => {
       </div>
       {/* Card 3 */}
       <div className=" rounded-lg bg-[#f7f7f7] border border-[#E9E9E9]">
-        <div className="p-5 flex flex-row justify-between">
+        <div className="p-5 flex flex-col md:flex-row justify-between">
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2">
               <h3 className="text-[20px] font-medium text-[#535967]">Unit 3</h3>
@@ -101,7 +101,7 @@ const Chapters = () => {
             </h3>
           </div>
 
-          <div className="flex flex-col items-center justify-center">
+          <div className="flex flex-col items-start md:items-center justify-center">
 <Button variant="primary" className="uppercase text-sm">start unit</Button>            
             <div>
             

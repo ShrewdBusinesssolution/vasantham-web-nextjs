@@ -1,9 +1,9 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { BsCart2 } from "react-icons/bs";
 import React, { useState } from "react";
-import CartModal from "../../utility/components/cart/cart-modal"
+import { CartModal } from "../../utility/components/cart/cart-modal";
+import { BsCart2 } from "react-icons/bs";
 
 const AboutCourse = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -41,14 +41,14 @@ const AboutCourse = () => {
           <p className="font-bold text-[26px]">24 Hrs</p>
           {/* Button */}
           <div className="flex justify-center items-center">
-            <Button variant="primary" className="mt-2 uppercase px-8 text-sm flex items-center gap-x-2" onClick={handleAddToCart}>
+          <Button variant="primary" className="mt-2 uppercase px-8 text-sm flex items-center gap-x-2" onClick={handleAddToCart}>
               Add to cart <BsCart2 size={20} />
             </Button>
           </div>
         </div>
       </div>
 
-      {/* Modal */}
+      {/* Cart Modal */}
       <CartModal isOpen={isModalOpen} onClose={closeModal} />
 
       {/* What you'll learn */}

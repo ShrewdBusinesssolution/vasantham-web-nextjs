@@ -8,7 +8,7 @@ import { GoSearch } from "react-icons/go";
 import { FiMenu, FiX } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
 import { AnimatePresence, motion } from "framer-motion";
-import { FadeBottom } from "@/app/utility/animation";
+import { FadeBottom, FadeUp } from "@/app/utility/animation";
 import { usePathname } from "next/navigation";
 import {
   Popover,
@@ -17,6 +17,8 @@ import {
 } from "@/components/ui/popover"
 import { LogoutModal } from "../form-components/logout-modal";
 import { useSession } from "next-auth/react";
+import { CartModal } from "../utility/components/cart/cart-modal";
+import SearchForm from "../form-components/search-form";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -41,6 +43,12 @@ export default function Header() {
     setMenuOpen((prev) => !prev);
   };
 
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  
+  const handleOpen = () => setIsCartOpen(true);
+  const handleClose = () => setIsCartOpen(false);
+
   return (
     <header className="sticky top-0 z-50 bg-white">
       <div className="flex flex-col lg:flex-row justify-between items-center brand-container py-5">
@@ -51,13 +59,11 @@ export default function Header() {
           </div>
 
           {/* Mobile Menu */}
-          <div className="flex items-center gap-3 lg:hidden">
+          <div className="flex items-center gap-2 lg:hidden">
             {/* Search */}
-            <button className="p-2 text-white bg-primary rounded-full ">
-              <GoSearch className="w-5 h-5" />
-            </button>
+            <SearchForm />
             {/* Cart */}
-            <button className="p-2 bg-[#F7F7F7] rounded-full">
+            <button className="p-2 bg-[#F7F7F7] rounded-full" onClick={handleOpen}>
               <Image
                 src="/assets/svg/cart.svg"
                 width={20}
@@ -65,6 +71,7 @@ export default function Header() {
                 alt="cart"
               />
             </button>
+            <CartModal isOpen={isCartOpen} onClose={handleClose} />
             {/* User */}
             <button className="p-2 bg-[#F7F7F7] rounded-full">
               <Image
@@ -116,24 +123,16 @@ export default function Header() {
         {/* Large Screen */}
         <div className="hidden lg:flex items-center gap-5">
           {/* Search */}
-          <div className="relative rounded-full p-1 pl-4 px-2 flex items-center gap-2 border-[1px] border-[#E9E9E9] w-full max-w-[250px]">
-            <input
-              type="text"
-              className="placeholder:text-[15px] placeholder:px-1 w-full text-black/40 focus:outline-none"
-              placeholder="search"
-            />
-            <p className="bg-primary rounded-full p-1">
-              <GoSearch className="w-6 h-6 text-white" />
-            </p>
-          </div>
+           <SearchForm />
           {/* Cart */}
-          <div className="p-[10px] bg-[#F7F7F7] rounded-full">
+          <div className="p-[10px] bg-[#F7F7F7] rounded-full cu" onClick={handleOpen}>
             <Image
               src="/assets/svg/cart.svg"
               width={20}
               height={20}
               alt="cart"
             />
+            <CartModal isOpen={isCartOpen} onClose={handleClose} />
           </div>
           {/* User */}
 

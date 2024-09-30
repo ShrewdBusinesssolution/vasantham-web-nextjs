@@ -10,11 +10,11 @@ import { GoSearch } from 'react-icons/go';
 const SubjectUnit = () => {
   return (
 <main className="">
-    <div className="brand-container px-6 flex flex-row justify-between py-5">
+    <div className="brand-container px-6 flex flex-col md:flex-row items-center md:items-center justify-between py-2 md:py-5">
         <div>
             <h3 className="uppercase text-lg">UNITS</h3>
         </div>
-        <div className="flex flex-row gap-5">
+        <div className="flex flex-col items-center md:flex-row gap-3 lg:gap-5">
         <Popover className="absolute top-0 right-10">
                         <PopoverTrigger asChild>
                             <div className="relative w-fit gap-5 p-2 bg-white border rounded-full flex items-center justify-between cursor-pointer px-5">
