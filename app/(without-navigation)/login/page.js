@@ -6,11 +6,11 @@ import { redirect } from 'next/navigation'
 import React from 'react'
 
 export default async function Login() {
-  const session = await getServerSession()
-   if(session){
+//   const session = await getServerSession()
+//    if(session){
 
-        redirect('/')
-   }
+//         redirect('/')
+//    }
     return (
         <main className='h-screen max-w-screen bg-white'>
             <div className='grid grid-cols-1  lg:grid-cols-2 xl:grid-cols-2'>

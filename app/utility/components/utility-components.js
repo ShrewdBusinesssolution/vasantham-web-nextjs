@@ -184,28 +184,7 @@ const ProductCard = ({ product, homePage }) => {
   )
 }
 
-const StaffCard = ({ staff }) => {
-  return (
-    <div className="bg-white rounded-2xl shadow-sm overflow-hidden w-fit max-w-xs p-3">
-      {/* Image */}
-      <div className="relative w-full">
-        <Image
-          src={staff.imageSrc}
-          width={300}
-          height={300}
-          alt="product"
-          className="object-cover w-full h-full"
-        />
-      </div>
-      <div className="text-center space-y-3 mt-3 py-2">
-        <h3 className="text-[17px] font-medium">{staff.name}</h3>
-        <p className="text-[14px] leading-normal font-light text-[#B5B6B5]">
-          {staff.para}
-        </p>
-      </div>
-    </div>
-  )
-}
+
 
 const CustomizedAlert = ({ isOpen, isOpenHandler, children }) => {
   return (
@@ -221,4 +200,4 @@ const CustomizedAlert = ({ isOpen, isOpenHandler, children }) => {
 }
 
 
-export { HeadingSection, AboutBanner, WorkingStaffs, StatCard, TestimonialCard, ProductCard, StaffCard, CourseBanner, CustomizedAlert }
+export { HeadingSection, AboutBanner, WorkingStaffs, StatCard, TestimonialCard, ProductCard, CourseBanner, CustomizedAlert }
