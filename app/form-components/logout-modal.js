@@ -21,12 +21,12 @@ export function LogoutModal() {
       <DialogTrigger asChild>
         <p className="w-full p-2 hover:bg-gradient-to-br from-white to-blue-100 from-20% rounded-[10px]">Logout</p>
       </DialogTrigger>
-      <DialogContent className="max-w-[300px] h-[260px] p-5">
+      <DialogContent className="max-w-[310px] h-[310px] p-5">
         <DialogHeader className="text-center">
           <div className="flex items-center justify-center">
             <Image src="/assets/svg/logout.svg" className='' width={150} height={150} alt="Image" />
           </div>
-          <p className="text-[#000] text-[17px] leading-normal text-center font-medium">
+          <p className="text-[#21242B] text-[17px] leading-normal text-center font-medium">
             Are you sure, Do you want to logout?
           </p>
           <div className="flex flex-row justify-center items-center gap-4">

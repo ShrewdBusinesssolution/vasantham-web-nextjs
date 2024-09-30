@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState,useEffect } from 'react';
 import { GoSearch } from 'react-icons/go';
 import { FiChevronLeft, FiChevronRight, FiChevronDown } from 'react-icons/fi'; 
 import {
@@ -24,8 +24,13 @@ const Filter = () => {
     ];
 
     const [filteredProducts, setFilteredProducts] = useState([]);
-    const [activeClass, setActiveClass] = useState(null);
+    const [activeClass, setActiveClass] = useState(0);
     const scrollRef = useRef(null);
+
+    useEffect(() => {
+        // Shuffle products and set the initial filtered products when component mounts
+        handleClassClick(0); // Automatically select Class 1 on mount
+    }, []);
 
     const shuffleArray = (array) => {
         for (let i = array.length - 1; i > 0; i--) {
