@@ -7,6 +7,8 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { LuDot } from "react-icons/lu";
 import { MdArrowDownward } from 'react-icons/md';
+import VideoModal from '@/app/utility/components/video-modal';
+import Link from 'next/link';
 
 const SectionLecture = () => {
 
@@ -57,11 +59,9 @@ const SectionLecture = () => {
     <RiCheckDoubleFill className='text-[#07A858]' size={22}/>
     <p className='text-[#07A858] text-[18px] font-medium'>Powerful Audience & Best course materials</p>
     </div>
-    <div className='flex flex-row items-center gap-3'>
+    <div className='flex flex-row items-center gap-3 cursor-pointer'>
     <h4 className='text-[16px] text-[#222] font-medium'>Score : <span className='font-medium text-secondary'>90</span></h4>
-    <div className='bg-[#E9E9E9] p-2 rounded-full'>
-    <Image src="/assets/svg/video.svg" width={22} height={22} alt="video_icon" className=""/>
-    </div>
+   <VideoModal/>
     </div>
     </div>
     {/* Take Test */}
@@ -71,7 +71,9 @@ const SectionLecture = () => {
     <p className='text-[#07A858] text-[18px] font-medium'>Powerful Audience & Best course materials</p>
     </div>
     <div className='flex flex-row items-center gap-3'>
+      <Link href="/test">
     <Button variant="primary" className="uppercase">take test</Button>
+    </Link>
     <div className='bg-[#E9E9E9] p-2 rounded-full'>
     <Image src="/assets/svg/video.svg" width={22} height={22} alt="video_icon" className=""/>
     </div>

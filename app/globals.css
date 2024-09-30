@@ -140,3 +140,9 @@
 .hide-y-scrollbar::-webkit-scrollbar {
   display: none; 
 }
+
+/* Video */
+.video-player {
+  width: 100%;
+  max-height: 100px;
+}
