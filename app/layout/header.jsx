@@ -63,15 +63,15 @@ export default function Header() {
             {/* Search */}
             <SearchForm />
             {/* Cart */}
-            <button className="p-2 bg-[#F7F7F7] rounded-full" onClick={handleOpen}>
+            {/* <button className="p-2 bg-[#F7F7F7] rounded-full" onClick={handleOpen}>
               <Image
                 src="/assets/svg/cart.svg"
                 width={20}
                 height={20}
                 alt="cart"
               />
-            </button>
-            <CartModal isOpen={isCartOpen} onClose={handleClose} />
+            </button> */}
+            <CartModal />
             {/* User */}
             <button className="p-2 bg-[#F7F7F7] rounded-full">
               <Image
@@ -125,15 +125,8 @@ export default function Header() {
           {/* Search */}
            <SearchForm />
           {/* Cart */}
-          <div className="p-[10px] bg-[#F7F7F7] rounded-full cu" onClick={handleOpen}>
-            <Image
-              src="/assets/svg/cart.svg"
-              width={20}
-              height={20}
-              alt="cart"
-            />
-            <CartModal isOpen={isCartOpen} onClose={handleClose} />
-          </div>
+            <CartModal />
+
           {/* User */}
 
           <div>

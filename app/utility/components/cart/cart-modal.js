@@ -4,6 +4,7 @@ import { FaUser } from "react-icons/fa";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import { RiDeleteBin4Line } from "react-icons/ri";
 import Link from 'next/link';
+import Image from "next/image";
 
 const courses = [
   {
@@ -26,7 +27,14 @@ export function CartModal({ isOpen, onClose }) {
   return (
     <Sheet open={isOpen} onOpenChange={onClose}>
       <SheetTrigger asChild>
-        {/* <Button variant="outline" onClick={onClose}>Open</Button> */}
+        <button className="p-2 bg-[#F7F7F7] rounded-full" >
+          <Image
+            src="/assets/svg/cart.svg"
+            width={20}
+            height={20}
+            alt="cart"
+          />
+        </button>
       </SheetTrigger>
       <SheetContent className="flex flex-col h-full overflow-hidden">
         <SheetHeader className="border-b-2">
@@ -47,7 +55,7 @@ export function CartModal({ isOpen, onClose }) {
           <p className="mt-4 text-start font-medium">
             Total: <span className='font-bold'>₹{courses.reduce((total, course) => total + course.price, 0)}</span>
             <span className="line-through text-[16px] text-gray-500 font-normal">
-               ₹{courses.reduce((total, course) => total + course.originalPrice, 0)}
+              ₹{courses.reduce((total, course) => total + course.originalPrice, 0)}
             </span>
           </p>
           <div className="mt-2">
