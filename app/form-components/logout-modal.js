@@ -34,7 +34,7 @@ export function LogoutModal() {
               onClick={()=> signOut({callbackUrl:"/"})}            
               variant="primary"
               className={`px-5  h-fit font-medium rounded-sm bg-[#f7f7f7] border text-[#000] mt-4 uppercase w-fit`}>
-              Yes, I'm sure
+              Yes, I&apos;m sure
             </Button>
             <Button
               variant="primary"

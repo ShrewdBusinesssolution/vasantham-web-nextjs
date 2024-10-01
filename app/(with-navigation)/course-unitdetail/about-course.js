@@ -51,9 +51,9 @@ const AboutCourse = () => {
       {/* Cart Modal */}
       <CartModal isOpen={isModalOpen} onClose={closeModal} />
 
-      {/* What you'll learn */}
+      {/* What you will learn */}
       <div className="flex flex-col gap-5 mt-10">
-        <h4 className="text-[#222] text-[32px]">What you'll learn</h4>
+        <h4 className="text-[#222] text-[32px]">What you&apos;ll learn</h4>
         <div className='flex flex-col gap-2'>
           {Array.from({ length: 10 }).map((_, index) => (
             <div key={index} className='flex items-center gap-4'>
