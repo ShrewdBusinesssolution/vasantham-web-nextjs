@@ -4,7 +4,6 @@ import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { COLORLOGOPATH } from "../utility/constant";
 import Link from "next/link";
-import { GoSearch } from "react-icons/go";
 import { FiMenu, FiX } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
 import { AnimatePresence, motion } from "framer-motion";
