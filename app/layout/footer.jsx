@@ -1,27 +1,47 @@
+"use client"
 import Image from "next/image";
 import { WHITELOGOPATH } from "../utility/constant";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
+import React, {useState} from "react";
+import { AppContext } from "../utility/context/context-api";
+import BasicService from "../services/api-services/basic-service";
+
 
 export default function Footer() {
+  const [companyInfo, setCompanyInfo] = useState({})
+
+
   const socialLink = [
     {
       icon: "linkedin.svg",
-      link: "https://www.linkedin.com/your-profile"
+      link: companyInfo.social_media?.linkedin_link
     },
     {
       icon: "instagram.svg",
-      link: "https://www.instagram.com/your-profile"
+      link: companyInfo.social_media?.instagram_link
     },
     {
       icon: "facebook.svg",
-      link: "https://www.facebook.com/your-profile"
+      link: companyInfo.social_media?.facebook_link
     },
     {
       icon: "x.svg",
-      link: "https://x.com/your-profile" // X is the new name for Twitter
+      link:  companyInfo.social_media?.twitter_link
     }
   ];
+
+  
+    const getCompanyInformation = async () => {
+      try {
+          setCompanyInfo((await BasicService.GetCompanyInfo()));
+      } catch (error) { console.log("🚀 ~ getCompanyInformation ~ error:", error) }
+  };
+  
+  
+  const data = getCompanyInformation(); 
+  console.log(companyInfo, "company info")
+
   return (
     <footer className="bg-[#2F2F2F]">
 
@@ -70,6 +90,7 @@ export default function Footer() {
             Social Marketing
             </Link>
           </li>
+          <li></li>
           <li>
             <Link className="font-light text-sm md:text-[15px] lg:text-[15px] xl:text-[15px] underline text-[#07A889]" href={'/cources'}>
             View All

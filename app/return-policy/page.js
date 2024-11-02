@@ -2,13 +2,13 @@
 import { useEffect, useState } from "react";
 import BasicService from "../services/api-services/basic-service";
 
-const Terms = () => {
-    const [termsInfo, setTermsInfo] = useState(null);
+const Return = () => {
+    const [returnInfo, setReturnInfo] = useState(null);
 
     const getCompanyInformation = async () => {
         try {
-            const data = await BasicService.TermsCondition();
-            setTermsInfo(data);
+            const data = await BasicService.ReturnPolicy();
+            setReturnInfo(data);
         } catch (error) {
             console.log("🚀 ~ getCompanyInformation ~ error:", error);
         }
@@ -18,18 +18,18 @@ const Terms = () => {
         getCompanyInformation();
     }, []);
 
-    console.log(termsInfo, "Terms and condition");
+    console.log(returnInfo, "Return Policy");
 
     return (
         <div className='brand-container py-10'>
-            <h1 className="text-3xl font-bold mb-4">Terms & Conditions</h1>
-            {!termsInfo ? (
-                <p>Loading terms and conditions!...</p>
+            <h1 className="text-3xl font-bold mb-4">Return Policy</h1>
+            {!returnInfo ? (
+                <p>Loading return policy!...</p>
             ) : (
-                <p>{termsInfo?.content}</p>
+                <p>{returnInfo?.content}</p>
             )}
         </div>
     );
 };
 
-export default Terms;
+export default Return;

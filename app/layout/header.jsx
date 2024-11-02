@@ -22,8 +22,8 @@ import SearchForm from "../form-components/search-form";
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
-  const pathname = usePathname();
   const session = useSession();
+  const pathname = usePathname();
 
   const handleClickOutside = (event) => {
     if (menuRef.current && !menuRef.current.contains(event.target)) {
