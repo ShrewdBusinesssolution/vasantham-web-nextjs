@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import BasicService from "../services/api-services/basic-service";
 
 const Privacy = () => {
-    // const [privacyInfo, setPrivacyInfo] = useState(null);
+    
     const [privacyInfo, setPrivacyInfo] = useState(null)
     const getCompanyInformation = async () => {
         try {

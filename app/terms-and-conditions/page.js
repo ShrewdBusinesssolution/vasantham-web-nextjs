@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import BasicService from "../services/api-services/basic-service";
 
 const Terms = () => {
+    
     const [termsInfo, setTermsInfo] = useState(null);
-
     const getCompanyInformation = async () => {
         try {
             const data = await BasicService.TermsCondition();
