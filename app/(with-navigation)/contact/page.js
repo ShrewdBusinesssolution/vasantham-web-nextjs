@@ -1,7 +1,8 @@
 "use client"
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import ContactForm from '../../form-components/contact-form'
 import BasicService from '@/app/services/api-services/basic-service'
+import { AppContext } from '@/app/utility/context/context-api'
 
 
 // export const metadata = {
@@ -13,7 +14,7 @@ import BasicService from '@/app/services/api-services/basic-service'
 
 const Contact = () => {
 
-  const [companyInfo, setCompanyInfo] = useState({})
+  const [companyInfo, setCompanyInfo] = useContext(AppContext)
 // const data = await BasicService.GetCompanyInfo().data;
 
   const getCompanyInformation = async () => {
@@ -33,7 +34,7 @@ console.log(companyInfo, "company info")
         <h4 className="mt-5 md:mt-10 text-[#222222] text-[26px] md:text-[32px]">Get In Touch</h4>
         <div className="mt-3 mx-auto w-full lg:w-[650px]">
             <p className="text-sm md:text-[16px] text-center">Have a question or feedback? We are here to help you. Send us a message and get a response within 24 hours.</p>
-        <p>{companyInfo?.email}</p>
+        {/* <p>{companyInfo?.email}</p> */}
         </div>
         <div className="lg:px-20 py-5 mt-5">
         <ContactForm/>

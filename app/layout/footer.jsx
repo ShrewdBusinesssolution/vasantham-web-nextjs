@@ -3,44 +3,35 @@ import Image from "next/image";
 import { WHITELOGOPATH } from "../utility/constant";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
-import React, {useState} from "react";
-import { AppContext } from "../utility/context/context-api";
+import React, {useContext} from "react";
+// import { AppContext } from "../utility/context/context-api";
 import BasicService from "../services/api-services/basic-service";
+import { AppContext } from "../utility/context/context-api";
 
 
 export default function Footer() {
-  const [companyInfo, setCompanyInfo] = useState({})
+  const {companyInfo} = useContext(AppContext)
 
 
   const socialLink = [
     {
       icon: "linkedin.svg",
-      link: companyInfo.social_media?.linkedin_link
+      link: companyInfo?.social_media?.linkedin_link ?? '/'
     },
     {
       icon: "instagram.svg",
-      link: companyInfo.social_media?.instagram_link
+      link: companyInfo?.social_media?.instagram_link ?? '/'
     },
     {
       icon: "facebook.svg",
-      link: companyInfo.social_media?.facebook_link
+      link: companyInfo?.social_media?.facebook_link ?? '/'
     },
     {
       icon: "x.svg",
-      link:  companyInfo.social_media?.twitter_link
+      link:  companyInfo?.social_media?.twitter_link ?? '/'
     }
   ];
 
-  
-    const getCompanyInformation = async () => {
-      try {
-          setCompanyInfo((await BasicService.GetCompanyInfo()));
-      } catch (error) { console.log("🚀 ~ getCompanyInformation ~ error:", error) }
-  };
-  
-  
-  const data = getCompanyInformation(); 
-  console.log(companyInfo, "company info")
 
   return (
     <footer className="bg-[#2F2F2F]">

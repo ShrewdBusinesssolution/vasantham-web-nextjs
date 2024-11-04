@@ -5,7 +5,7 @@ const BestService = () => {
     <main>
     <div className="flex flex-col space-y-4">
       <h4 className="text-[#20ad96] text-[14px] font-semibold uppercase mt-5 md:mt-10">Our Best Service</h4>
-      <p className="text-2xl md:text-[32px] lg:text-[36px] font-bold md:leading-10 w-full md:w-[1000px] text-[#222]">We break down barriers so teams can focus on what matters
+      <p className="text-2xl md:text-[32px] lg:text-[36px] font-bold md:leading-10 w-full lg:w-[1000px] text-[#222]">We break down barriers so teams can focus on what matters
       – learning together to create online career you love.</p>
     </div>
 {/* Cards */}
