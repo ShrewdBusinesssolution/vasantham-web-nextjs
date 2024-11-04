@@ -13,7 +13,7 @@ class BasicService {
      */
     static async EnquirySave(payload) {
         try {
-            const response = await axiosInstance.post(`/api/contact-us`, payload);
+            const response = await axiosInstance.post(`/api/v1/contact-us`, payload);
             return response.data;
         } catch (error) {
             throw error;
@@ -27,7 +27,7 @@ class BasicService {
      */
     static async GetCompanyInfo() {
         try {
-            const response = await api.get(`/basic/company-profile`);
+            const response = await api.get(`/api/v1/basic/company-profile`);
             return response.data;
         } catch (error) {
             throw error;
@@ -36,7 +36,7 @@ class BasicService {
 
     static async PrivacyPolicy() {
         try {
-            const response = await api.get(`/basic/privacy-policy`);
+            const response = await api.get(`/api/v1/basic/privacy-policy`);
             return response.data;
         } catch (error) {
             throw error;
@@ -44,7 +44,7 @@ class BasicService {
     }
     static async TermsCondition() {
         try {
-            const response = await api.get(`/basic/terms-and-conditions`);
+            const response = await api.get(`/api/v1/basic/terms-and-conditions`);
             return response.data;
         } catch (error) {
             throw error;
@@ -52,7 +52,7 @@ class BasicService {
     }
     static async ReturnPolicy() {
         try {
-            const response = await api.get(`/basic/return-policy`);
+            const response = await api.get(`/api/v1/basic/return-policy`);
             return response.data;
         } catch (error) {
             throw error;

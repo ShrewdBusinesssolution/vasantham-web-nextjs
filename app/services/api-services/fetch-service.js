@@ -1,4 +1,5 @@
 import { getSession, signOut } from 'next-auth/react';
+import { NextResponse } from 'next/server';
 
 const baseURL = process.env.NEXT_PUBLIC_BASEURL;
 
@@ -6,6 +7,22 @@ const setAuthHeader = async () => {
   const session = await getSession();
   return session?.user?.token ? `Bearer ${session.user.token}` : null;
 };
+
+const navigate = (path) =>{
+  try {
+    if (typeof window !== 'undefined') {
+      // You can safely use window here
+      window.location.href = path; // This will change the browser URL
+    }else{
+      const base = process.env.NEXT_PUBLIC_BASEURL; // Replace with your base URL
+      return NextResponse.redirect(new URL(path, base)); // Redirect to 404
+    }
+  } catch (error) {
+    console.log("🚀 ~ navigate ~ error:", error)
+    
+  }
+
+}
 
 const fetchWithAuth = async (url, options = {}) => {
   const token = await setAuthHeader();
@@ -31,8 +48,8 @@ const fetchWithAuth = async (url, options = {}) => {
 
   // Handle different response statuses
   if (response.status === 503) {
-    window.location.href = '/maintenance';
-    throw new Error('Service Unavailable');
+      navigate('/maintenance');
+
   }
 
   if (response.status === 401) {
@@ -46,8 +63,9 @@ const fetchWithAuth = async (url, options = {}) => {
 
   // Handle other errors
   const error = await response.json();
-  console.error('Fetch error:', error);
-  throw new Error(error.message || 'Something went wrong');
+  console.log("🚀 ~ fetchWithAuth ~ error:", error)
+  error.status = response.status; // Attach the status code to the error object
+  throw error; // Throw the complete error object
 };
 
 // Example usage
@@ -57,4 +75,10 @@ const api = {
   // Add other methods as needed (PUT, DELETE, etc.)
 };
 
+
+
+
 export default api;
+
+
+

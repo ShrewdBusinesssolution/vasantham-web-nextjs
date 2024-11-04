@@ -1,35 +1,23 @@
-"use client"
-import { useEffect, useState } from "react";
 import BasicService from "../services/api-services/basic-service";
+import { handlePageError } from "../utility/errorHandler";
 
-const Terms = () => {
-    
-    const [termsInfo, setTermsInfo] = useState(null);
-    const getCompanyInformation = async () => {
-        try {
-            const data = await BasicService.TermsCondition();
-            setTermsInfo(data);
-        } catch (error) {
-            console.log("🚀 ~ getCompanyInformation ~ error:", error);
-        }
-    };
+const Terms = async () => {
+    try {
+        const data = (await BasicService.TermsCondition());
+        return (
+            <div className='brand-container py-10'>
+                <div className="w-full " dangerouslySetInnerHTML={{ __html: data.content }} />
+            </div>
+        );
+    } catch (error) {
+        const errorMessage = await handlePageError(error);
+        return (
+          <>
+            {errorMessage}
+          </>
+        )
 
-    useEffect(() => {
-        getCompanyInformation();
-    }, []);
-
-    console.log(termsInfo, "Terms and condition");
-
-    return (
-        <div className='brand-container py-10'>
-            <h1 className="text-3xl font-bold mb-4">Terms & Conditions</h1>
-            {!termsInfo ? (
-                <p>Loading terms and conditions!...</p>
-            ) : (
-                <p>{termsInfo?.content}</p>
-            )}
-        </div>
-    );
+    }
 };
 
 export default Terms;

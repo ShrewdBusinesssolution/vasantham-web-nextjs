@@ -1,7 +1,5 @@
 import "./globals.css";
-import {Urbanist} from "next/font/google";
-import Header from "./layout/header";
-import Footer from "./layout/footer";
+import { Urbanist } from "next/font/google";
 import AuthProvider from "./utility/context/context-api";
 import SessionWrapper from "./utility/SessionWrapper";
 import NextTopLoader from "nextjs-toploader";
@@ -20,18 +18,15 @@ export default function RootLayout({ children }) {
 
   return (
     <SessionWrapper>
-
-    <html lang="en">
-      <body
-        className={urbanist.className}>
-           <NextTopLoader height={6} color="#008DF1" showSpinner={true} />
-        <AuthProvider>
-        {/* <Header /> */}
-        {children}
-        {/* <Footer /> */}
-        </AuthProvider>
-      </body>
-    </html>
+      <html lang="en">
+        <body
+          className={urbanist.className}>
+          <NextTopLoader height={6} color="#008DF1" showSpinner={true} />
+          <AuthProvider>
+            {children}
+          </AuthProvider>
+        </body>
+      </html>
     </SessionWrapper>
   );
 }
