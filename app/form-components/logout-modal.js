@@ -11,6 +11,7 @@ import { IoMdArrowUp } from "react-icons/io";
 import { LuLoader2 } from "react-icons/lu";
 import Image from "next/image";
 import { signOut } from "next-auth/react";
+import Link from "next/link";
 
 export function LogoutModal() {
   const [activeButton, setActiveButton] = useState(null);
@@ -30,12 +31,13 @@ export function LogoutModal() {
             Are you sure, Do you want to logout?
           </p>
           <div className="flex flex-row justify-center items-center gap-4">
+            <Link href="/log-out">
             <Button
-              onClick={()=> signOut({callbackUrl:"/"})}            
               variant="primary"
               className={`px-5  h-fit font-medium rounded-sm bg-[#f7f7f7] border text-[#000] mt-4 uppercase w-fit`}>
               Yes, I&apos;m sure
             </Button>
+            </Link>
             <Button
               variant="primary"
               className={`px-5  h-fit font-medium rounded-sm bg-primary mt-4 uppercase w-fit`}>

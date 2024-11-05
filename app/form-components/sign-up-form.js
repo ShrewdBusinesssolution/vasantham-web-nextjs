@@ -23,8 +23,6 @@ import { AppContext } from "../utility/context/context-api";
 import { Router } from "next/router";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
-// import { signIn as signin, signOut, useSession } from 'next-auth/react'
-import AuthService from "../services/api-services/auth-service";
 
 const formSchema = z.object({
     email: z.string()
@@ -41,13 +39,6 @@ const formSchema = z.object({
         .max(100, {
             message: "Name must be less than 100 characters.",
         }),
-    mobile_number: z.string()
-        .length(10, {
-            message: "Phone number must be exactly 10 digits.",
-        })
-        .regex(/^[0-9]+$/, {
-            message: "Phone number must be numeric.",
-        }),
     password: z.string()
         .min(6, {
             message: "Password must be at least 6 characters.",
@@ -55,14 +46,10 @@ const formSchema = z.object({
         .max(15, {
             message: "Password must be at most 15 characters.",
         }),
-    terms: z.boolean().refine((val) => val === true, {
-        message: "You must accept the terms and conditions.",
-    }),
 })
 
 export default function SignUpForm() {
     const router = useRouter()
-
     const { setSignUpInformation } = useContext(AppContext);
 
     const form = useForm({
@@ -70,57 +57,37 @@ export default function SignUpForm() {
         defaultValues: {
             email: "",
             name: "",
-            mobile_number: "",
             password: "",
-            terms: true
         },
     })
 
     // Define a submit handler
-    async function onSubmit(values) {
-        values.country_code ="+91";
-        //TODO MANUAL ERROR SETTING
-        try {
-            const response = await AuthService.Signup(values)
-            if (response.status) {
-                toast.success(response.message, { position: "top-right" })
-                await Login(values)
-                form.reset();
-                //TODO NEED TO Login
-            }
-
-        } catch (error) {
-            const message = error?.response?.data?.message ?? error.message;
-            toast.error(message, { position: 'top-right' })
-
-        }
-
-    }
-
-    const Login = async (data) => {
-
+    async function onSubmit(data) {
         try {
             const result = await signIn('credentials', {
                 redirect: false,
                 email: data.email,
+                name: data.name,
                 password: data.password,
+                loginType: "register"
             });
 
-            if(!result.ok){
-                toast.error(result.error,{position:"top-right"});
-            }else{
-                form.reset();
-                toast.success("Login successful!",{position:"top-right"})
-                window.location.href = "/"; // Correct syntax for redirection
+            if (!result.ok) {
+               throw result;
+
+            } else {
+                toast.success("Register and Login Successfull", { position: "top-right" })
+                router.push('/')
             }
 
         } catch (error) {
             console.log("🚀 ~ onSubmit ~ error:", error)
+            const message = error?.response?.data?.message ?? error.error;
+            toast.error(message, { position: "top-right" })
 
         }
 
-    };
-
+    }
 
     return (
         <Form {...form}>
@@ -159,22 +126,13 @@ export default function SignUpForm() {
                         <FormItem>
                             <FormLabel className="font-semibold text-lg">Password <small className="text-primary">*</small></FormLabel>
                             <FormControl>
-                                <Input className="text-sm placeholder:text-[#B5B6B5]" placeholder="Enter Password" {...field} />
+                                <Input maxLength={15} className="text-sm placeholder:text-[#B5B6B5]" placeholder="Enter Password" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
                     )}
                 />
-                <FormField
-                    control={form.control}
-                    name="terms"
-                    render={({ field }) => (
-                        <FormItem className="flex gap-2 flex-col">
-                            
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
+
                 <Button variant="primary" className="w-full flex gap-2 uppercase" type="submit" disabled={form.formState.isSubmitting}>
                     {form.formState.isSubmitting ?
                         <LuLoader2 className="animate-spin" /> : <></>
@@ -182,26 +140,26 @@ export default function SignUpForm() {
                     Submit
                 </Button>
                 <Button
-    variant="primary"
-    className="w-full flex items-center gap-2 uppercase bg-gray-100 text-[#000] font-semibold border"
-    type="submit"
-    disabled={form.formState.isSubmitting}
->
-    {form.formState.isSubmitting ? (
-        <LuLoader2 className="animate-spin" />
-    ) : (
-        <>
-           <Image
-                src="/assets/google.webp"
-                alt="Google"
-                width={50}
-                height={50}
-                className="w-6 h-6 object-cover"
-            />
-            Continue with Google
-        </>
-    )}
-</Button>
+                    variant="primary"
+                    className="w-full flex items-center gap-2 uppercase bg-gray-100 text-[#000] font-semibold border"
+                    type="submit"
+                    disabled={form.formState.isSubmitting}
+                >
+                    {form.formState.isSubmitting ? (
+                        <LuLoader2 className="animate-spin" />
+                    ) : (
+                        <>
+                            <Image
+                                src="/assets/google.webp"
+                                alt="Google"
+                                width={50}
+                                height={50}
+                                className="w-6 h-6 object-cover"
+                            />
+                            Continue with Google
+                        </>
+                    )}
+                </Button>
                 <p className="text-sm opacity-60 text-center">Have account? <Link href="/login" className="text-primary underline">Log in</Link></p>
             </form>
         </Form>

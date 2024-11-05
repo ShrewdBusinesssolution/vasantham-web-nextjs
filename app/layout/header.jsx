@@ -22,7 +22,7 @@ import SearchForm from "../form-components/search-form";
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
-  const session = useSession();
+  const {data:session} = useSession();
   const pathname = usePathname();
 
   const handleClickOutside = (event) => {

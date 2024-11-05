@@ -3,6 +3,7 @@ import { Urbanist } from "next/font/google";
 import AuthProvider from "./utility/context/context-api";
 import SessionWrapper from "./utility/SessionWrapper";
 import NextTopLoader from "nextjs-toploader";
+import { Toaster } from "sonner";
 
 
 
@@ -24,6 +25,7 @@ export default function RootLayout({ children }) {
           <NextTopLoader height={6} color="#008DF1" showSpinner={true} />
           <AuthProvider>
             {children}
+            <Toaster richColors />
           </AuthProvider>
         </body>
       </html>

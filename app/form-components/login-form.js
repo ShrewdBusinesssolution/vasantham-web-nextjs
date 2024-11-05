@@ -44,15 +44,14 @@ const formSchema = z.object({
         .min(6, {
             message: "Password must be at least 6 characters.",
         })
-        .max(15, {
-            message: "Password must be at most 15 characters.",
+        .max(30, {
+            message: "Password must be at most 30 characters.",
         }),
 })
 
 export default function LoginForm() {
-
+    const { data: session } = useSession()
     const [passwordtype, setPasswordtype] = useState(true)
-    // const { data: session } = useSession()
     const { setPreLoader } = useContext(AppContext)
     const router = useRouter();
 
@@ -60,37 +59,35 @@ export default function LoginForm() {
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            email: "",
-            password: "",
+            email: "johnsss.doe@example.com",
+            password: "StrongPassword123!",
 
         },
     })
 
     const onSubmit = async (data) => {
 
-const payload = {
-    "email":"rabinswalterraj@gmail.com",
-    "password":"@Querty123456"
-}
-console.log(payload,"payload")
-
         try {
             const result = await signIn('credentials', {
                 redirect: false,
                 email: data.email,
                 password: data.password,
+                loginType: "login"
             });
 
-            if(!result.ok){
-                toast.error(result.error,{position:"top-right"});
-            }else{
-                form.reset();
-                toast.success("Login successful!",{position:"top-right"})
-                window.location.href = "/"; // Correct syntax for redirection
+            if (!result.ok) {
+                console.log("🚀 ~ onSubmit ~ result:", result)
+
+            } else {
+                console.log("🚀 ~ onSubmit ~ result:", result)
+                toast.success("Login Successfull", { position: "top-right" })
+                router.push('/')
             }
 
         } catch (error) {
             console.log("🚀 ~ onSubmit ~ error:", error)
+            const message = error?.response?.data?.message ?? error.message;
+            toast.error(message, { position: "top-right" })
 
         }
     };
@@ -155,30 +152,30 @@ console.log(payload,"payload")
                     {form.formState.isSubmitting ?
                         <LuLoader2 className="animate-spin" /> : <></>
                     }
-                 Log in
+                    Log in
                 </Button>
-                
+
                 <Button
-    variant="primary"
-    className="w-full flex items-center gap-2 uppercase bg-gray-100 text-[#000] font-semibold border"
-    type="submit"
-    disabled={form.formState.isSubmitting}
->
-    {form.formState.isSubmitting ? (
-        <LuLoader2 className="animate-spin" />
-    ) : (
-        <>
-            <Image
-                src="/assets/google.webp"
-                alt="Google"
-                width={50}
-                height={50}
-                className="w-6 h-6 object-cover"
-            />
-            Continue with Google
-        </>
-    )}
-</Button>
+                    variant="primary"
+                    className="w-full flex items-center gap-2 uppercase bg-gray-100 text-[#000] font-semibold border"
+                    type="submit"
+                    disabled={form.formState.isSubmitting}
+                >
+                    {form.formState.isSubmitting ? (
+                        <LuLoader2 className="animate-spin" />
+                    ) : (
+                        <>
+                            <Image
+                                src="/assets/google.webp"
+                                alt="Google"
+                                width={50}
+                                height={50}
+                                className="w-6 h-6 object-cover"
+                            />
+                            Continue with Google
+                        </>
+                    )}
+                </Button>
 
                 <p className="text-sm opacity-60 text-center">Don’t have account? <Link href="/sign-up" className="text-primary underline">Signup</Link></p>
             </form>
