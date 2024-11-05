@@ -22,11 +22,9 @@ import { useContext } from "react";
 import { AppContext } from "../utility/context/context-api";
 import { Router } from "next/router";
 import { useRouter } from "next/navigation";
-// import AuthService from "../services/api-services/auth-service";
 import { signIn } from "next-auth/react";
-
-import { signIn as signin, signOut, useSession } from 'next-auth/react'
-
+// import { signIn as signin, signOut, useSession } from 'next-auth/react'
+import AuthService from "../services/api-services/auth-service";
 
 const formSchema = z.object({
     email: z.string()
@@ -78,7 +76,7 @@ export default function SignUpForm() {
         },
     })
 
-    // 2. Define a submit handler.
+    // Define a submit handler
     async function onSubmit(values) {
         values.country_code ="+91";
         //TODO MANUAL ERROR SETTING
@@ -154,19 +152,6 @@ export default function SignUpForm() {
                     )}
                 />
 
-                {/* <FormField
-                    control={form.control}
-                    name="mobile_number"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Phone <small className="text-primary">*</small></FormLabel>
-                            <FormControl>
-                                <Input className="text-sm" placeholder="Enter Phone Number" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                /> */}
                 <FormField
                     control={form.control}
                     name="password"
@@ -185,17 +170,7 @@ export default function SignUpForm() {
                     name="terms"
                     render={({ field }) => (
                         <FormItem className="flex gap-2 flex-col">
-                            {/* <div className="flex gap-2 items-center">
-                                <FormControl>
-                                    <Checkbox
-                                        checked={field.value}
-                                        onCheckedChange={field.onChange}
-                                    />
-                                </FormControl>
-                                <FormLabel className="mt-0">
-                                    Use different settings for my mobile devices
-                                </FormLabel>
-                            </div> */}
+                            
                             <FormMessage />
                         </FormItem>
                     )}
