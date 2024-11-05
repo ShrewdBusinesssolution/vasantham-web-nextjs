@@ -1,35 +1,22 @@
-"use client"
-import { useEffect, useState } from "react";
 import BasicService from "../services/api-services/basic-service";
+import { handlePageError } from "../utility/errorHandler";
 
-const Return = () => {
-    
-    const [returnInfo, setReturnInfo] = useState(null);
-    const getCompanyInformation = async () => {
-        try {
-            const data = await BasicService.ReturnPolicy();
-            setReturnInfo(data);
-        } catch (error) {
-            console.log("🚀 ~ getCompanyInformation ~ error:", error);
-        }
-    };
-
-    useEffect(() => {
-        getCompanyInformation();
-    }, []);
-
-    console.log(returnInfo, "Return Policy");
-
+const Return = async () => {
+   try {
+    const data = (await BasicService.ReturnPolicy());
     return (
         <div className='brand-container py-10'>
-            <h1 className="text-3xl font-bold mb-4">Return Policy</h1>
-            {!returnInfo ? (
-                <p>Loading return policy!...</p>
-            ) : (
-                <p>{returnInfo?.content}</p>
-            )}
+            <div className="w-full" dangerouslySetInnerHTML={{ __html: data.content }}/>
         </div>
     );
+   } catch (error) {
+    const errorMessage = await handlePageError(error);
+    return (
+        <>
+        {errorMessage}
+        </>
+    )
+   }
 };
 
 export default Return;

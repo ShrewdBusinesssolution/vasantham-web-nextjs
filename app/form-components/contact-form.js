@@ -21,29 +21,27 @@ import { Input } from "@/components/ui/input"
 import { toast } from "sonner";
 import Link from "next/link";
 import { Textarea } from "@/components/ui/textarea";
-// import BasicService from "../services/api-services/basic-service";
 import Image from "next/image";
-import { EnquiryForm } from "./enquery-modal";
 import { useState } from "react";
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { delay } from "../utility/helper";
 import { CustomizedAlert } from "../utility/components/utility-components";
+import BasicService from "../services/api-services/basic-service";
 const formSchema = z.object({
-    firstName: z.string()
+    first_name: z.string()
         .min(1, {
-            message: "First Name is required.",
+            message: "Name is required.",
         })
         .max(100, {
             message: "First Name must be less than 100 characters.",
         }),
-    lastName: z.string()
+    last_name: z.string()
         .min(1, {
             message: "Last Name is required.",
         })
         .max(100, {
             message: "Last Name must be less than 100 characters.",
         }),
-    email: z.string()
+        email: z.string()
         .min(1, {
             message: "Email is required.",
         })
@@ -57,7 +55,7 @@ const formSchema = z.object({
         .regex(/^[0-9]+$/, {
             message: "Phone number must be numeric.",
         }),
-    note: z.string()
+        message: z.string()
         .min(1, {
             message: "Note is required.",
         }),
@@ -83,25 +81,30 @@ export default function ContactForm() {
 
     // 2. Define a submit handler.
     async function onSubmit(values) {
+        const payload = {
+            "first_name": "John",
+            "last_name": "Doe",
+            "mobile_number": "1234567890",
+            "email": "john.doe@example.com",
+            "message": "This is a sample message within the character limit."
+        }
+        console.log(values,'values')
+        // console.log(payload,'payload')
+
         try {
-
             await delay(2000)
-
             setIsDialogOpen(true)
-            // const response = await BasicService.EnquirySave(values);
+            const response = await BasicService.EnquirySave(values);
+            console.log(response,"response")
             // toast.success(response.message, { position: "top-right" })
-            // form.reset();
+            form.reset();
 
         } catch (error) {
             const message = error?.response?.data?.message ?? error.message;
             toast.error(message, { position: 'top-right' })
 
         }
-
-
-
     }
-
 
     return (
         <Form {...form}>
@@ -110,11 +113,10 @@ export default function ContactForm() {
 
                     <FormField
                         control={form.control}
-                        name="firstName"
+                        name="first_name"
                         render={({ field }) => (
                             <FormItem className="text-start">
                                 <FormLabel className="text-lg">Name</FormLabel>
-                                {/* <small className="text-primary">*</small> */}
                                 <FormControl>
                                     <Input className=" px-5 h-[52px] border border-[#E2E2E2] placeholder:text-[#B5B6B5] text-[16px] font-arial" placeholder="First Name" {...field} />
                                 </FormControl>
@@ -124,7 +126,7 @@ export default function ContactForm() {
                     />
                     <FormField
                         control={form.control}
-                        name="lastName"
+                        name="last_name"
                         render={({ field }) => (
                             <FormItem className="text-start">
                                 <FormLabel className="text-lg font-dm_serif_display invisible">Last Name</FormLabel>
@@ -169,7 +171,7 @@ export default function ContactForm() {
 
                 <FormField
                     control={form.control}
-                    name="note"
+                    name="message"
                     render={({ field }) => (
                         <FormItem className="text-start">
                             <FormLabel className="text-lg pb-1 font-dm_serif_display">Subject</FormLabel>

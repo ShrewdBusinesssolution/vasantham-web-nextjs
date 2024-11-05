@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { LuLoader2 } from "react-icons/lu";
 import { Button } from "@/components/ui/button"
-import { ImGoogle3 } from "react-icons/im";
 import Image from "next/image";
 import {
     Form,
@@ -69,6 +68,12 @@ export default function LoginForm() {
 
     const onSubmit = async (data) => {
 
+const payload = {
+    "email":"rabinswalterraj@gmail.com",
+    "password":"@Querty123456"
+}
+console.log(payload,"payload")
+
         try {
             const result = await signIn('credentials', {
                 redirect: false,
@@ -88,7 +93,6 @@ export default function LoginForm() {
             console.log("🚀 ~ onSubmit ~ error:", error)
 
         }
-
     };
 
     const handleGoogleSignIn = async () => {

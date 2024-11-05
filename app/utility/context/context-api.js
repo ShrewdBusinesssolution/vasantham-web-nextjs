@@ -11,6 +11,9 @@ export const AuthProvider = ({ children }) => {
 
     const { data: session } = useSession();
     const [companyInfo, setCompanyInfo] = useState({})
+    const [signUpInformation, setSignUpInformation] = useState({})
+    const [preloader, setPreLoader] = useState(false);
+
 
     //USEEFFECT - INITIAL CALL
     useEffect(() => {
@@ -57,6 +60,10 @@ export const AuthProvider = ({ children }) => {
 
     const value = {
         companyInfo,
+        signUpInformation,
+        setSignUpInformation,
+        preloader,
+        setPreLoader,
     };
 
     return (

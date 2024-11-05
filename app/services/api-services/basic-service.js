@@ -13,8 +13,16 @@ class BasicService {
      */
     static async EnquirySave(payload) {
         try {
-            const response = await axiosInstance.post(`/api/v1/contact-us`, payload);
+            const response = await api.post(`/api/v1/basic/contact-store`, payload);
             return response.data;
+        } catch (error) {
+            throw error;
+        }
+    }
+    static async NewsLetter(payload) {
+        try {
+            const response = await api.post(`/api/v1/basic/news-letter-store`, payload);
+            return response;
         } catch (error) {
             throw error;
         }

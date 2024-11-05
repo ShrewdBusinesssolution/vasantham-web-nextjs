@@ -6,7 +6,7 @@ const Terms = async () => {
         const data = (await BasicService.TermsCondition());
         return (
             <div className='brand-container py-10'>
-                <div className="w-full " dangerouslySetInnerHTML={{ __html: data.content }} />
+                <div className="w-full" dangerouslySetInnerHTML={{ __html: data.content }} />
             </div>
         );
     } catch (error) {
