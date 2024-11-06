@@ -3,8 +3,6 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { LuLoader2 } from "react-icons/lu";
-
-
 import { Button } from "@/components/ui/button"
 import {
     Form,
@@ -24,10 +22,11 @@ import { Input } from "@/components/ui/input"
 import { toast } from "sonner";
 import Link from "next/link";
 import { AppContext } from "../utility/context/context-api";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { addBeforeUnloadListener } from "../utility/helper";
 import AuthService from "../services/api-services/auth-service";
+import { BiLoaderCircle } from "react-icons/bi";
 
 const formSchema = z.object({
     otp: z.string().min(6, {
@@ -45,6 +44,22 @@ export default function OtpVerifyForm() {
             otp: "",
         },
     })
+
+    const [timer, setTimer] = useState(180); // 3 minutes = 180 seconds
+    const [isDisabled, setIsDisabled] = useState(true);
+    const [resendCodeLoading, setResendCodeLoading] = useState(false);
+  
+    useEffect(() => {
+      if (timer > 0) {
+        const countdown = setInterval(() => {
+          setTimer((prev) => prev - 1);
+        }, 1000);
+  
+        return () => clearInterval(countdown); // Cleanup on unmount
+      } else {
+        setIsDisabled(false); // Enable the resend OTP button when timer reaches 0
+      }
+    }, [timer]);
 
     useEffect(() => {
 
@@ -74,6 +89,8 @@ export default function OtpVerifyForm() {
             values.email = forgotPasswordemail;
             const response = await AuthService.ForgototpVerify(values)
             if (response.status) {
+                setTimer(180); 
+                setIsDisabled(true);
                 toast.success(response.message, { position: "top-right" })
                 setForgotPasswordemailotpVerify(true)
                 form.reset();
@@ -82,12 +99,17 @@ export default function OtpVerifyForm() {
 
         } catch (error) {
             const message = error?.response?.data?.message ?? error.message;
-            toast.error(message, { position: 'top-right' })
-
+            toast.error(message, { position: 'top-right' });
+        } finally {
+            setResendCodeLoading(false);
         }
     }
 
-
+    const formatTime = (seconds) => {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = seconds % 60;
+        return ` ${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+    };
     return (
         <Form {...form}>
             <div className="">
@@ -105,7 +127,7 @@ export default function OtpVerifyForm() {
                         <FormItem>
                             {/* <FormLabel>One-Time Password</FormLabel> */}
                             <FormControl>
-                                <div className="flex items-end justify-between ">
+                                <div className="flex flex-col md:flex-row items-end justify-between ">
                                 <InputOTP maxLength={6} {...field}>
                                     <InputOTPGroup className="flex gap-2 w-full">
                                         <InputOTPSlot className="border h-[42px] w-[42px] rounded-md text-md" index={0} />
@@ -116,7 +138,20 @@ export default function OtpVerifyForm() {
                                         <InputOTPSlot className="border h-[42px] w-[42px] rounded-md text-md" index={5} />
                                     </InputOTPGroup>
                                 </InputOTP>
-                                <p className="text-[14px]">OTP Expires in <span className="text-[#07A889]">00.02.59 </span></p>
+                                <p className="text-[14px] pt-2 whitespace-nowrap font-arial flex items-center gap-3">
+                                OTP Expires in{" "}
+                        {resendCodeLoading ? (
+                            <BiLoaderCircle className="w-5 h-5 text-primary animate-spin" />
+                        ) : (
+                            <span
+                                onClick={onSubmit}
+                                className={`text-primary ${isDisabled ? 'pointer-events-none opacity-30' : 'cursor-pointer'}`}
+                            >
+                                Resend {isDisabled ? formatTime(timer) : ''}
+                            </span>
+                        )}
+                    </p>
+                                {/* <p className="text-[14px]">OTP Expires in <span className="text-[#07A889]">00.02.59 </span></p> */}
                                 </div>
                             </FormControl>
                             {/* <FormDescription>
@@ -127,11 +162,22 @@ export default function OtpVerifyForm() {
                     )}
                 />
                 <div className="space-y-3 flex flex-col gap-2">
-                        <Link href={'/forgot-password'} className="w-full">
-                            <Button variant="primary" className="w-full flex gap-2 font-medium uppercase" type="button" disabled={form.formState.isSubmitting}>
-                                verify otp
-                            </Button>
-                        </Link>
+                <Link href={form.formState.isValid && !form.formState.isSubmitting ? '/new-password' : '#'} className="w-full">
+    <Button
+        variant="primary"
+        className="w-full flex gap-2 font-medium uppercase"
+        type="button"
+        disabled={form.formState.isSubmitting || !form.formState.isValid} // Disable if form is submitting or invalid
+    >
+        Verify OTP
+        {form.formState.isSubmitting ? (
+            <LuLoader2 className="w-5 h-5 text-white animate-spin" />
+        ) : (
+            <></>
+        )}
+    </Button>
+</Link>
+                        
 
 <Link href={'/forgot-password'}>
                         <Button variant="primary" className="w-full flex gap-2 font-medium uppercase bg-gray-100 border text-black" type="submit" disabled={form.formState.isSubmitting}>

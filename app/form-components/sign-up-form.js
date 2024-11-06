@@ -97,7 +97,7 @@ export default function SignUpForm() {
                     name="name"
                     render={({ field }) => (
                         <FormItem className="mt-5">
-                            <FormLabel className="font-semibold text-lg"> Full Name <small className="text-primary">*</small></FormLabel>
+                            <FormLabel className="font-semibold text-lg"> Full Name <small className="text-red-500">*</small></FormLabel>
                             <FormControl>
                                 <Input className="text-sm placeholder:text-[#B5B6B5]" placeholder="Enter your name" {...field} />
                             </FormControl>
@@ -110,7 +110,7 @@ export default function SignUpForm() {
                     name="email"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel className="font-semibold text-lg">Email Address <small className="text-primary">*</small></FormLabel>
+                            <FormLabel className="font-semibold text-lg">Email Address <small className="text-red-500">*</small></FormLabel>
                             <FormControl>
                                 <Input className="text-sm placeholder:text-[#B5B6B5]" placeholder="Enter your email" {...field} />
                             </FormControl>
@@ -124,7 +124,7 @@ export default function SignUpForm() {
                     name="password"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel className="font-semibold text-lg">Password <small className="text-primary">*</small></FormLabel>
+                            <FormLabel className="font-semibold text-lg">Password <small className="text-red-500">*</small></FormLabel>
                             <FormControl>
                                 <Input maxLength={15} className="text-sm placeholder:text-[#B5B6B5]" placeholder="Enter Password" {...field} />
                             </FormControl>

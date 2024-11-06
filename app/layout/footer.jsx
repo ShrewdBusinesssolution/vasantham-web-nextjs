@@ -4,8 +4,6 @@ import { WHITELOGOPATH } from "../utility/constant";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import React, {useContext} from "react";
-// import { AppContext } from "../utility/context/context-api";
-import BasicService from "../services/api-services/basic-service";
 import { AppContext } from "../utility/context/context-api";
 
 

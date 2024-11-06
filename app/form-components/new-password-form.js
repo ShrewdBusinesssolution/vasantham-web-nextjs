@@ -22,10 +22,10 @@ import { toast } from "sonner";
 import Link from "next/link";
 import { useContext, useState } from "react";
 import { AppContext } from "../utility/context/context-api";
-// import AuthService from "../services/api-services/auth-service";
 import { useRouter } from "next/navigation";
 import { addBeforeUnloadListener } from "../utility/helper";
 import { useEffect } from "react";
+import AuthService from "../services/api-services/auth-service";
 
 
 const formSchema = z.object({
@@ -59,7 +59,7 @@ export default function NewPasswordForm() {
 
     useEffect(() => {
         if (forgotPasswordemail === '' && !forgotPasswordemailotpVerify) {
-            // router.push("/forgot-password")
+            router.push("/forgot-password")
         }
         // Add the beforeunload listener
         const removeBeforeUnloadListener = addBeforeUnloadListener();
@@ -82,21 +82,22 @@ export default function NewPasswordForm() {
     async function onSubmit(values) {
         try {
             values.email = forgotPasswordemail;
+            const email = forgotPasswordemail;
+
             const response = await AuthService.RestPassword(values)
             if (response.status) {
                 toast.success(response.message, { position: "top-right" })
-                setForgotPasswordemailotpVerify(true)
+                setForgotPasswordemailotpVerify(false)
                 form.reset();
-                setTimeout(() => {
-                    router.push('/login')
-                }, 2000);
+                // setTimeout(() => {
+                    router.push(`/password-update?email=${email}`);
+                // }, 2000);
             }
 
         } catch (error) {
             const message = error?.response?.data?.message ?? error.message;
             toast.error(message, { position: 'top-right' })
         }
-
     }
 
     return (
@@ -148,8 +149,7 @@ export default function NewPasswordForm() {
                     }
                     save & continue
                 </Button>
-                {/* <p className="text-sm opacity-60">Your password must be at least 8 characters including a lowercase letter, an uppercase letter, and a number</p>
-                <p className="text-sm opacity-60">Back to Login <Link href="/login" className="text-primary underline">Login?</Link></p> */}
+                
             </form>
         </Form>
     )

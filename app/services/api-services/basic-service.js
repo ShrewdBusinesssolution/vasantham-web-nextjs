@@ -67,6 +67,15 @@ class BasicService {
         }
     }
 
+     static async GetProfileInfo() {
+        try {
+            const response = await api.get(`/api/v1/student`);
+            return response.data;
+        } catch (error) {
+            throw error;
+        }
+    }
+
      /**
      * Retrieves company Flash Information by sending a GET request to the '/api/flash-message' endpoint.
      * 
