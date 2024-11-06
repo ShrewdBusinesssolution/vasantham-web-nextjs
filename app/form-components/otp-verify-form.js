@@ -92,7 +92,7 @@ export default function OtpVerifyForm() {
         <Form {...form}>
             <div className="">
             {/* <small className='text-[#7C8B9D] '>We&apos;ve sent a code to <span className='text-primary underline'>{forgotPasswordemail}</span></small> */}
-            <p className="text-[15px]">We have sent the OTP to <span className="text-[#07A889]">priyas2001@gmail.com</span></p>
+            <p className="text-[15px]">We have sent the OTP to <span className="text-[#07A889]">{forgotPasswordemail}</span></p>
             </div>
             <h6 className="text-[18px]" >Verify OTP</h6>
 
