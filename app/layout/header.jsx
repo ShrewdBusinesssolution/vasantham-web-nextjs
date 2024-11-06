@@ -64,14 +64,40 @@ export default function Header() {
             {/* Cart */}
             <CartModal />
             {/* User */}
-            <button className="p-2 bg-[#F7F7F7] rounded-full">
-              <Image
-                src="/assets/svg/user.svg"
-                width={20}
-                height={20}
-                alt="user"
-              />
-            </button>
+            <div>
+            <Popover className="absolute top-0 right-10">
+              <PopoverTrigger asChild>
+                <Button variant="outline" className="p-2 rounded-full bg-[#F7F7F7] border-none" size="icon" ><div className="">
+                  <Image
+                    src="/assets/svg/user.svg"
+                    width={20}
+                    height={20}
+                    alt="user"
+                  />
+                </div></Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-fit p-0 rounded-xl">
+                <div className="w-[150px] p-2 cursor-pointer">
+                  {session ?
+                    <ul>
+                      <Link href="/profiles"><li className="w-full p-2 hover:bg-gradient-to-br from-white to-blue-100 from-20% rounded-[10px]">My Profile</li></Link>
+                      <li>
+                        <LogoutModal />
+                      </li>
+                    </ul>
+                    :
+                    <ul>
+                      <li>
+                        <Link href="/login"><li className="w-full p-2 hover:bg-gradient-to-br from-white to-blue-100 from-20% rounded-[10px]">login</li></Link>
+                      </li>
+                      <li>
+                        <Link href="/sign-up"><li className="w-full p-2 hover:bg-gradient-to-br from-white to-blue-100 from-20% rounded-[10px]">sign up</li></Link>
+                      </li>
+                    </ul>}
+                </div>
+              </PopoverContent>
+            </Popover>
+          </div>
             {/* Mobile Menu Icon */}
             <Button
               variant="secondary"

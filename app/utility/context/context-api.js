@@ -13,6 +13,8 @@ export const AuthProvider = ({ children }) => {
     const [companyInfo, setCompanyInfo] = useState({})
     const [signUpInformation, setSignUpInformation] = useState({})
     const [preloader, setPreLoader] = useState(false);
+    const [forgotPasswordemail, setForgotPasswordemail] = useState("")
+    const [forgotPasswordemailotpVerify, setForgotPasswordemailotpVerify] = useState(false)
 
 
     //USEEFFECT - INITIAL CALL
@@ -64,6 +66,10 @@ export const AuthProvider = ({ children }) => {
         setSignUpInformation,
         preloader,
         setPreLoader,
+        forgotPasswordemail,
+        setForgotPasswordemail,
+        forgotPasswordemailotpVerify,
+        setForgotPasswordemailotpVerify,
     };
 
     return (

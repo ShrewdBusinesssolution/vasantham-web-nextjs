@@ -27,7 +27,7 @@ import { AppContext } from "../utility/context/context-api";
 import { useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { addBeforeUnloadListener } from "../utility/helper";
-// import AuthService from "../services/api-services/auth-service";
+import AuthService from "../services/api-services/auth-service";
 
 const formSchema = z.object({
     otp: z.string().min(6, {
@@ -68,7 +68,7 @@ export default function OtpVerifyForm() {
     }, []);
 
 
-    // 2. Define a submit handler.
+    // Define a submit handler.
     async function onSubmit(values) {
         try {
             values.email = forgotPasswordemail;

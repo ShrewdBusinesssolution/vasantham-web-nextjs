@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { LuLoader2 } from "react-icons/lu";
 
-
 import { Button } from "@/components/ui/button"
 import {
     Form,
@@ -17,11 +16,10 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { toast } from "sonner";
-import Link from "next/link";
-// import AuthService from "../services/api-services/auth-service";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import { AppContext } from "../utility/context/context-api";
+import AuthService from "../services/api-services/auth-service";
 
 const formSchema = z.object({
     email: z.string()
@@ -44,7 +42,7 @@ export default function ForgotPasswordForm() {
     })
     const router = useRouter();
 
-    // 2. Define a submit handler.
+    // Define a submit handler.
     async function onSubmit(values) {
         try {
             const response = await AuthService.ForgototpSend(values)
@@ -67,11 +65,8 @@ export default function ForgotPasswordForm() {
 
                 toast.error(message, { position: 'top-right' })
             }
-
         }
-
     }
-
 
     return (
         <Form {...form}>

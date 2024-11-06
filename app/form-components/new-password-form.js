@@ -78,7 +78,7 @@ export default function NewPasswordForm() {
         },
     })
 
-    // 2. Define a submit handler.
+    // Define a submit handler.
     async function onSubmit(values) {
         try {
             values.email = forgotPasswordemail;
@@ -95,12 +95,9 @@ export default function NewPasswordForm() {
         } catch (error) {
             const message = error?.response?.data?.message ?? error.message;
             toast.error(message, { position: 'top-right' })
-
-
         }
 
     }
-
 
     return (
         <Form {...form}>
