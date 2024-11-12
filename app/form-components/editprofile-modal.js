@@ -1,17 +1,20 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { LuPencilLine } from "react-icons/lu";
 import { FaUser, FaEnvelope, FaPhone, FaCalendarAlt } from "react-icons/fa";
+import { AppContext } from "../utility/context/context-api";
 
 export function EditProfile() {
+  const {userInformation} = useContext(AppContext)
+
   const [step, setStep] = useState("details");
-  const [userName, setUserName] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState("");
+  const [userName, setUserName] = useState(userInformation?.name ?? '');
+  const [dateOfBirth, setDateOfBirth] = useState();
   const [email, setEmail] = useState("");
   const [gender, setGender] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState(userInformation?.mobile_number ?? '');
   const [occupation, setOccupation] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);

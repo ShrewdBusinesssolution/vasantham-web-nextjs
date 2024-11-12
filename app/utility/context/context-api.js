@@ -4,6 +4,7 @@ import { isEmptyobject } from "../helper";
 import BasicService from "@/app/services/api-services/basic-service";
 // import CustomerService from "@/app/services/api-services/customer-service";
 import { useSession } from "next-auth/react";
+import ProfileService from "@/app/services/api-services/profile-service";
 // import AddressService from "@/app/services/api-services/address-service";
 export const AppContext = createContext();
 
@@ -15,6 +16,9 @@ export const AuthProvider = ({ children }) => {
     const [preloader, setPreLoader] = useState(false);
     const [forgotPasswordemail, setForgotPasswordemail] = useState("")
     const [forgotPasswordemailotpVerify, setForgotPasswordemailotpVerify] = useState(false)
+    const [userInformation, setuserInformation] = useState({});
+
+
 
 
     //USEEFFECT - INITIAL CALL
@@ -33,6 +37,16 @@ export const AuthProvider = ({ children }) => {
             setCompanyInfo((await BasicService.GetCompanyInfo()).data);
         } catch (error) { console.log("🚀 ~ getCompanyInformation ~ error:", error) }
     };
+
+    const getUserInformation = async() =>{
+        try {
+            const resonse = await ProfileService.GetProfileInfo();
+            setuserInformation(resonse.customer)
+            console.log("🚀 ~ getUserInformation ~ resonse:", resonse)
+        } catch (error) {
+            
+        }
+    }
 
     //     try {
     //         setwishLoading(true)
@@ -70,6 +84,9 @@ export const AuthProvider = ({ children }) => {
         setForgotPasswordemail,
         forgotPasswordemailotpVerify,
         setForgotPasswordemailotpVerify,
+        getUserInformation,
+        userInformation, 
+        setuserInformation
     };
 
     return (
