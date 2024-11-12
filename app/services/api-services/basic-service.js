@@ -67,6 +67,16 @@ class BasicService {
         }
     }
 
+    // About
+    static async AboutPage() {
+        try {
+            const response = await api.get(`/api/v1/page/about`);
+            return response.data;
+        } catch (error) {
+            throw error;
+        }
+    }
+
     // Profile
      static async GetProfileInfo() {
         try {

@@ -7,10 +7,12 @@ import { RightListing } from './client-components/right-listing';
 const Page = () => {
   const [selectedItem, setSelectedItem] = useState('');
 
+
   const handleSelect = (item) => {
     setSelectedItem(item);
   };
 
+  
   return (
     <main className='bg-[#fcfcfc] py-6'>
       <div className="brand-container flex flex-col md:flex-row gap-5">

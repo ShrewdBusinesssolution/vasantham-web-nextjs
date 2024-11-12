@@ -143,6 +143,7 @@ export default function Header() {
            <SearchForm />
           {/* Cart */}
             <CartModal />
+            
           {/* User */}
           <div>
             <Popover className="absolute top-0 right-10">

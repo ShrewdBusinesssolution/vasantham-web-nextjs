@@ -16,6 +16,7 @@ export const LeftListing = ({ onSelect }) => {
     onSelect(item);
   };
 
+  
   return (
     <main>
       <div className='flex flex-row justify-between items-center border-b p-5'>

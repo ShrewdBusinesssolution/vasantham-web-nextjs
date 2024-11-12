@@ -3,6 +3,8 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import BasicService from '@/app/services/api-services/basic-service'
+import { handlePageError } from '@/app/utility/errorHandler'
 
 export const metadata = {
   title: "About",
@@ -10,7 +12,7 @@ export const metadata = {
 
 };
 
-const About = () => {
+const About = async () => {
   const products = [
     {
       id: 1,
@@ -62,8 +64,12 @@ const About = () => {
     },
   ];
 
-  return (
-    <main>
+
+  try {
+    const data = await BasicService.AboutPage();
+
+    return (
+      <main>
       {/* Banner */}
       <AboutBanner title={"Know about us"} subtitle={"Grow strong to take up the challenges of life."} />
       {/* Our Service */}
@@ -133,7 +139,16 @@ const About = () => {
         </div>
       </section>
     </main>
-  )
+    )
+} catch (error) {
+    const errorMessage = await handlePageError(error);
+    return (
+        <>
+            {errorMessage}
+        </>
+    )
+}
+
 }
 
 export default About
