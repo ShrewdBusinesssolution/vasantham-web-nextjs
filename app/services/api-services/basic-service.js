@@ -77,16 +77,6 @@ class BasicService {
         }
     }
 
-    // Profile
-     static async GetProfileInfo() {
-        try {
-            const response = await api.get(`/api/v1/student`);
-            return response.data;
-        } catch (error) {
-            throw error;
-        }
-    }
-
     static async ProfileUpdate(payload) {
         try {
             const response = await api.post(`/api/v1/student/update`, payload);

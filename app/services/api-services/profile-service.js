@@ -10,6 +10,18 @@ class ProfileService {
                 throw error;
             }
         }
+
+        static async UserProfileform(payload) {
+            try {
+                const response = await api.post(`/api/v1/student/update`, payload);
+                return response;
+            } catch (error) {
+                throw error;
+            }
+        }
 }
+
+
+
 
 export default ProfileService;

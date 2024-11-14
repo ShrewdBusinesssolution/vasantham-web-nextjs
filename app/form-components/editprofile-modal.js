@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { LuPencilLine } from "react-icons/lu";
@@ -7,18 +7,29 @@ import { FaUser, FaEnvelope, FaPhone, FaCalendarAlt } from "react-icons/fa";
 import { AppContext } from "../utility/context/context-api";
 
 export function EditProfile() {
-  const {userInformation} = useContext(AppContext)
+  const { userInformation, setUserInformation } = useContext(AppContext);
 
-  const [step, setStep] = useState("details");
-  const [userName, setUserName] = useState(userInformation?.name ?? '');
-  const [dateOfBirth, setDateOfBirth] = useState();
-  const [email, setEmail] = useState("");
-  const [gender, setGender] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState(userInformation?.mobile_number ?? '');
-  const [occupation, setOccupation] = useState("");
+  // States for user information
+  const [userName, setUserName] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState('');
+  const [email, setEmail] = useState('');
+  const [gender, setGender] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [errors, setErrors] = useState({});
+  const [apiError, setApiError] = useState(null);
+
+  // Use effect to set initial values if the user information is available
+  useEffect(() => {
+    if (userInformation) {
+      setUserName(userInformation?.name ?? '');
+      setDateOfBirth(userInformation?.date_of_birth ?? '');
+      setEmail(userInformation?.email ?? '');
+      setGender(userInformation?.gender ?? '');
+      setPhoneNumber(userInformation?.mobile_number ?? '');
+    }
+  }, [userInformation]);
 
   // Validate form
   const validateDetails = () => {
@@ -38,18 +49,59 @@ export function EditProfile() {
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handleGenderChange = (e) => setGender(e.target.value);
   const handlePhoneNumberChange = (e) => setPhoneNumber(e.target.value);
-  const handleOccupationChange = (e) => setOccupation(e.target.value);
 
   // Save and continue
   const handleSaveContinue = async () => {
     if (validateDetails()) {
       setIsLoading(true);
       setSuccess(false);
-      // Simulate a submission
-      setTimeout(() => {
+      setApiError(null);
+
+      // Prepare the updated data object
+      const updatedData = {
+        name: userName,
+        email,
+        mobile_number: phoneNumber,
+        date_of_birth: dateOfBirth,
+        gender
+      };
+
+      try {
+        // Make the API call to save the profile
+        const response = await fetch("api/v1/student/update", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedData),
+        });
+console.log(response,"update data")
+        const data = await response.json();
+
+        if (response.ok && data.status) {
+          // Update success state and context
+          setIsLoading(false);
+          setSuccess(true);
+
+          // Optionally, update context with new user info
+          const { customer } = data.data;
+          setUserName(customer.name);
+          setEmail(customer.email);
+          setPhoneNumber(customer.mobile_number);
+          setDateOfBirth(customer.date_of_birth);
+          setGender(customer.gender);
+          setUserInformation(customer); // Update context with the new data
+
+        } else {
+          setIsLoading(false);
+          setSuccess(false);
+          setApiError(data.message || "Profile updated successfully!");
+        }
+      } catch (error) {
         setIsLoading(false);
-        setSuccess(true);
-      }, 2000);
+        setSuccess(false);
+        setApiError("An error occurred while updating the profile.......");
+      }
     }
   };
 
@@ -158,6 +210,7 @@ export function EditProfile() {
 
           {/* Update message */}
           {success && <p className="text-green-500 text-sm">Profile updated successfully!</p>}
+          {apiError && <p className="text-red-500 text-sm">{apiError}</p>}
         </div>
       </DialogContent>
     </Dialog>

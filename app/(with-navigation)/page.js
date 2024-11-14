@@ -10,13 +10,19 @@ import CourseExploreSection from '../utility/components/home/course-explore'
 import TestimonialsSection from '../utility/components/home/testimonial-section'
 import AboutSection from '../utility/components/home/home-about'
 import BestService from '../utility/components/home/best-service'
+import api from '../services/api-services/fetch-service'
 
 export const metadata = {
   title: "Homepage",
   description: "Protect your home from pests with our expert pest control services. We offer safe, effective solutions to eliminate unwanted insects, rodents, and other nuisances. Book now for a pest-free environment!",
 };
 
-const Home = () => {
+const Home = async () => {
+
+try {
+  const response = await api('/api/v1/page/home');
+  console.log(response,"homeee")
+  const homedata = response.data;
   return (
     <main>
      {/* Banner */}
@@ -147,6 +153,27 @@ const Home = () => {
 
     </main>
   )
+} catch (error) {
+  if (error?.status == 503) {
+    redirect('/maintenance')
+  }
+  if (error?.status == 401) {
+    const session = await getServerSession(authOptions);
+    if (session) {
+      signOut({ callbackUrl: '/' })
+    }
+
+  }
+
+  return (
+    <div className='brand-container py-10'>
+      <h1 className="text-3xl font-bold mb-4"></h1>
+      <p>Error Home page Data. Please try again later.</p>
+    </div>
+  );
+}
+
+ 
 }
 
 export default Home

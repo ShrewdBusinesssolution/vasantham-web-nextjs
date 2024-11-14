@@ -11,7 +11,7 @@ import { AppContext } from '@/app/utility/context/context-api';
 import { isEmptyobject } from '@/app/utility/helper';
 
 export const LeftListing = ({ onSelect }) => {
-  const [active, setActive] = useState('');
+  const [active, setActive] = useState(true);
   const {getUserInformation, userInformation} = useContext(AppContext)
   const handleSelect = (item) => {
     setActive(item);
@@ -31,8 +31,8 @@ export const LeftListing = ({ onSelect }) => {
         <div className='flex gap-2 items-center cursor-pointer' onClick={() => onSelect('user')}>
           <p className='bg-[#8A3AC8] rounded-full w-12 h-12 flex items-center justify-center text-[#fff]'>MP</p>
           <div className="flex flex-col">
-            <h5 className="font-semibold text-[20px] md:text-[22px]">hi, Mounika</h5>
-            <p className="text-sm text-primary">8787898989</p>
+            <h5 className="font-semibold text-[20px] md:text-[22px]">{userInformation?.name}</h5>
+            <p className="text-sm text-primary">878....789{userInformation?.mobile_number}</p>
           </div>
         </div>
         <EditProfile />
