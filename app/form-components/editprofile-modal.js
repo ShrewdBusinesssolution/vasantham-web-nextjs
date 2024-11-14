@@ -5,6 +5,7 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { LuPencilLine } from "react-icons/lu";
 import { FaUser, FaEnvelope, FaPhone, FaCalendarAlt } from "react-icons/fa";
 import { AppContext } from "../utility/context/context-api";
+import api from "../services/api-services/fetch-service";
 
 export function EditProfile() {
   const { userInformation, setUserInformation } = useContext(AppContext);
@@ -68,7 +69,7 @@ export function EditProfile() {
 
       try {
         // Make the API call to save the profile
-        const response = await fetch("api/v1/student/update", {
+        const response = await api.post("/api/v1/student/update", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -124,7 +125,7 @@ console.log(response,"update data")
                 <FaUser className="absolute left-3 top-[18px] text-[#000]" />
                 <input
                   type="text"
-                  name="userName"
+                  name="name"
                   value={userName}
                   onChange={handleUserNameChange}
                   className="mt-2 pl-10 p-[6px] border rounded w-full placeholder:text-sm"
