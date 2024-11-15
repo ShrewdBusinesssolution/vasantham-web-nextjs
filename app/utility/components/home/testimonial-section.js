@@ -1,9 +1,10 @@
 "use client";
 import React, { useRef } from 'react';
-import { HeadingSection, TestimonialCard } from '@/app/utility/components/utility-components';
+import { HeadingSection } from '@/app/utility/components/utility-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css'; // Import Swiper styles
 import SwiperCore, { Autoplay, Pagination } from 'swiper';
+import Image from 'next/image';
 
 // Configure Swiper to use modules
 SwiperCore.use([Autoplay, Pagination]);
@@ -41,7 +42,7 @@ const testimonials = [
   }
 ];
 
-const TestimonialsSection = () => {
+const TestimonialsSection = ({testimonialData}) => {
   const categorySplide = useRef(null);
 
   return (
@@ -83,7 +84,7 @@ const TestimonialsSection = () => {
             },
           }}
         >
-          {testimonials.map((testimonial, index) => (
+          {testimonialData.map((testimonial, index) => (
             <SwiperSlide key={index}>
               <TestimonialCard {...testimonial} />
             </SwiperSlide>
@@ -95,3 +96,19 @@ const TestimonialsSection = () => {
 };
 
 export default TestimonialsSection;
+
+const TestimonialCard = ({ name, content, desc, description }) => {
+  return (
+    <div className="flex flex-col space-y-4 p-8 bg-white bg-opacity-50 rounded-3xl max-md:px-5">
+      <div className="flex flex-row justify-end">
+        <Image src={"/assets/basic/quotes.webp"} width={50} height={50} alt="quotes" className="" />
+      </div>
+      <div className="flex flex-col space-y-3">
+        <h4 className="text-2xl font-semibold leading-none text-primary mt-4">{name}</h4>
+        <p className=" text-[16px] leading-8 text-[#535967]">{content}</p>
+        <p className=" text-[16px] leading-8 text-[#535967]">{desc}</p>
+        <p className=" text-[16px] leading-8 text-[#535967]">{description}</p>
+      </div>
+    </div>
+  );
+};

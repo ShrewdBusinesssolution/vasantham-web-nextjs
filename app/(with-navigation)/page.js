@@ -140,7 +140,10 @@ const Home = async () => {
         {/* <CourseExploreSection/> */}
         <section className='bg-[#FCFCFC]'>
           <div className='brand-container bg-gradient-to-br from-[#fff] to-[#CCF4FF] from-0%'>
-            <TestimonialsSection />
+            {homedata?.testimonials?.legth !==0 ?
+            <TestimonialsSection testimonialData={homedata.testimonials}/>
+         :<></>
+        }
           </div>
         </section>
 

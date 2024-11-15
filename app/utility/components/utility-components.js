@@ -99,21 +99,7 @@ const StatCard = ({ title, value, unit, description }) => {
 
 
 // Testimonial Card
-const TestimonialCard = ({ name, content, desc, description }) => {
-  return (
-    <div className="flex flex-col space-y-4 p-8 bg-white bg-opacity-50 rounded-3xl max-md:px-5">
-      <div className="flex flex-row justify-end">
-        <Image src={"/assets/basic/quotes.webp"} width={50} height={50} alt="quotes" className="" />
-      </div>
-      <div className="flex flex-col space-y-3">
-        <h4 className="text-2xl font-semibold leading-none text-primary mt-4">{name}</h4>
-        <p className=" text-[16px] leading-8 text-[#535967]">{content}</p>
-        <p className=" text-[16px] leading-8 text-[#535967]">{desc}</p>
-        <p className=" text-[16px] leading-8 text-[#535967]">{description}</p>
-      </div>
-    </div>
-  );
-};
+
 
 
 const ProductCard = ({ product, homePage }) => {
@@ -200,4 +186,4 @@ const CustomizedAlert = ({ isOpen, isOpenHandler, children }) => {
 }
 
 
-export { HeadingSection, AboutBanner, WorkingStaffs, StatCard, TestimonialCard, ProductCard, CourseBanner, CustomizedAlert }
+export { HeadingSection, AboutBanner, WorkingStaffs, StatCard, ProductCard, CourseBanner, CustomizedAlert }
