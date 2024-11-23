@@ -159,23 +159,17 @@ export default function LoginForm() {
                     type="submit"
                     disabled={form.formState.isSubmitting}
                 >
-                    {form.formState.isSubmitting ? (
-                        <LuLoader2 className="animate-spin" />
-                    ) : (
-                        <>
-                            <Image
-                                src="/assets/google.webp"
-                                alt="Google"
-                                width={50}
-                                height={50}
-                                className="w-6 h-6 object-cover"
-                            />
-                            Continue with Google
-                        </>
-                    )}
+                    <Image
+                        src="/assets/google.webp"
+                        alt="Google"
+                        width={50}
+                        height={50}
+                        className="w-6 h-6 object-cover"
+                    />
+                    Continue with Google
                 </Button>
 
-                <p className="text-sm opacity-60 text-center">Don’t have account? <Link href="/sign-up" className="text-primary underline">Signup</Link></p>
+                <p className="text-sm opacity-60 text-center">Don&apos;t have account? <Link href="/sign-up" className="text-primary underline">Signup</Link></p>
             </form>
         </Form>
 

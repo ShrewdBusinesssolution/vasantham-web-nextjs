@@ -61,34 +61,53 @@ export function CartModal() {
         </SheetHeader>
 
         {/* Card Design */}
-        <div className='flex-1 overflow-y-auto hide-y-scrollbar'>
-          {cartCourseInformation.map((course, index) => (
-            <div key={index} className='rounded-xl border-2 flex flex-col p-5 mb-4'>
-              <CardComponent course={course} />
+        {session ?
+          <>
+            <div className='flex-1 overflow-y-auto hide-y-scrollbar'>
+              {cartCourseInformation.map((course, index) => (
+                <div key={index} className='rounded-xl border-2 flex flex-col p-5 mb-4'>
+                  <CardComponent course={course} />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+            {/* Total Price Section */}
+            <div className="flex flex-col justify-center bg-white">
+              <p className="mt-4 text-start font-medium">
+                Total: <span className='font-bold'>₹ {cartSummary?.order_total ?? 0.00}</span>
 
-        {/* Total Price Section */}
-        <div className="flex flex-col justify-center bg-white">
-          <p className="mt-4 text-start font-medium">
-            Total: <span className='font-bold'>₹ {cartSummary?.order_total ?? 0.00}</span>
+                {cartSummary?.order_discount !== 0 ?
+                  <span className="line-through text-[16px] text-gray-500 font-normal">
+                    ₹ {cartSummary?.order_discount_value ?? 0.00}
+                  </span>
 
-            {cartSummary?.order_discount !== 0 ?
-              <span className="line-through text-[16px] text-gray-500 font-normal">
-                ₹ {cartSummary?.order_discount_value ?? 0.00}
-              </span>
+                  :
+                  null
+                }
+              </p>
+              <div className="mt-2">
+                <Link onClick={() => setCartModal(false)} href={'/checkout'}>
+                  <Button variant="primary" className="w-full uppercase text-sm">Checkout</Button>
+                </Link>
+              </div>
+            </div>
+          </>
 
-              :
-              null
-            }
-          </p>
-          <div className="mt-2">
-            <Link onClick={() => setCartModal(false)} href={'/checkout'}>
-              <Button variant="primary" className="w-full uppercase text-sm">Checkout</Button>
+          :
+          <div className="w-full h-full grid place-items-center">
+
+          <div className="flex flex-col items-center gap-5 justify-center">
+            <p>You Have to Login</p>
+            <Link onClick={() => setCartModal(false)} href={'/login'}>
+            
+            <Button  variant="primary">
+              Login
+            </Button>
             </Link>
+
           </div>
-        </div>
+          </div>
+        }
+
       </SheetContent>
     </Sheet>
   );

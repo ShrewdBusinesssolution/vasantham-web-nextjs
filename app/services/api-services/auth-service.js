@@ -5,7 +5,6 @@ class AuthService {
     static async ForgototpSend(payload) {
         try {
             const response = await api.post(`/api/v1/forgot-password/send-otp`, payload);
-            console.log("🚀 ~ AuthService ~ ForgototpSend ~ response:", response)
             return response;
         } catch (error) {
             throw error;

@@ -19,6 +19,7 @@ import { toast } from "sonner";
 import { useContext } from "react";
 import { AppContext } from "../utility/context/context-api";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import ProfileService from "../services/api-services/profile-service";
 
 const formSchema = z.object({
     name: z.string()
@@ -64,6 +65,10 @@ export default function ProfileUpdateForm({DialogOpenHandler}) {
 
         try {
 
+            const response = await ProfileService.UserProfileform(data)
+            if(response.status){
+                toast.success(response.message, {position:"top-right", duration:2000})
+            }
 
         } catch (error) {
             const message = error?.error ?? error.message;

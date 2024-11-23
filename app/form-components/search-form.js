@@ -13,6 +13,7 @@ import { LuLoader2 } from "react-icons/lu";
 const SUGGESTIONS = ['tamil', 'english', 'maths'];
 
 export default function SearchForm() {
+
     const [searchTerm, setSearchTerm] = useState('');
     const [showDropdown, setShowDropdown] = useState(false);
     const [isSearchFormVisible, setIsSearchFormVisible] = useState(false);
@@ -38,10 +39,6 @@ export default function SearchForm() {
             triggerSearchApi(value);
         }, 1000);
     };
-
-    useEffect(() => {
-        console.log("🚀 ~ SearchForm ~ searchData:", searchData)
-    }, [searchData])
 
     const triggerSearchApi = async (value) => {
         if (value.trim().length > 0) {
@@ -74,7 +71,7 @@ export default function SearchForm() {
     return (
         <div className='relative'>
             {isSearchFormVisible && window.innerWidth < 768 && (
-                <div className='fixed inset-0 bg-white z-50 flex flex-col items-center pt-[200px] justify-start'>
+                <div className='fixed inset-0 bg-white z-30 flex flex-col items-center pt-[200px] justify-start'>
                     {/* Close Button */}
                     <button
                         className='absolute top-0 right-0 m-4 p-2 bg-primary rounded-full z-60'
@@ -84,7 +81,7 @@ export default function SearchForm() {
                     </button>
 
                     {/* Search Form */}
-                    <div className='relative rounded-2xl p-[10px] flex items-center gap-2 border-[1px] border-primary/10 shadow-primary/20 shadow-lg w-full max-w-[70%] overflow-hidden'>
+                    <div className='z-40 relative rounded-2xl p-[10px] flex items-center gap-2 border-[1px] border-primary/10 shadow-primary/20 shadow-lg w-full max-w-[70%]'>
                         <GoSearch className='w-6 h-6 text-primary' />
                         <input
                             onChange={handleInputChange}
@@ -92,9 +89,9 @@ export default function SearchForm() {
                             className='placeholder:text-sm w-full  text-black/40 focus:outline-none'
                             placeholder='Search'
                         />
-                        {searchData.length !== 0 && (
-                            <ul className='mt-4 w-full absolute top-full py-3 left-0 rounded-[10px] bg-white shadow-lg shadow-primary/20 h-auto'>
-                                {searchData.map((item, index) => (
+                        {searchData?.length !== 0 && (
+                            <ul className='z-[60] mt-4 w-full absolute top-full py-3 left-0 rounded-[10px] bg-white shadow-lg shadow-primary/20 h-auto'>
+                                {searchData?.map((item, index) => (
                                     <li key={index} className='text-sm px-3 py-3 hover:bg-secondary border-b cursor-pointer'>
                                         <Link href={`/course-detail/${item.slug}`} onClick={toggleSearchForm}>
                                             <div className='flex gap-3 items-center'>
