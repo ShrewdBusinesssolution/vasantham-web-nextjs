@@ -8,7 +8,8 @@ import { IoMailOpenOutline } from 'react-icons/io5';
 import { MdOutlineNavigateNext } from "react-icons/md";
 import { EditProfile } from '@/app/form-components/editprofile-modal';
 import { AppContext } from '@/app/utility/context/context-api';
-import { isEmptyobject } from '@/app/utility/helper';
+import { getInitials, isEmptyobject } from '@/app/utility/helper';
+import { EditProfileModal } from '@/app/modal-section/profile-edit-modal';
 
 export const LeftListing = ({ onSelect }) => {
   const [active, setActive] = useState(true);
@@ -29,13 +30,14 @@ export const LeftListing = ({ onSelect }) => {
     <main>
       <div className='flex flex-row justify-between items-center border-b p-5'>
         <div className='flex gap-2 items-center cursor-pointer' onClick={() => onSelect('user')}>
-          <p className='bg-[#8A3AC8] rounded-full w-12 h-12 flex items-center justify-center text-[#fff]'>MP</p>
+          <p className='bg-[#8A3AC8] rounded-full w-12 h-12 flex items-center justify-center text-[#fff]'>{getInitials(userInformation?.name)}</p>
           <div className="flex flex-col">
             <h5 className="font-semibold text-[20px] md:text-[22px]">{userInformation?.name}</h5>
-            <p className="text-sm text-primary">878....789{userInformation?.mobile_number}</p>
+            <p className="text-sm text-primary">{userInformation?.mobile_number}</p>
           </div>
         </div>
-        <EditProfile />
+        {/* <EditProfile /> */}
+        <EditProfileModal />
       </div>
 
       <div className="flex flex-col gap-2 p-3 cursor-pointer">

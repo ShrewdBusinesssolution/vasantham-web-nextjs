@@ -1,7 +1,9 @@
+import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
 export const handlePageError = async (error) => {
+  console.log("🚀 ~ handlePageError ~ error:", error)
   switch (error?.status) {
     case 503:
       redirect('/maintenance'); // Server under maintenance
@@ -14,10 +16,14 @@ export const handlePageError = async (error) => {
 
     default:
       return (
-        <main className="h-screen w-full grid place-content-center">
-          <div className="flex flex-col gap-2 items-center">
-            {error?.message || 'An unknown error occurred'}
-            <Link href="/">Home</Link>
+        <main className="h-auto w-full py-20 ">
+          <div className="flex flex-col gap-5 items-center">
+            <h6>{error?.message || 'An unknown error occurred'}</h6>
+            <Link href="/">
+              <Button variant="primary">
+                Home
+              </Button>
+            </Link>
           </div>
         </main>
       )

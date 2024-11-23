@@ -13,12 +13,17 @@ import Image from "next/image";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 
-export function LogoutModal() {
-  const [activeButton, setActiveButton] = useState(null);
+export function LogoutModal({PopovercloseHandling}) {
+  const [dialog, setDialogOpen] = useState(false);
+
+  const closeHandling=() =>{
+    setDialogOpen(false);
+    PopovercloseHandling();
+  }
 
 
   return (
-    <Dialog>
+    <Dialog open={dialog} onOpenChange={setDialogOpen}>
       <DialogTrigger asChild>
         <p className="w-full p-2 hover:bg-gradient-to-br from-white to-blue-100 from-20% rounded-[10px]">Logout</p>
       </DialogTrigger>
@@ -38,7 +43,8 @@ export function LogoutModal() {
               Yes, I&apos;m sure
             </Button>
             </Link>
-            <Button
+            <Button 
+              onClick={closeHandling}
               variant="primary"
               className={`px-5  h-fit font-medium rounded-sm bg-primary mt-4 uppercase w-fit`}>
               no

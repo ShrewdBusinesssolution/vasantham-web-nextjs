@@ -19,6 +19,42 @@ class ProfileService {
                 throw error;
             }
         }
+
+        static async wishlistUpdate(payload) {
+            try {
+                const response = await api.post(`/api/v1/wishlist/update`, payload);
+                return response;
+            } catch (error) {
+                throw error;
+            }
+        }
+
+        static async getWishList(page) {
+            try {
+                const response = await api.get(`/api/v1/wishlist?page=${page}`);
+                return response;
+            } catch (error) {
+                throw error;
+            }
+        }
+
+        static async getCouorseList(page) {
+            try {
+                const response = await api.get(`/api/v1/student/course-list?page=${page}`);
+                return response;
+            } catch (error) {
+                throw error;
+            }
+        }
+
+        static async getNotificationList(page) {
+            try {
+                const response = await api.get(`/api/v1/student/notification-list?page=${page}`);
+                return response;
+            } catch (error) {
+                throw error;
+            }
+        }
 }
 
 

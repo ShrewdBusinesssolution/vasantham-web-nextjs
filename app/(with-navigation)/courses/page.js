@@ -1,6 +1,9 @@
 import { AboutBanner } from '@/app/utility/components/utility-components'
 import React from 'react'
 import Filter from './filter'
+import CourseService from '@/app/services/api-services/course-service';
+import { generateQueryString } from '@/app/utility/helper';
+import { handlePageError } from '@/app/utility/errorHandler';
 
 export const metadata = {
   title: "Courses",
@@ -8,15 +11,23 @@ export const metadata = {
 
 };
 
-const Course = () => {
-  return (
-    <main>
-         <AboutBanner title={"our courses"} subtitle={"Explore our courses"}/> 
-         <div>
-         <Filter/>
-         </div>
-    </main>
-  )
+const Course = async ({ searchParams }) => {
+  try {
+
+    const respSearchParamQuery = generateQueryString(searchParams)
+    const CourseResponse = (await CourseService.list(respSearchParamQuery)).data;
+
+    return (
+      <main>
+        <AboutBanner title={"our courses"} subtitle={"Explore our courses"} />
+        <div>
+          <Filter ResponseData={CourseResponse} />
+        </div>
+      </main>
+    )
+  } catch (error) {
+    handlePageError(error)
+  }
 }
 
 export default Course

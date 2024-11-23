@@ -8,14 +8,14 @@ import { FiChevronDown } from 'react-icons/fi';
 import { GoSearch } from 'react-icons/go';
 
 const SubjectUnit = () => {
-  return (
-<main className="">
-    <div className="brand-container px-6 flex flex-col md:flex-row items-center md:items-center justify-between py-2 md:py-5">
-        <div>
-            <h3 className="uppercase text-lg">UNITS</h3>
-        </div>
-        <div className="flex flex-col items-center md:flex-row gap-3 lg:gap-5">
-        <Popover className="absolute top-0 right-10">
+    return (
+        <main className="">
+            <div className="brand-container px-6 flex flex-col md:flex-row items-center md:items-center justify-between py-2 md:py-5">
+                <div>
+                    <h3 className="uppercase text-lg">UNITS</h3>
+                </div>
+                <div className="flex flex-col items-center md:flex-row gap-3 lg:gap-5">
+                    <Popover className="absolute top-0 right-10">
                         <PopoverTrigger asChild>
                             <div className="relative w-fit gap-5 p-2 bg-white border rounded-full flex items-center justify-between cursor-pointer px-5">
                                 <p className="text-sm font-medium text-nowrap uppercase"><span className='text-[#858585]'>sortby:</span> completed</p>
@@ -32,20 +32,20 @@ const SubjectUnit = () => {
                             </div>
                         </PopoverContent>
                     </Popover>
-        
-        <div className="relative rounded-full p-1 pl-4 px-2 flex items-center gap-2 border-[1px] border-[#E9E9E9] bg-white w-full max-w-[300px]">
-                    <input
-                        type="text"
-                        className="placeholder:text-[15px] placeholder:px-1 w-full text-black/40 focus:outline-none"
-                        placeholder="search"/>
-                    <p className="bg-primary rounded-full p-[6px]">
-                        <GoSearch className="w-5 h-5 text-white" />
-                    </p>
+
+                    <div className="relative rounded-full p-1 pl-4 px-2 flex items-center gap-2 border-[1px] border-[#E9E9E9] bg-white w-full max-w-[300px]">
+                        <input
+                            type="text"
+                            className="placeholder:text-[15px] placeholder:px-1 w-full text-black/40 focus:outline-none"
+                            placeholder="search" />
+                        <p className="bg-primary rounded-full p-[6px]">
+                            <GoSearch className="w-5 h-5 text-white" />
+                        </p>
+                    </div>
                 </div>
-                </div>
-    </div>
-</main>
-)
+            </div>
+        </main>
+    )
 }
 
 export default SubjectUnit

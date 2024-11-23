@@ -4,7 +4,6 @@ import CheckOutClientComponent from '@/app/utility/components/checkout/CheckOutC
 export default function Checkout() {
     return (
         <main>
-            {/* <PageHeaderTitleSection pageName={'Checkout'} bgImage="/assets/images/basic/categories-header-section.webp"/> */}
             <CheckOutClientComponent />
         </main>
     )

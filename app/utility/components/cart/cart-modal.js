@@ -1,3 +1,4 @@
+"use client"
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { FaUser } from "react-icons/fa";
@@ -5,6 +6,9 @@ import { IoDocumentTextOutline } from "react-icons/io5";
 import { RiDeleteBin4Line } from "react-icons/ri";
 import Link from 'next/link';
 import Image from "next/image";
+import { useContext, useEffect } from "react";
+import { AppContext } from "../../context/context-api";
+import { useSession } from "next-auth/react";
 
 const courses = [
   {
@@ -23,11 +27,26 @@ const courses = [
   },
 ];
 
-export function CartModal({ isOpen, onClose }) {
+export function CartModal() {
+  const { data: session } = useSession();
+
+  const { cartData, cartModal, setCartModal, checkoutHandling, cartCourseInformation, cartSummary } = useContext(AppContext);
+  useEffect(() => {
+    if (cartModal && session) {
+      checkoutHandling();
+    }
+  }, [cartModal, cartData])
+
   return (
-    <Sheet open={isOpen} onOpenChange={onClose}>
+    <Sheet open={cartModal} onOpenChange={setCartModal}>
       <SheetTrigger asChild>
-        <button className="p-2 bg-[#F7F7F7] rounded-full" >
+        <button className="p-2 bg-[#F7F7F7] rounded-full relative" >
+          {cartData.length !== 0 ?
+            <div className=' h-5 w-5 bg-primary rounded-full border-white border-[1px] absolute top-[-2px] right-[-10px] grid place-content-center'>
+              <p className='text-[10px] text-white'>{cartData.length}</p>
+            </div>
+            : null
+          }
           <Image
             src="/assets/svg/cart.svg"
             width={20}
@@ -43,7 +62,7 @@ export function CartModal({ isOpen, onClose }) {
 
         {/* Card Design */}
         <div className='flex-1 overflow-y-auto hide-y-scrollbar'>
-          {courses.map((course, index) => (
+          {cartCourseInformation.map((course, index) => (
             <div key={index} className='rounded-xl border-2 flex flex-col p-5 mb-4'>
               <CardComponent course={course} />
             </div>
@@ -53,13 +72,19 @@ export function CartModal({ isOpen, onClose }) {
         {/* Total Price Section */}
         <div className="flex flex-col justify-center bg-white">
           <p className="mt-4 text-start font-medium">
-            Total: <span className='font-bold'>₹{courses.reduce((total, course) => total + course.price, 0)}</span>
-            <span className="line-through text-[16px] text-gray-500 font-normal">
-              ₹{courses.reduce((total, course) => total + course.originalPrice, 0)}
-            </span>
+            Total: <span className='font-bold'>₹ {cartSummary?.order_total ?? 0.00}</span>
+
+            {cartSummary?.order_discount !== 0 ?
+              <span className="line-through text-[16px] text-gray-500 font-normal">
+                ₹ {cartSummary?.order_discount_value ?? 0.00}
+              </span>
+
+              :
+              null
+            }
           </p>
           <div className="mt-2">
-            <Link href={'/checkout'}>
+            <Link onClick={() => setCartModal(false)} href={'/checkout'}>
               <Button variant="primary" className="w-full uppercase text-sm">Checkout</Button>
             </Link>
           </div>
@@ -70,24 +95,26 @@ export function CartModal({ isOpen, onClose }) {
 }
 
 const CardComponent = ({ course }) => {
+  const { removeFromCart, } = useContext(AppContext);
+
   return (
     <div className="mb-2 md:mb-5 flex flex-col gap-2">
-      <h4 className="mt-2 text-lg">{course.title}</h4>
+      <h4 className="mt-2 text-lg">{course.name}</h4>
       <p className="font-bold">
-        Course fee: ₹{course.price} <span className="line-through text-gray-400">₹{course.originalPrice}</span>
+        Course fee: ₹{course.sale_price} <span className="line-through text-gray-400">₹{course.price}</span>
       </p>
       <div className="flex flex-col md:flex-row justify-between gap-4 md:gap-0 items-center">
         <div className='flex items-center gap-4 md:gap-2'>
           <div className="flex items-center space-x-1">
             <span className="text-secondary"><FaUser size={16} /></span>
-            <span className="mt-1 font-light text-[14px]">{course.students} Students</span>
+            <span className="mt-1 font-light text-[14px]">22 Students</span>
           </div>
           <div className="flex items-center space-x-1">
             <span className="text-secondary"><IoDocumentTextOutline size={20} /></span>
-            <span className="mt-1 font-light text-[14px]">{course.lessons} Lessons</span>
+            <span className="mt-1 font-light text-[14px]">22 Lessons</span>
           </div>
         </div>
-        <div className="bg-[#E9E9E9] rounded-lg p-2">
+        <div onClick={() => removeFromCart(course.id)} className="bg-[#E9E9E9] rounded-lg p-2 cursor-pointer active:opacity-50">
           <RiDeleteBin4Line />
         </div>
       </div>

@@ -1,25 +1,32 @@
+import { authOptions } from '@/lib/authOptions';
+import { getServerSession } from 'next-auth';
 import { getSession, signOut } from 'next-auth/react';
 import { NextResponse } from 'next/server';
 
 const baseURL = process.env.NEXT_PUBLIC_BASEURL;
 
 const setAuthHeader = async () => {
-  const session = await getSession();
+  let session;
+  if (typeof window !== 'undefined') {
+    session = await getSession();
+  } else {
+    session = await getServerSession(authOptions);
+    
+  }
   return session?.user?.token ? `Bearer ${session.user.token}` : null;
 };
 
-const navigate = (path) =>{
+const navigate = (path) => {
   try {
     if (typeof window !== 'undefined') {
       // You can safely use window here
       window.location.href = path; // This will change the browser URL
-    }else{
+    } else {
       const base = process.env.NEXT_PUBLIC_BASEURL; // Replace with your base URL
       return NextResponse.redirect(new URL(path, base)); // Redirect to 404
     }
   } catch (error) {
-    console.log("🚀 ~ navigate ~ error:", error)
-    
+
   }
 
 }
@@ -41,6 +48,7 @@ const fetchWithAuth = async (url, options = {}) => {
     ...options,
     headers,
   });
+   // Debugging: Check if Authorization header is being sent correctly
 
   if (response.ok) {
     return response.json();
@@ -48,12 +56,11 @@ const fetchWithAuth = async (url, options = {}) => {
 
   // Handle different response statuses
   if (response.status === 503) {
-      navigate('/maintenance');
+    navigate('/maintenance');
 
   }
 
   if (response.status === 401) {
-    console.log('Unauthorized access - logging out or redirecting...');
     const session = await getSession();
     if (session) {
       await signOut({ callbackUrl: '/' });
@@ -63,7 +70,6 @@ const fetchWithAuth = async (url, options = {}) => {
 
   // Handle other errors
   const error = await response.json();
-  console.log("🚀 ~ fetchWithAuth ~ error:", error)
   error.status = response.status; // Attach the status code to the error object
   throw error; // Throw the complete error object
 };

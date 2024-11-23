@@ -3,6 +3,7 @@ import { FaUser, FaCalendarAlt, FaEnvelope, FaVenusMars, FaPhone } from 'react-i
 import { isEmptyobject } from '../utility/helper';
 import { AppContext } from "../utility/context/context-api";
 import { PiGenderMaleBold } from "react-icons/pi";
+import { FaExclamationCircle } from "react-icons/fa";
 
 const UserForm = ({ onSubmit }) => {
   const { getUserInformation, userInformation } = useContext(AppContext);
@@ -81,6 +82,7 @@ const UserForm = ({ onSubmit }) => {
           <label className="block text-sm font-semibold">Date of Birth</label>
           <div className="relative">
             <FaCalendarAlt className="absolute left-3 top-[18px] text-[#000]" />
+            <FaExclamationCircle className='absolute right-3 top-[18px] text-[#F8CB1E]' />
             <input
               type="text"
               name="dateOfBirth"
@@ -93,21 +95,6 @@ const UserForm = ({ onSubmit }) => {
           {errors.dateOfBirth && <p className="text-red-500 text-sm">{errors.dateOfBirth}</p>}
         </div>
 
-        {/* <div className="flex-1">
-          <label className="block text-sm font-semibold">Date of Birth</label>
-          <div className="relative">
-            <FaCalendarAlt className="absolute left-3 top-[18px] text-[#000]" />
-            <input
-              type="date"
-              name="dateOfBirth"
-              value={formData.dateOfBirth}
-              onChange={handleChange}
-              className="mt-2 pl-10 p-[6px] border rounded w-full"
-              placeholder=''
-            />
-          </div>
-          {errors.dateOfBirth && <p className="text-red-500 text-sm">{errors.dateOfBirth}</p>}
-        </div> */}
       </div>
 
       {/* Email & Gender*/}
@@ -143,20 +130,7 @@ const UserForm = ({ onSubmit }) => {
           </div>
           {errors.email && <p className="text-red-500 text-sm">{errors.gender}</p>}
         </div>
-        {/* <div className="flex-1">
-          <label className="block text-sm font-semibold">Gender</label>
-          <select
-            name="gender"
-            value={formData.gender}
-            onChange={handleChange}
-            className="mt-2 p-[7px] border rounded w-full"
-          >
-            <option value="">Select Gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-          </select>
-          {errors.gender && <p className="text-red-500 text-sm">{errors.gender}</p>}
-        </div> */}
+        
       </div>
 
       {/* Phone Number in the next row */}

@@ -81,15 +81,6 @@ export default function ContactForm() {
 
     // 2. Define a submit handler.
     async function onSubmit(values) {
-        const payload = {
-            "first_name": "John",
-            "last_name": "Doe",
-            "mobile_number": "1234567890",
-            "email": "john.doe@example.com",
-            "message": "This is a sample message within the character limit."
-        }
-        console.log(values,'values')
-        // console.log(payload,'payload')
 
         try {
             await delay(2000)

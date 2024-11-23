@@ -59,8 +59,8 @@ export default function LoginForm() {
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            email: "johnsss.doe@example.com",
-            password: "StrongPassword123!",
+            email: "",
+            password: "",
 
         },
     })
@@ -76,17 +76,15 @@ export default function LoginForm() {
             });
 
             if (!result.ok) {
-                console.log("🚀 ~ onSubmit ~ result:", result)
+                throw new Error(result.error || 'Login failed');
 
             } else {
-                console.log("🚀 ~ onSubmit ~ result:", result)
                 toast.success("Login Successfull", { position: "top-right" })
                 router.push('/')
             }
 
         } catch (error) {
-            console.log("🚀 ~ onSubmit ~ error:", error)
-            const message = error?.response?.data?.message ?? error.message;
+            const message = error?.error ?? error.message;
             toast.error(message, { position: "top-right" })
 
         }

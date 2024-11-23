@@ -4,6 +4,7 @@ import AuthProvider from "./utility/context/context-api";
 import SessionWrapper from "./utility/SessionWrapper";
 import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "sonner";
+import Loader from "./utility/components/loader";
 
 
 
@@ -26,6 +27,7 @@ export default function RootLayout({ children }) {
           <AuthProvider>
             {children}
             <Toaster richColors />
+            <Loader />
           </AuthProvider>
         </body>
       </html>

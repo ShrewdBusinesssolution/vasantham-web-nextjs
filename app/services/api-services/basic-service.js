@@ -19,6 +19,7 @@ class BasicService {
             throw error;
         }
     }
+
     static async NewsLetter(payload) {
         try {
             const response = await api.post(`/api/v1/basic/news-letter-store`, payload);
@@ -67,10 +68,29 @@ class BasicService {
         }
     }
 
-    // About
+
+    static async HomePage() {
+        try {
+            const response = await api.get(`/api/v1/page/home`);
+            return response.data;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    static async HomeCourseFilter(standard) {
+        try {
+            const response = await api.get(`/api/v1/page/home/standard-filter?standard=${standard}`);
+            return response;
+        } catch (error) {
+            throw error;
+        }
+    }
+
     static async AboutPage() {
         try {
             const response = await api.get(`/api/v1/page/about`);
+            console.log("🚀 ~ BasicService ~ AboutPage ~ response:", response)
             return response.data;
         } catch (error) {
             throw error;
@@ -86,13 +106,13 @@ class BasicService {
         }
     }
 
-     /**
-     * Retrieves company Flash Information by sending a GET request to the '/api/flash-message' endpoint.
-     * 
-     * @returns {Promise} A promise that resolves to the data containing company information.
-     * @throws {Error} If an error occurs during the GET request.
-     */
-     static async GetCompanyFlashInfo() {
+    /**
+    * Retrieves company Flash Information by sending a GET request to the '/api/flash-message' endpoint.
+    * 
+    * @returns {Promise} A promise that resolves to the data containing company information.
+    * @throws {Error} If an error occurs during the GET request.
+    */
+    static async GetCompanyFlashInfo() {
         try {
             const response = await axiosInstance.get(`/api/flash-message`);
             return response.data;
@@ -101,14 +121,13 @@ class BasicService {
         }
     }
 
-
-     /**
-     * Retrieves Section information by sending a GET request to the '/api/flash-message' endpoint.
-     * 
-     * @returns {Promise} A promise that resolves to the data containing company information.
-     * @throws {Error} If an error occurs during the GET request.
-     */
-     static async GetSectionsInfo() {
+    /**
+    * Retrieves Section information by sending a GET request to the '/api/flash-message' endpoint.
+    * 
+    * @returns {Promise} A promise that resolves to the data containing company information.
+    * @throws {Error} If an error occurs during the GET request.
+    */
+    static async GetSectionsInfo() {
         try {
             const response = await axiosInstance.get(`/api/collections`);
             return response.data;
@@ -117,22 +136,6 @@ class BasicService {
         }
     }
 
-     /**
-     * Retrieves Popup information by sending a GET request to the '/api/flash-message' endpoint.
-     * 
-     * @returns {Promise} A promise that resolves to the data containing company information.
-     * @throws {Error} If an error occurs during the GET request.
-     */
-     static async GetPopupInfo() {
-        try {
-            const response = await axiosInstance.get(`/api/popup`);
-            return response.data;
-        } catch (error) {
-            throw error;
-        }
-    }
-
-
     /**
      * Retrieves search results by sending a GET request to the '/api/search' endpoint with a specific keyword.
      * 
@@ -140,10 +143,10 @@ class BasicService {
      * @returns {Promise} A promise that resolves to the data containing search results.
      * @throws {Error} If an error occurs during the GET request.
      */
-    static async SearchResult(keyword, slug) {
+    static async SearchResult(keyword) {
         try {
-            const response = await axiosInstance.get(`/api/search?category=${slug ?? ''}&keyword=${keyword}`);
-            return response.data;
+            const response = await api.get(`/api/v1/course/search?keyword=${keyword}`);
+            return response;
         } catch (error) {
             throw error;
         }
@@ -170,14 +173,7 @@ class BasicService {
     }
 
 
-    static async getWishList(page) {
-        try {
-            const response = await axiosInstance.get(`/api/wishlists?page=${page}`);
-            return response.data;
-        } catch (error) {
-            throw error;
-        }
-    }
+ 
 
 
 

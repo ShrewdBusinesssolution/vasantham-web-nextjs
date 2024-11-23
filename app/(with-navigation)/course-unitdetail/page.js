@@ -5,34 +5,34 @@ import SectionLecture from './section-lecture'
 import RelatedCourse from '@/app/utility/components/related-course'
 
 const UnitDetail = () => {
-    const productData = {
-        students: "1500 Students",
-        lessons: "6 lessons",
-        rating: "4.5",
-        reviews:"30"
-    }
+  const productData = {
+    students: "1500 Students",
+    lessons: "6 lessons",
+    rating: "4.5",
+    reviews: "30"
+  }
 
   return (
-   <main className='bg-[#fcfcfc]'>
-    {/* Banner */}
-    <section>
-            <CourseBanner title="Design" subtitle="Photography Crash Course for
-Photographer" product={productData}/>
-        </section>
+    <main className='bg-[#fcfcfc]'>
+      {/* Banner */}
+      <section>
+        <CourseBanner title="Design" subtitle="Photography Crash Course for
+Photographer" product={productData} />
+      </section>
 
-{/* AboutSection */}
+      {/* AboutSection */}
       <section className='brand-container'>
-        <AboutCourse/>
+        <AboutCourse />
       </section>
-{/* Section & Lecture */}
+      {/* Section & Lecture */}
       <section className="brand-container">
-        <SectionLecture/>
+        <SectionLecture />
       </section>
-{/* Related Courses */}
+      {/* Related Courses */}
       <section className="brand-container">
-        <RelatedCourse/>
+        <RelatedCourse />
       </section>
-         </main>
+    </main>
   )
 }
 

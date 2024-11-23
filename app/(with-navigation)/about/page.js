@@ -13,60 +13,10 @@ export const metadata = {
 };
 
 const About = async () => {
-  const products = [
-    {
-      id: 1,
-      imageSrc: '/assets/about/staff.webp',
-      name: 'Saravanakumar',
-      para: 'Wireless Headphones',
-    },
-    {
-      id: 2,
-      imageSrc: '/assets/about/staff.webp',
-      name: 'Saravanakumar',
-      para: 'Air Purifier',
-    },
-    {
-      id: 3,
-      imageSrc: '/assets/about/staff.webp',
-      name: 'Saravanakumar',
-      para: 'Smart Watch',
-    },
-    {
-      id: 4,
-      imageSrc: '/assets/about/staff.webp',
-      name: 'Saravanakumar',
-      para: 'Smart Watch',
-    },
-    {
-      id: 5,
-      imageSrc: '/assets/about/staff.webp',
-      name: 'Saravanakumar',
-      para: 'Smart Watch',
-    },
-    {
-      id: 6,
-      imageSrc: '/assets/about/staff.webp',
-      name: 'Saravanakumar',
-      para: 'Smart Watch',
-    },
-    {
-      id: 7,
-      imageSrc: '/assets/about/staff.webp',
-      name: 'Saravanakumar',
-      para: 'Smart Watch',
-    },
-    {
-      id: 8,
-      imageSrc: '/assets/about/staff.webp',
-      name: 'Saravanakumar',
-      para: 'Smart Watch',
-    },
-  ];
-
 
   try {
-    const data = await BasicService.AboutPage();
+    const responseAboutData = await BasicService.AboutPage();
+    console.log("🚀 ~ About ~ responseAboutData:", responseAboutData)
 
     return (
       <main>
@@ -79,8 +29,8 @@ const About = async () => {
           <div className='flex flex-col gap-5'>
             <h4 className='uppercase text-secondary text-sm font-medium'>Our services</h4>
             <h3 className='text-[32px] mt-4'>Get Instant Access Pro Courses</h3>
-            <p className='text-sm text-[#222222] w-full md:w-8/12 lg:w-11/12 leading-6'>Our institution aims to expand our hands to the students anywhere, anytime. Educating, exploring, and expanding the freedom of the students is our intention. Future is the combination of man and medium. Here, we become the medium to reach the dream of the students. Kids find exams as their frightful flight. Our Institution and our experts become a guide to make their adventure way more effortless and engrossing. Questioning openly, sharing their independent thoughts are encouraged. Having the potential to get good marks is a skill, anyone can acquire with our guidance. We have been guiding the students for more than 15 years under time and space limits.</p>
-            <p className='text-sm text-[#222222] mt-2 w-full md:w-8/12 lg:w-11/12 leading-6'>Students get counseling for their future endeavors and our institution stands as a pillar to our student’s growth. We pay special attention to the books, so we mobilize our materials created by the experts on time. Social circumstances are not a bane to the education and enrichment of the students anymore. Expert lectures and easy communication make the complex subject engaging. Practice tests, personalized reports, and our expert’s understanding of students make exams easier. We are devoted to creating an exceptional future with our services. We starting with Maths classes online in Tamil.</p>
+            <p className='text-sm text-[#222222] w-full md:w-8/12 lg:w-11/12 leading-6 first-letter:ml-10 text-justify'>Our institution aims to expand our hands to the students anywhere, anytime. Educating, exploring, and expanding the freedom of the students is our intention. Future is the combination of man and medium. Here, we become the medium to reach the dream of the students. Kids find exams as their frightful flight. Our Institution and our experts become a guide to make their adventure way more effortless and engrossing. Questioning openly, sharing their independent thoughts are encouraged. Having the potential to get good marks is a skill, anyone can acquire with our guidance. We have been guiding the students for more than 15 years under time and space limits.</p>
+            <p className='text-sm text-[#222222] mt-2 w-full md:w-8/12 lg:w-11/12 leading-6 first-letter:ml-10 text-justify'>Students get counseling for their future endeavors and our institution stands as a pillar to our student’s growth. We pay special attention to the books, so we mobilize our materials created by the experts on time. Social circumstances are not a bane to the education and enrichment of the students anymore. Expert lectures and easy communication make the complex subject engaging. Practice tests, personalized reports, and our expert’s understanding of students make exams easier. We are devoted to creating an exceptional future with our services. We starting with Maths classes online in Tamil.</p>
           </div>
           {/* right */}
           <Image src={"/assets/about/about-1.webp"} className="w-full h-[350px] md:w-[400px] md:h-[402px] rounded-xl" width={500} height={500} alt="Image" />
@@ -93,11 +43,11 @@ const About = async () => {
           {/* left */}
           <Image src={"/assets/about/about-2.webp"} className="w-full h-[350px] md:w-[400px] md:h-[402px] rounded-xl" alt="Images" width={500} height={500} />
           {/* right */}
-          <div className='flex flex-col gap-2'>
+          <div className='flex flex-col gap-2 w-full'>
             <h4 className='uppercase text-secondary text-sm font-medium'>How it works</h4>
             <h3 className='text-[32px] mt-4 md:mt-6'>Upgrade Your Skill</h3>
             <h3 className='text-[32px]'>Upgrade Your Life</h3>
-            <p className='text-sm text-[#222222] w-full md:w-8/12 lg:w-11/12 leading-6 mt-4 pb-10 md:pb-22 lg:pb-28'>Our institution aims to expand our hands to the students anywhere, anytime. Educating, exploring, and expanding the freedom of the students is our intention. Future is the combination of man and medium. Here, we become the medium to reach the dream of the students. Kids find exams as their frightful flight. Our Institution and our experts become a guide to make their adventure way more effortless and engrossing. Questioning openly, sharing their independent thoughts are encouraged. Having the potential to get good marks is a skill, anyone can acquire with our guidance. We have been guiding the students for more than 15 years under time and space limits.</p>
+            <p className='text-sm text-[#222222] w-full md:w-8/12 lg:w-11/12 leading-6 mt-4 pb-10 md:pb-22 lg:pb-28 first-letter:ml-10 text-justify'>Our institution aims to expand our hands to the students anywhere, anytime. Educating, exploring, and expanding the freedom of the students is our intention. Future is the combination of man and medium. Here, we become the medium to reach the dream of the students. Kids find exams as their frightful flight. Our Institution and our experts become a guide to make their adventure way more effortless and engrossing. Questioning openly, sharing their independent thoughts are encouraged. Having the potential to get good marks is a skill, anyone can acquire with our guidance. We have been guiding the students for more than 15 years under time and space limits.</p>
           </div>
         </div>
       </section>
@@ -112,10 +62,8 @@ const About = async () => {
         {/* ProductCard */}
         <div className='brand-container'>
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center gap-5 px-4 md:px-6 lg:px-10 py-10">
-            {products.map(staff => (
-              // <div className='pb-8 md:pb-12 lg:pb-15 mt-10' key={staff.id}>
-                <StaffCard key={staff.id} staff={staff} />
-              // </div>
+            {responseAboutData?.team?.map((item,index)=>(
+              <StaffCard key={index} staff={item} />
             ))}
           </div>
         </div>
@@ -160,17 +108,17 @@ const StaffCard = ({ staff }) => {
       {/* Image */}
       {/* <div className="relative w-full"> */}
         <Image
-          src={staff.imageSrc}
+          src={staff.image}
           width={300}
           height={300}
           alt="product"
-          className="object-cover object-top aspect-square w-full h-auto"
+          className="object-cover object-top aspect-square w-full h-auto rounded-md"
         />
       {/* </div> */}
       <div className="text-center space-y-3 mt-3 py-2">
         <h3 className="text-[17px] font-medium">{staff.name}</h3>
         <p className="text-[14px] leading-normal font-light text-[#B5B6B5]">
-          {staff.para}
+          {staff.designation}
         </p>
       </div>
     </div>

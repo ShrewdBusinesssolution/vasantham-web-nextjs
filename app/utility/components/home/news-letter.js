@@ -43,11 +43,10 @@ const NewsletterSection = () => {
     };
 
     try {
-      // await delay(2000);
       const response = await BasicService.NewsLetter(values);
-      // alert("Email send successfully!");
       console.log(response, "response");
       form.reset();
+      toast.success(response.message, { position: "top-right", duration:2000 })
     } catch (error) {
       console.error("Caught error:", error);
       const message = error?.response?.data?.message ?? error.message;

@@ -11,6 +11,7 @@ import TestimonialsSection from '../utility/components/home/testimonial-section'
 import AboutSection from '../utility/components/home/home-about'
 import BestService from '../utility/components/home/best-service'
 import api from '../services/api-services/fetch-service'
+import BasicService from '../services/api-services/basic-service'
 
 export const metadata = {
   title: "Homepage",
@@ -20,18 +21,18 @@ export const metadata = {
 const Home = async () => {
 
   try {
-    const response = await api.get('/api/v1/page/home');
-    const homedata = response.data;
+    const HomedataResponse = await BasicService.HomePage();
+
     return (
       <main>
         {/* Banner */}
         <section className='flex flex-col justify-center py-16 md:py-24 bg-cover md:bg-bottom relative overflow-hidden' style={{ backgroundImage: `url("/assets/basic/home-banner.webp")` }}>
           <div className="relative z-10 brand-container px-5 md:px-10 flex flex-col gap-6 md:gap-8">
             {/* Text */}
-            <h6 className='text-[#07A889] font-medium uppercase text-[15px]'>Expert Instruction</h6>
-            <h2 className='text-white lg:w-3/5 xl:w-3/5 leading-normal'>Making learning easy with
+            <h6 className='text-[#07A889] font-medium uppercase text-[15px] animate-slide-in-top delay-100'>Expert Instruction</h6>
+            <h2 className='text-white lg:w-3/5 xl:w-3/5 leading-normal animate-slide-in-top delay-200'>Making learning easy with
               our best platform!</h2>
-            <p className='text-[14px] md:text-lg text-white lg:w-3/5 xl:w-3/5'>Education empowers humanity by unlocking the potential within every individual, enabling personal growth and societal progress. </p>
+            <p className='text-[14px] md:text-lg text-white lg:w-3/5 xl:w-3/5 animate-slide-in-top delay-300'>Education empowers humanity by unlocking the potential within every individual, enabling personal growth and societal progress. </p>
             {/* Buttons */}
             <div className='flex flex-col md:flex-row gap-3'>
               <Link href={'/courses'}>
@@ -128,7 +129,7 @@ const Home = async () => {
         {/* Course Explore */}
         <section className='bg-white py-8 md:py-12 lg:py-16'>
           <div className='brand-container'>
-            <CourseExploreSection />
+            <CourseExploreSection standards={HomedataResponse?.standard ?? []} courses={HomedataResponse?.cousers ?? []} />
           </div>
         </section>
 
@@ -140,8 +141,8 @@ const Home = async () => {
         {/* <CourseExploreSection/> */}
         <section className='bg-[#FCFCFC]'>
           <div className='brand-container bg-gradient-to-br from-[#fff] to-[#CCF4FF] from-0%'>
-            {homedata?.testimonials?.legth !==0 ?
-            <TestimonialsSection testimonialData={homedata.testimonials}/>
+            {HomedataResponse?.testimonial.length !==0 ?
+            <TestimonialsSection testimonialData={HomedataResponse?.testimonial}/>
          :<></>
         }
           </div>

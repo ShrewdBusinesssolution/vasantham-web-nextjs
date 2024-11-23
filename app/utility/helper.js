@@ -1,4 +1,9 @@
 // import { getPlaiceholder } from "plaiceholder";
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+
+dayjs.extend(relativeTime);
+
 
 const scrollToSection = (id) => {
     const section = document.getElementById(id);
@@ -36,12 +41,36 @@ const scrollToSection = (id) => {
   async function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-  
+const generateQueryString = (params) => {
+  if (!params) return '';
+  return new URLSearchParams(params).toString();
+};
+const TruncateText = (text, length = 6) => text.length > length ? text.substring(0, length) + '...' : text;
+
+function timeAgo(dateString) {
+  return dayjs(dateString).fromNow();
+}
+/**
+ * Get the first two letters of a name.
+ * @param {string} name - The name to convert.
+ * @returns {string} The first two letters in uppercase.
+ */
+function getInitials(name) {
+  if (!name) return ""; // Handle empty name
+
+  const letters = name.trim().toUpperCase().replace(/\s+/g, ""); // Remove spaces and convert to uppercase
+  return letters.substring(0, 2); // Get the first two letters
+}
+
   export {
     scrollToSection,
     scrollToTop,
     LOGOPATH,
     isEmptyobject,
     addBeforeUnloadListener,
-    delay
+    delay,
+    generateQueryString,
+    TruncateText,
+    timeAgo,
+    getInitials
   }

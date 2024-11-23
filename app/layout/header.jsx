@@ -21,8 +21,12 @@ import SearchForm from "../form-components/search-form";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const closePopover = () => {
+    setIsPopoverOpen(false);
+  };
   const menuRef = useRef(null);
-  const {data:session} = useSession();
+  const { data: session } = useSession();
   const pathname = usePathname();
 
   const handleClickOutside = (event) => {
@@ -42,77 +46,15 @@ export default function Header() {
     setMenuOpen((prev) => !prev);
   };
 
-  const [isCartOpen, setIsCartOpen] = useState(false);
-
-  
-  const handleOpen = () => setIsCartOpen(true);
-  const handleClose = () => setIsCartOpen(false);
-
   return (
-    <header className="sticky top-0 z-50 bg-white">
-      <div className="flex flex-col lg:flex-row justify-between items-center brand-container py-5">
+    <header className="sticky top-0 z-50 bg-white w-full">
+      <div className="flex flex-row justify-between items-center brand-container py-5">
         {/* LOGO */}
-        <div className="flex items-center justify-between w-full lg:w-auto">
-          <div className="flex items-center cursor-pointer">
-            <Image src={COLORLOGOPATH} width={150} height={75} alt="logo" />
-          </div>
-
-          {/* Mobile Menu */}
-          <div className="flex items-center gap-2 lg:hidden">
-            {/* Search */}
-            <SearchForm />
-            {/* Cart */}
-            <CartModal />
-            {/* User */}
-            <div>
-            <Popover className="absolute top-0 right-10">
-              <PopoverTrigger asChild>
-                <Button variant="outline" className="p-2 rounded-full bg-[#F7F7F7] border-none" size="icon" ><div className="">
-                  <Image
-                    src="/assets/svg/user.svg"
-                    width={20}
-                    height={20}
-                    alt="user"
-                  />
-                </div></Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-fit p-0 rounded-xl">
-                <div className="w-[150px] p-2 cursor-pointer">
-                  {session ?
-                    <ul>
-                      <Link href="/profiles"><li className="w-full p-2 hover:bg-gradient-to-br from-white to-blue-100 from-20% rounded-[10px]">My Profile</li></Link>
-                      <li>
-                        <LogoutModal />
-                      </li>
-                    </ul>
-                    :
-                    <ul>
-                      <li>
-                        <Link href="/login"><li className="w-full p-2 hover:bg-gradient-to-br from-white to-blue-100 from-20% rounded-[10px]">login</li></Link>
-                      </li>
-                      <li>
-                        <Link href="/sign-up"><li className="w-full p-2 hover:bg-gradient-to-br from-white to-blue-100 from-20% rounded-[10px]">sign up</li></Link>
-                      </li>
-                    </ul>}
-                </div>
-              </PopoverContent>
-            </Popover>
-          </div>
-            {/* Mobile Menu Icon */}
-            <Button
-              variant="secondary"
-              className="rounded-md shadow-primary/20 shadow-lg px-1 py-[20px] border bg-white"
-              onClick={handleMenuClick}
-            >
-              {menuOpen ? (
-                <FiX className="text-primary w-8 h-8" />
-              ) : (
-                <FiMenu className="text-primary w-8 h-8" />
-              )}
-            </Button>
-          </div>
+        <Link href={'/'}>
+        <div className="flex items-center cursor-pointer">
+          <Image src={COLORLOGOPATH} width={150} height={75} alt="logo" className="max-sm:w-[20vw] w-[150px] h-auto" />
         </div>
-
+        </Link>
         {/* Large screens List */}
         <div className="hidden lg:flex w-auto lg:space-x-14 items-center">
           <ul className="flex lg:flex-row space-x-8">
@@ -137,16 +79,14 @@ export default function Header() {
           </ul>
         </div>
 
-        {/* Large Screen */}
-        <div className="hidden lg:flex items-center gap-5">
+        <div className="flex items-center gap-2 ">
           {/* Search */}
-           <SearchForm />
+          <SearchForm />
           {/* Cart */}
-            <CartModal />
-            
+          <CartModal />
           {/* User */}
           <div>
-            <Popover className="absolute top-0 right-10">
+            <Popover className="" open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
               <PopoverTrigger asChild>
                 <Button variant="outline" className="p-2 rounded-full bg-[#F7F7F7] border-none" size="icon" ><div className="">
                   <Image
@@ -161,9 +101,9 @@ export default function Header() {
                 <div className="w-[150px] p-2 cursor-pointer">
                   {session ?
                     <ul>
-                      <Link href="/profiles"><li className="w-full p-2 hover:bg-gradient-to-br from-white to-blue-100 from-20% rounded-[10px]">My Profile</li></Link>
+                      <Link onClick={closePopover} href="/profile" ><li className="w-full p-2 hover:bg-gradient-to-br from-white to-blue-100 from-20% rounded-[10px]">My Profiles</li></Link>
                       <li>
-                        <LogoutModal />
+                        <LogoutModal PopovercloseHandling={closePopover} />
                       </li>
                     </ul>
                     :
@@ -179,7 +119,20 @@ export default function Header() {
               </PopoverContent>
             </Popover>
           </div>
+          {/* Mobile Menu Icon */}
+          <Button
+            variant="secondary"
+            className="rounded-md shadow-primary/20 shadow-lg px-1 py-[20px] border bg-white max-lg:flex hidden"
+            onClick={handleMenuClick}
+          >
+            {menuOpen ? (
+              <FiX className="text-primary w-8 h-8" />
+            ) : (
+              <FiMenu className="text-primary w-8 h-8" />
+            )}
+          </Button>
         </div>
+
       </div>
 
       {/* Mobile Menu List */}
