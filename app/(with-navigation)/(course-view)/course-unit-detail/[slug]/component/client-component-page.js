@@ -51,7 +51,7 @@ export default function CourseUnitDetailclientComponent({ unitdetails,slug }) {
             </section>
             <section className='flex flex-col gap-5 brand-container py-5'>
                 {unitdetails?.map((item, index) => (
-                    <UnitCard data={item} linkSlug={slug} />
+                    <UnitCard key={index} data={item} linkSlug={slug} />
                 ))}
             </section>
         </>

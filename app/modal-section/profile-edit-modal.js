@@ -7,17 +7,17 @@ import { FaUser, FaEnvelope, FaPhone, FaCalendarAlt } from "react-icons/fa";
 import ProfileUpdateForm from "../form-components/profile-edit-form";
 
 export function EditProfileModal() {
-
+    const [open, setOpen] = useState(false)
 
     return (
-        <Dialog className="!w-[700px]">
+        <Dialog open={open} onOpenChange={setOpen} className="!w-[700px]">
             <DialogTrigger asChild>
                 <div className="p-2 bg-gradient-to-br from-[#fff] to-[#CCF4FF] rounded-lg cursor-pointer">
                     <LuPencilLine size={22} className="text-primary" />
                 </div>
             </DialogTrigger>
             <DialogContent className="h-auto p-3 ">
-                <ProfileUpdateForm />
+                <ProfileUpdateForm DialogOpenHandler={setOpen} />
             </DialogContent>
         </Dialog>
     );

@@ -45,7 +45,7 @@ const formSchema = z.object({
         .regex(/^\d{10}$/, { message: "Phone number must be exactly 10 digits." }),
 });
 
-export default function ProfileUpdateForm() {
+export default function ProfileUpdateForm({DialogOpenHandler}) {
     const { userInformation, setUserInformation } = useContext(AppContext);
 
 
@@ -178,7 +178,7 @@ export default function ProfileUpdateForm() {
 
 
                 <div className="flex gap-3 w-full justify-end">
-                    <Button type="button">
+                    <Button onClick={()=> DialogOpenHandler(false)} type="button">
                         CANCEL
                     </Button>
                     <Button variant="primary" className=" flex gap-2 uppercase" type="submit" disabled={form.formState.isSubmitting}>

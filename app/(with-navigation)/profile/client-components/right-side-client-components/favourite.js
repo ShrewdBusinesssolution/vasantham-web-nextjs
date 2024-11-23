@@ -93,7 +93,7 @@ const EmptyHandling = () => {
       <div className='flex flex-col items-center gap-3  pt-20'>
         <Image src={'/assets/images/fav-empty.png'} width={200} height={200} alt='empty image' className='h-[200px] w-auto' />
         <div className='flex flex-col items-center gap-5'>
-          <p className='text-center'>You haven't added any favorites yet. Start exploring and add your top picks!</p>
+          <p className='text-center'>You haven&apos;t added any favorites yet. Start exploring and add your top picks!</p>
           <Link href={'/courses'}>
             <Button variant="primary" className="uppercase">
               Explore courses
