@@ -15,7 +15,7 @@ import BasicService from '../services/api-services/basic-service'
 
 export const metadata = {
   title: "Homepage",
-  description: "Protect your home from pests with our expert pest control services. We offer safe, effective solutions to eliminate unwanted insects, rodents, and other nuisances. Book now for a pest-free environment!",
+  description: "Vasantham e-Learning - Explore a wide range of expertly crafted online courses designed to empower your learning journey. Join today for skill development, career growth, and personal enrichment.",
 };
 
 const Home = async () => {
