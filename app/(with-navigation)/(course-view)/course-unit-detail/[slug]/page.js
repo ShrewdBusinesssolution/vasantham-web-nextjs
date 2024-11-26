@@ -5,6 +5,8 @@ import Image from 'next/image';
 import React from 'react'
 import { BsCart2 } from 'react-icons/bs';
 import CourseUnitDetailclientComponent from './component/client-component-page';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export default async function CourseUnitview({ params }) {
 
@@ -17,7 +19,21 @@ export default async function CourseUnitview({ params }) {
                 <section>
                     <CourseBanner title={Response?.subject?.name} subtitle={Response?.name} product={options} />
                 </section>
-                <CourseUnitDetailclientComponent unitdetails={Response?.unit} slug={params.slug} />
+                {Response?.unit.length !== 0 ?
+
+                    <CourseUnitDetailclientComponent unitdetails={Response?.unit} slug={params.slug} />
+                    :
+                    <div className='py-10 grid place-items-center'>
+                        <div className='flex flex-col gap-5 items-center'>
+                            <h5>No units Found</h5>
+                            <Link href={'/'}>
+                                <Button variant="primary">
+                                    Home
+                                </Button>
+                            </Link>
+                        </div>
+                    </div>
+                }
 
 
             </main>

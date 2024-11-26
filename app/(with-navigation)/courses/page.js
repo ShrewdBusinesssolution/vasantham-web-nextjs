@@ -13,15 +13,14 @@ export const metadata = {
 
 const Course = async ({ searchParams }) => {
   try {
-
     const respSearchParamQuery = generateQueryString(searchParams)
     const CourseResponse = (await CourseService.list(respSearchParamQuery)).data;
-
+    const standard = searchParams['standard[]'] ?? [];
     return (
       <main>
         <AboutBanner title={"our courses"} subtitle={"Explore our courses"} />
         <div>
-          <Filter ResponseData={CourseResponse} />
+          <Filter ResponseData={CourseResponse} subject={searchParams?.subject ?? ''} board={searchParams?.board ?? ''} standard={standard} />
         </div>
       </main>
     )

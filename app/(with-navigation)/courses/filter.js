@@ -15,54 +15,89 @@ import { TruncateText } from '@/app/utility/helper';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import CourseService from '@/app/services/api-services/course-service';
 
-const Filter = ({ ResponseData }) => {
+const Filter = ({ ResponseData, subject, board, standard }) => {
 
     const scrollRef = useRef(null);
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const queryParams = new URLSearchParams(searchParams);
     const router = useRouter();
-
-
     const [filteredProducts, setFilteredProducts] = useState(ResponseData?.courses ?? []);
     const [resData, setResDaa] = useState(ResponseData ?? []);
     const [pagination, setPagination] = useState(ResponseData?.pagination ?? {});
 
+    //INFO SEARCH SECTION
+
+
+
+     //INFO STANDARD SECTION
+    const [standardList, setStandardList] = useState(ResponseData?.standard ?? []);
+    const [activeClasses, setActiveClasses] = useState(standard); // Array to store selected indices
+
+    const HandleStandard = (slug) => {
+        setActiveClasses((prev) => {
+            let updatedActiveClasses;
+
+            // If the slug is already in the array, remove it
+            if (prev.includes(slug)) {
+                updatedActiveClasses = prev.filter((item) => item !== slug);
+            } else {
+                // If the slug is not in the array, add it
+                updatedActiveClasses = [...prev, slug];
+            }
+
+            // Update the URL with the new set of standards
+            HandleParams('standard', updatedActiveClasses);
+
+            return updatedActiveClasses;
+        });
+    };
+
+
 
     //INFO SUBJECT SECTION
     const [subjectShow, setSubjectShow] = useState(false);
-    const [selectedSubject, setSelectedSubject] = useState("");
+    const [selectedSubject, setSelectedSubject] = useState(subject);
     const [subjectSlug, setSubjectslug] = useState("");
+    
 
     const [subjectList, setSubjectList] = useState(ResponseData?.subject ?? []);
 
     const SubjectHandling = (name, slug) => {
-        setSelectedSubject(name)
-        setSubjectslug(slug)
-        setSubjectShow(false)
-        HandleParams('subject', slug)
-    }
+        if (name === 'clear') {
+            setSelectedSubject('');
+            setSubjectslug('');
+            setSubjectShow(false);
+            HandleParams('subject', slug, true); // Pass `true` to indicate deletion
+        } else {
+            setSelectedSubject(name);
+            setSubjectslug(slug);
+            setSubjectShow(false);
+            HandleParams('subject', slug);
+        }
+    };
     //INFO BOARD SECTION
     const [boardShow, setBoardShow] = useState(false);
-    const [selectedBoard, setSelectedBoard] = useState("")
+    const [selectedBoard, setSelectedBoard] = useState(board)
     const [boardSlug, setBoardslug] = useState("");
     const [boardList, setBoardList] = useState(ResponseData?.board ?? [])
 
     const BoardHandling = (name, slug) => {
-        setSelectedBoard(name)
-        setBoardslug(slug)
-        setBoardShow(false)
-        HandleParams('board', slug)
+        if (name === 'clear') {
+
+            setSelectedBoard("")
+            setBoardslug("")
+            setBoardShow(false)
+            HandleParams('board', slug, true)
+        } else {
+            setSelectedBoard(name)
+            setBoardslug(slug)
+            setBoardShow(false)
+            HandleParams('board', slug)
+        }
 
     }
-    //INFO CLASS HANDLING
-    const [activeClass, setActiveClass] = useState(0);
 
-    useEffect(() => {
-        handleClassClick(0); // Automatically select Class 1 on mount
-    }, []);
-    
-    
     const scrollLeft = () => {
         scrollRef.current.scrollBy({ left: -100, behavior: 'smooth' });
     };
@@ -71,52 +106,67 @@ const Filter = ({ ResponseData }) => {
         scrollRef.current.scrollBy({ left: 100, behavior: 'smooth' });
     };
 
-    const handleClassClick = (index) => {
-        setActiveClass(index);
-    };
-
-    const HandleParams = (type, data) => {
+    const HandleParams = (type, data, dl = false) => {
         // Clone the queryParams to avoid direct mutation
         const newQueryParams = new URLSearchParams(queryParams.toString());
-    
+
         switch (type) {
-            case 'subject':
-                if (newQueryParams.has('subject')) {
-                    newQueryParams.set('subject', data);
+            case 'standard':
+                if (dl) {
+                    // If `dl` is true, delete the `standard` parameter from the URL
+                    newQueryParams.delete('standard[]');
+                } else if (data.length > 0) {
+                    // If the data array is not empty, set the `standard` parameter as an array
+                    // URLSearchParams can append the same key multiple times (for an array)
+                    newQueryParams.delete('standard[]'); // Remove any existing `standard` params
+                    data.forEach((slug) => {
+                        newQueryParams.append('standard[]', slug); // Append each selected standard slug
+                    });
                 } else {
-                    newQueryParams.append('subject', data);
+                    // If no standards are selected, delete the `standard` parameter
+                    newQueryParams.delete('standard[]');
+                }
+                break;
+
+            case 'subject':
+                if (dl) {
+                    newQueryParams.delete('subject'); // Delete the 'subject' parameter
+                } else if (newQueryParams.has('subject')) {
+                    newQueryParams.set('subject', data); // Update existing parameter
+                } else {
+                    newQueryParams.append('subject', data); // Add new parameter
                 }
                 break;
             case 'board':
-                if (newQueryParams.has('board')) {
-                    newQueryParams.set('board', data);
+                if (dl) {
+                    newQueryParams.delete('board'); // Delete the 'board' parameter
+                } else if (newQueryParams.has('board')) {
+                    newQueryParams.set('board', data); // Update existing parameter
                 } else {
-                    newQueryParams.append('board', data);
+                    newQueryParams.append('board', data); // Add new parameter
                 }
                 break;
             default:
                 break;
         }
-    
+
         // Push the updated query parameters to the router without scrolling or re-rendering unnecessarily
         router.push(
-            `${pathname}?${newQueryParams.toString()}`, 
-            undefined, 
+            `${pathname}?${newQueryParams.toString()}`,
+            undefined,
             { shallow: true, scroll: false } // `shallow: true` helps avoid data re-fetch
         );
-    
+
         // Call GetData to fetch or process the new data without affecting the UI scroll
         GetData(newQueryParams.toString());
     };
-    
-
-     // Create a function to handle updating query parameters
 
 
-    const GetData = async (paramData) =>{
+    const GetData = async (paramData) => {
         const response = (await CourseService.list(paramData)).data;
         setFilteredProducts(response?.courses ?? [])
-    }    
+        setPagination(response?.pagination ?? [])
+    }
 
     return (
         <main className='bg-[#FCFCFC] py-10 lg:py-16 px-6 md:px-12 lg:px-16 '>
@@ -140,18 +190,18 @@ const Filter = ({ ResponseData }) => {
                             onClick={scrollLeft}>
                             <FiChevronLeft />
                         </button>
-                        <div className='bg-[#F7F7F7] rounded-full border w-[370px] md:w-[600px] lg:w-[640px] px-12 lg:px-18' >
+                        <div className='bg-[#F7F7F7] rounded-full border w-[370px] md:w-[600px] lg:w-[640px] px-12 lg:px-18'>
                             <div
                                 ref={scrollRef}
-                                className="hide-scrollbar flex overflow-x-auto p-1" >
+                                className="hide-scrollbar flex overflow-x-auto p-1">
                                 {/* Array */}
-                                {[...Array(10)].map((_, index) => (
+                                {standardList?.map((item) => (
                                     <div
-                                        key={index}
+                                        key={item.slug}
                                         className={`rounded-full font-semibold uppercase text-sm p-2 px-5 flex items-center justify-center mx-2 text-nowrap cursor-pointer 
-                                            ${activeClass === index ? 'bg-secondary text-white' : 'bg-white text-black'}`}
-                                        onClick={() => handleClassClick(index)}>
-                                        Class {index + 1}
+                    ${activeClasses.includes(item.slug) ? 'bg-secondary text-white' : 'bg-white text-black'}`}
+                                        onClick={() => HandleStandard(item.slug)}>
+                                        {item.name}
                                     </div>
                                 ))}
                             </div>
@@ -179,6 +229,15 @@ const Filter = ({ ResponseData }) => {
                                 <ScrollArea className="h-[200px] rounded-md ">
 
                                     <ul>
+                                        {selectedSubject !== '' ?
+                                            <li
+                                                onClick={() => SubjectHandling('clear', null)}
+                                                className={`w-full p-2 hover:bg-gradient-to-br from-white to-[#b9f8ee] from-20% rounded-[10px] shadow-sm cursor-pointer`}>
+                                                Clear
+                                            </li>
+                                            :
+                                            null
+                                        }
                                         {subjectList?.map((item, index) => (
                                             <li key={index}
                                                 onClick={() => SubjectHandling(item.name, item.slug)}
@@ -205,6 +264,16 @@ const Filter = ({ ResponseData }) => {
                                 <ScrollArea className="h-[200px] rounded-md ">
 
                                     <ul>
+                                        {selectedBoard !== '' ?
+                                            <li
+                                                onClick={() => BoardHandling('clear', null)}
+                                                className={`w-full p-2 hover:bg-gradient-to-br from-white to-[#b9f8ee] from-20% rounded-[10px] shadow-sm cursor-pointer`}>
+                                                Clear
+                                            </li>
+                                            :
+                                            null
+                                        }
+
                                         {boardList?.map((item, index) => (
                                             <li key={index}
                                                 onClick={() => BoardHandling(item.name, item.slug)}
@@ -239,11 +308,21 @@ const Filter = ({ ResponseData }) => {
                 }
             </div>
             {/* Button */}
-            <div className='flex flex-col justify-center items-center py-5 md:py-8'>
-                <Button variant="primary" className="uppercase px-5 text-sm flex items-center gap-x-2">
-                    Load More courses<IoReloadOutline size={20} />
-                </Button>
-            </div>
+            {pagination?.total_pages > 1 && pagination?.total_pages !== page ?
+                <div className='flex flex-col justify-center items-center py-5 md:py-8'>
+                    <Button variant="primary" className="uppercase px-5 text-sm flex items-center gap-x-2">
+                        Load More courses<IoReloadOutline size={20} />
+                    </Button>
+                </div>
+                //   <div className="flex justify-center py-5">
+                //     <Button onClick={() => { getWishlistData(page + 1, true) }} variant="primary" className="flex gap-2 items-center">
+                //       Load More
+                //       {loadMore ? <LuLoader2 className="w-4 h-4 text-white animate-spin" />
+                //         : null}
+                //     </Button>
+                //   </div>
+                : null}
+
         </main>
     );
 }

@@ -23,6 +23,10 @@ export const AuthProvider = ({ children }) => {
     const [cartSummary, setCartSummary] = useState({}); //INFO CART SUMMARY
     const [cartCourseInformation, setcartCourseInformation] = useState([]); //INFO CART SUMMARY
     const [couponInformation, setCouponInformation] = useState({})
+    const [TestModalopen, setTestModalopen] = useState(false)
+    const [TestScore, setTestScrore] = useState(0)
+
+
 
 
 
@@ -33,7 +37,6 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const savedCart = localStorage.getItem('cart');
         if (savedCart) {
-            console.log("🚀 ~ useEffect ~ JSON.parse(savedCart):", JSON.parse(savedCart))
             setCartData(JSON.parse(savedCart));
         }
         if (isEmptyobject(companyInfo)) {
@@ -53,7 +56,8 @@ export const AuthProvider = ({ children }) => {
     const getCompanyInformation = async () => {
         try {
             setCompanyInfo((await BasicService.GetCompanyInfo()).data);
-        } catch (error) { console.log("🚀 ~ getCompanyInformation ~ error:", error) }
+        } catch (error) { 
+        }
     };
 
     const getUserInformation = async () => {
@@ -82,7 +86,6 @@ export const AuthProvider = ({ children }) => {
 
             }
         } catch (error) {
-            console.log("🚀 ~ checkoutHandling ~ error:", error)
             
         }
 
@@ -143,7 +146,11 @@ export const AuthProvider = ({ children }) => {
         checkoutHandling,
         cartCourseInformation,
         setCartData,
-        setCouponInformation
+        setCouponInformation,
+        TestModalopen, 
+        setTestModalopen,
+        TestScore, setTestScrore
+
     };
 
     return (
