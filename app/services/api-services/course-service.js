@@ -21,9 +21,10 @@ class CourseService {
         }
     }
 
-    static async courseunitView(slug) {
+    static async courseunitView(slug, params) {
         try {
-            const response = await api.get(`/api/v1/course/unit/${slug}`);
+            const queryString = params ? `?${params}` : '';
+            const response = await api.get(`/api/v1/course/unit/${slug}${queryString}`);
             return response
         } catch (error) {
             throw error;

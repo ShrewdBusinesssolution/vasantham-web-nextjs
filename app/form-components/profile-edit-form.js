@@ -47,7 +47,7 @@ const formSchema = z.object({
 });
 
 export default function ProfileUpdateForm({DialogOpenHandler}) {
-    const { userInformation, setUserInformation } = useContext(AppContext);
+    const { userInformation, setUserInformation, getUserInformation } = useContext(AppContext);
 
 
     const form = useForm({
@@ -68,6 +68,8 @@ export default function ProfileUpdateForm({DialogOpenHandler}) {
             const response = await ProfileService.UserProfileform(data)
             if(response.status){
                 toast.success(response.message, {position:"top-right", duration:2000})
+                //TODO UPDATE
+                getUserInformation()
             }
 
         } catch (error) {

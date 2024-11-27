@@ -11,15 +11,30 @@ import VideoModal from '@/app/utility/components/video-modal';
 import Link from 'next/link';
 
 import { FaArrowDown } from "react-icons/fa6";
+import { useRouter } from 'next/navigation';
 
 
 export default function UnitClientComponent({ lesson, lesson_count, lecture_count }) {
+    const router = useRouter();
 
     return (
         <section className='brand-container flex flex-col py-10 '>
             <p className='text-[#B0B0B0] text-lg'>{lesson_count} Section. {lecture_count} lectures</p>
+            {lesson?.length !== 0
+                ?
+                <Accordion lesson={lesson} />
+                :
+                <div className='py-10 grid place-items-center'>
+                    <div className='flex flex-col gap-5 items-center'>
+                        <h5>No Lessons Found</h5>
 
-            <Accordion lesson={lesson} />
+                        <Button onClick={() => router.back()} variant="primary">
+                            Back
+                        </Button>
+
+                    </div>
+                </div>
+            }
 
 
         </section>
@@ -100,11 +115,13 @@ const List = ({ data }) => {
                 <p className={`${data?.viewed ? 'text-[#07A858]' : ''} text-[18px] font-medium`}>{data?.name}</p>
             </div>
             <div className='flex flex-row items-center gap-3'>
-                {data?.viewed ?
+                {data?.viewed && (data?.score === 0 || data?.score == null) ? (
                     <Link href="/test/1">
-                        <Button variant="primary" className="uppercase">take test</Button>
+                        <Button variant="primary" className="uppercase">Take Test</Button>
                     </Link>
-                    : null}
+                ) : (
+                    <p>{data?.score !== 0 && data?.score != null ? `${data?.score} %` : null}</p>
+                )}
                 <div className='bg-[#E9E9E9] p-2 rounded-full'>
                     <Image src="/assets/svg/video.svg" width={22} height={22} alt="video_icon" className="" />
                 </div>

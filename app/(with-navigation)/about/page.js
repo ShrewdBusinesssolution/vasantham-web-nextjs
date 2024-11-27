@@ -16,7 +16,6 @@ const About = async () => {
 
   try {
     const responseAboutData = await BasicService.AboutPage();
-    console.log("🚀 ~ About ~ responseAboutData:", responseAboutData)
 
     return (
       <main>

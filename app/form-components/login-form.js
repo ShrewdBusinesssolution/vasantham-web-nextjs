@@ -154,9 +154,10 @@ export default function LoginForm() {
                 </Button>
 
                 <Button
+                    onClick={() => signIn('google')}
                     variant="primary"
                     className="w-full flex items-center gap-2 uppercase bg-gray-100 text-[#000] font-semibold border"
-                    type="submit"
+                    type="button"
                     disabled={form.formState.isSubmitting}
                 >
                     <Image

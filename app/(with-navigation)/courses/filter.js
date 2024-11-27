@@ -14,6 +14,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { TruncateText } from '@/app/utility/helper';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import CourseService from '@/app/services/api-services/course-service';
+import { LuLoader2 } from 'react-icons/lu';
 
 const Filter = ({ ResponseData, subject, board, standard }) => {
 
@@ -22,15 +23,45 @@ const Filter = ({ ResponseData, subject, board, standard }) => {
     const pathname = usePathname();
     const queryParams = new URLSearchParams(searchParams);
     const router = useRouter();
+    const timeoutRef = useRef(null); // Ref to store the timeout ID
     const [filteredProducts, setFilteredProducts] = useState(ResponseData?.courses ?? []);
     const [resData, setResDaa] = useState(ResponseData ?? []);
+    const [loading, setLoading] = useState(false);
+    const [page, setPage] = useState(1);
+    const [loadMore, setLoadMore] = useState(false)
+
     const [pagination, setPagination] = useState(ResponseData?.pagination ?? {});
 
-    //INFO SEARCH SECTION
+    //INFO STANDARD SECTION
+    const [searchData, setSearchData] = useState('');
+
+    // Handle search input changes with debounce
+    const handleSearchChange = (event) => {
+        const newSearchData = event.target.value;
+        setSearchData(newSearchData);
+        setLoading(true)
+
+
+        // Clear the previous timeout
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+        }
+
+        if (newSearchData.trim().length === 0) {
+            setLoading(false)
+            HandleParams('search', null, true);
+
+        }
+
+        // Set a new timeout
+        timeoutRef.current = setTimeout(() => {
+            HandleParams('search', newSearchData);
+        }, 300); // Delay of 300ms
+    };
 
 
 
-     //INFO STANDARD SECTION
+    //INFO STANDARD SECTION
     const [standardList, setStandardList] = useState(ResponseData?.standard ?? []);
     const [activeClasses, setActiveClasses] = useState(standard); // Array to store selected indices
 
@@ -59,7 +90,7 @@ const Filter = ({ ResponseData, subject, board, standard }) => {
     const [subjectShow, setSubjectShow] = useState(false);
     const [selectedSubject, setSelectedSubject] = useState(subject);
     const [subjectSlug, setSubjectslug] = useState("");
-    
+
 
     const [subjectList, setSubjectList] = useState(ResponseData?.subject ?? []);
 
@@ -109,9 +140,22 @@ const Filter = ({ ResponseData, subject, board, standard }) => {
     const HandleParams = (type, data, dl = false) => {
         // Clone the queryParams to avoid direct mutation
         const newQueryParams = new URLSearchParams(queryParams.toString());
+        let paginate = false;
 
         switch (type) {
+            case 'search':
+                newQueryParams.delete('page'); // Delete the 'board' parameter
+                if (dl) {
+                    newQueryParams.delete('search');  // Delete the 'search' parameter
+                } else if (newQueryParams.has('search')) {
+                    newQueryParams.set('search', data);  // Update existing parameter
+                } else {
+                    newQueryParams.append('search', data);  // Add new parameter
+                }
+                break;
             case 'standard':
+                newQueryParams.delete('page'); // Delete the 'board' parameter
+
                 if (dl) {
                     // If `dl` is true, delete the `standard` parameter from the URL
                     newQueryParams.delete('standard[]');
@@ -129,6 +173,7 @@ const Filter = ({ ResponseData, subject, board, standard }) => {
                 break;
 
             case 'subject':
+                newQueryParams.delete('page'); // Delete the 'board' parameter
                 if (dl) {
                     newQueryParams.delete('subject'); // Delete the 'subject' parameter
                 } else if (newQueryParams.has('subject')) {
@@ -138,6 +183,8 @@ const Filter = ({ ResponseData, subject, board, standard }) => {
                 }
                 break;
             case 'board':
+                newQueryParams.delete('page'); // Delete the 'board' parameter
+
                 if (dl) {
                     newQueryParams.delete('board'); // Delete the 'board' parameter
                 } else if (newQueryParams.has('board')) {
@@ -145,6 +192,16 @@ const Filter = ({ ResponseData, subject, board, standard }) => {
                 } else {
                     newQueryParams.append('board', data); // Add new parameter
                 }
+                break;
+            case 'pagination':
+                if (dl) {
+                    newQueryParams.delete('page'); // Delete the 'board' parameter
+                } else if (newQueryParams.has('page')) {
+                    newQueryParams.set('page', data); // Update existing parameter
+                } else {
+                    newQueryParams.append('page', data); // Add new parameter
+                }
+                paginate = true
                 break;
             default:
                 break;
@@ -158,15 +215,36 @@ const Filter = ({ ResponseData, subject, board, standard }) => {
         );
 
         // Call GetData to fetch or process the new data without affecting the UI scroll
-        GetData(newQueryParams.toString());
+        GetData(newQueryParams.toString(), paginate);
     };
 
 
-    const GetData = async (paramData) => {
-        const response = (await CourseService.list(paramData)).data;
-        setFilteredProducts(response?.courses ?? [])
-        setPagination(response?.pagination ?? [])
+    const GetData = async (paramData, fromPageination = false) => {
+        try {
+            if (fromPageination) {
+                setLoadMore(true)
+            }
+            const response = (await CourseService.list(paramData)).data;
+
+            if (fromPageination) {
+                setFilteredProducts(prevData => [...prevData, ...response?.courses ?? []]);
+            } else {
+                setFilteredProducts(response?.courses ?? [])
+            }
+            setPagination(response?.pagination ?? [])
+            setPage(response?.pagination?.current_page)
+
+        } catch (error) {
+
+        } finally {
+            setLoading(false);
+            setLoadMore(false)
+        }
     }
+
+
+
+
 
     return (
         <main className='bg-[#FCFCFC] py-10 lg:py-16 px-6 md:px-12 lg:px-16 '>
@@ -174,11 +252,14 @@ const Filter = ({ ResponseData, subject, board, standard }) => {
                 {/* Search */}
                 <div className="relative rounded-full p-1 pl-4 px-2 flex items-center gap-2 border-[1px] border-[#E9E9E9] bg-white w-full max-w-[300px]">
                     <input
+                        value={searchData}
+                        onChange={handleSearchChange}
                         type="text"
                         className="placeholder:text-[15px] placeholder:px-1 w-full text-black/40 focus:outline-none"
                         placeholder="search" />
                     <p className="bg-primary rounded-full p-[6px]">
-                        <GoSearch className="w-5 h-5 text-white" />
+                        {loading ? <LuLoader2 className="max-sm:h-3 max-sm:w-3 w-5 h-5 text-white animate-spin" /> : <GoSearch className="max-sm:h-3 max-sm:w-3 w-5 h-5 text-white" />}
+
                     </p>
                 </div>
 
@@ -310,8 +391,8 @@ const Filter = ({ ResponseData, subject, board, standard }) => {
             {/* Button */}
             {pagination?.total_pages > 1 && pagination?.total_pages !== page ?
                 <div className='flex flex-col justify-center items-center py-5 md:py-8'>
-                    <Button variant="primary" className="uppercase px-5 text-sm flex items-center gap-x-2">
-                        Load More courses<IoReloadOutline size={20} />
+                    <Button disabled={loadMore} onClick={() => { HandleParams('pagination',page + 1) }} variant="primary" className="uppercase px-5 text-sm flex items-center gap-x-2">
+                        Load More courses<IoReloadOutline className={`${loadMore ? 'animate-spin' : ''}`} size={20} />
                     </Button>
                 </div>
                 //   <div className="flex justify-center py-5">

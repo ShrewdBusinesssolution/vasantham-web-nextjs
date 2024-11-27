@@ -38,6 +38,15 @@ class AuthService {
         }
     }
 
+    static async GoogleAuthendication(payload) {
+        try {
+            const response = await api.post(`/api/v1/auth/google-login`, payload);
+            return response;
+        } catch (error) {
+            throw error;
+        }
+    }
+
 }
 
 export default AuthService;
