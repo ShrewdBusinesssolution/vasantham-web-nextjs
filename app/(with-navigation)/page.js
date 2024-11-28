@@ -120,14 +120,14 @@ const Home = async () => {
         </section>
 
         {/* Best Service */}
-        <section className='bg-[#FCFCFC]'>
+        <section className='bg-[#F9F9F9]'>
           <div className='brand-container px-5 md:px-10'>
             <BestService />
           </div>
         </section>
 
         {/* Course Explore */}
-        <section className='bg-white py-8 md:py-12 lg:py-16'>
+        <section className='bg-[#F9F9F9] py-8 md:py-12 lg:py-16'>
           <div className='brand-container'>
             <CourseExploreSection standards={HomedataResponse?.standard ?? []} courses={HomedataResponse?.cousers ?? []} />
           </div>

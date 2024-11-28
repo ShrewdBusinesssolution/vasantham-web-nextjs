@@ -18,11 +18,13 @@ import {
 import { Input } from "@/components/ui/input"
 import { toast } from "sonner";
 import Link from "next/link";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "../utility/context/context-api";
 import { Router } from "next/router";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import { VscEye } from "react-icons/vsc";
+import { PiEyeClosed } from "react-icons/pi";
 
 const formSchema = z.object({
     email: z.string()
@@ -51,6 +53,8 @@ const formSchema = z.object({
 export default function SignUpForm() {
     const router = useRouter()
     const { setSignUpInformation } = useContext(AppContext);
+    const [passwordtype, setPasswordtype] = useState(true)
+
 
     const form = useForm({
         resolver: zodResolver(formSchema),
@@ -73,7 +77,7 @@ export default function SignUpForm() {
             });
 
             if (!result.ok) {
-               throw result;
+                throw result;
 
             } else {
                 toast.success("Register and Login Successfull", { position: "top-right" })
@@ -126,7 +130,14 @@ export default function SignUpForm() {
                         <FormItem>
                             <FormLabel className="font-semibold text-lg">Password <small className="text-red-500">*</small></FormLabel>
                             <FormControl>
-                                <Input maxLength={15} className="text-sm placeholder:text-[#B5B6B5]" placeholder="Enter Password" {...field} />
+                                <div className="relative ">
+                                    <div className=" absolute right-0 top-0 bottom-0 z-10 h-full grid place-content-center px-5 ">
+                                        <div onClick={() => { setPasswordtype(!passwordtype) }} className="cursor-pointer active:opacity-30">
+                                            {passwordtype ? <VscEye size={20} className="hover:text-primary" /> : <PiEyeClosed size={20} className="hover:text-primary" />}
+                                        </div>
+                                    </div>
+                                    <Input type={passwordtype ? 'password' : 'text'} maxLength={15} className="text-sm placeholder:text-[#B5B6B5]" placeholder="Enter Password" {...field} />
+                                </div>
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -160,7 +171,7 @@ export default function SignUpForm() {
                         </>
                     )}
                 </Button>
-                <p className="text-sm opacity-60 text-center">Have account? <Link href="/login" className="text-primary underline">Log in</Link></p>
+                <p className="text-sm opacity-60 text-center">Have account? <Link href="/login" className="text-[#20AD96] font-bold underline">Log in</Link></p>
             </form>
         </Form>
     )

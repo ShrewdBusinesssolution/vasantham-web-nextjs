@@ -5,13 +5,14 @@ import { Progress } from "@/components/ui/progress"
 import { RiCheckDoubleFill } from 'react-icons/ri';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { LuDot } from "react-icons/lu";
+import { LuDot, LuLoader2 } from "react-icons/lu";
 import { MdArrowDownward } from 'react-icons/md';
 import VideoModal from '@/app/utility/components/video-modal';
 import Link from 'next/link';
 
 import { FaArrowDown } from "react-icons/fa6";
 import { useRouter } from 'next/navigation';
+import VideoService from '@/app/services/api-services/video-service';
 
 
 export default function UnitClientComponent({ lesson, lesson_count, lecture_count }) {
@@ -104,6 +105,11 @@ const Accordion = ({ lesson }) => {
 };
 
 const List = ({ data }) => {
+    console.log("🚀 ~ List ~ data:", data)
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const toggleModal = () => {
+        setIsModalOpen(!isModalOpen);
+    };
     return (
         <div className='flex flex-row justify-between gap-2 items-center'>
             <div className='flex flex-row gap-4 items-center'>
@@ -122,10 +128,11 @@ const List = ({ data }) => {
                 ) : (
                     <p>{data?.score !== 0 && data?.score != null ? `${data?.score} %` : null}</p>
                 )}
-                <div className='bg-[#E9E9E9] p-2 rounded-full'>
+                <div onClick={toggleModal} className='bg-[#E9E9E9] p-2 rounded-full'>
                     <Image src="/assets/svg/video.svg" width={22} height={22} alt="video_icon" className="" />
                 </div>
             </div>
+            <VideoIfram OpenHandler={toggleModal} openFlag={isModalOpen} title={data?.name} id={data?.video_id} />
         </div>
     )
 }
@@ -142,3 +149,92 @@ const ProgressBar = ({ percentage }) => {
     )
 
 }
+
+
+const VideoIfram = ({ OpenHandler, openFlag, title, id }) => {
+    const [loading, setLoading] = useState(true);
+    const [videoData, setVideoData] = useState({});
+
+    const GetVideoInformation = async () => {
+        try {
+            const payload = { video_id: id };
+            console.log("🚀 ~ GetVideoInformation ~ payload:", payload);
+            const response = await VideoService.GetVideData(payload);
+            if (response.status) {
+                setVideoData(response.data);
+            }
+        } catch (error) {
+            console.error("🚀 ~ GetVideoInformation ~ error:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        if (openFlag && id !== '') {
+            GetVideoInformation();
+            document.body.style.overflow = "hidden"; // Disable scrolling
+        } else {
+            document.body.style.overflow = "auto"; // Enable scrolling
+        }
+        return () => {
+            document.body.style.overflow = "auto"; // Ensure scrolling is re-enabled on unmount
+        };
+    }, [openFlag]);
+
+    return (
+        <>
+            {/* Modal */}
+            {openFlag && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                    {id ? (
+                        <div className="bg-white rounded-xl p-4 w-[90%] md:w-[60%] relative">
+                            {loading ? (
+                                <div className="grid place-items-center py-20">
+                                    <LuLoader2 className="animate-spin text-primary" size={30} />
+                                </div>
+                            ) : (
+                                <>
+                                    <p className="font-medium">{title}</p>
+                                    <iframe
+                                        className="rounded-xl"
+                                        src={`https://player.vdocipher.com/v2/?otp=${videoData?.otp ?? ""}&playbackInfo=${videoData?.playbackInfo}`}
+                                        style={{ width: "100%", height: "50vh" }}
+                                        allowFullScreen={true}
+                                        allow="encrypted-media"
+                                    ></iframe>
+                                </>
+                            )}
+                            <div className="flex justify-end pt-3">
+                                <Button
+                                    onClick={OpenHandler}
+                                    className="font-bold"
+                                    variant="secondary"
+                                >
+                                    CLOSE VIDEO
+                                </Button>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="bg-white rounded-xl p-4 w-[90%] md:w-[60%] relative">
+                            <p className="font-medium">{title}</p>
+                            <div className="grid place-items-center py-20">
+                                <p>Video Not Available</p>
+                            </div>
+                            <div className="flex justify-end pt-3">
+                                <Button
+                                    onClick={OpenHandler}
+                                    className="font-bold"
+                                    variant="secondary"
+                                >
+                                    CLOSE VIDEO
+                                </Button>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            )}
+        </>
+    );
+};
+

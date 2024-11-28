@@ -170,7 +170,7 @@ export default function LoginForm() {
                     Continue with Google
                 </Button>
 
-                <p className="text-sm opacity-60 text-center">Don&apos;t have account? <Link href="/sign-up" className="text-primary underline">Signup</Link></p>
+                <p className="text-sm opacity-60 text-center">Don&apos;t have account? <Link href="/sign-up" className="text-[#20AD96] font-bold underline">Sign up</Link></p>
             </form>
         </Form>
 
