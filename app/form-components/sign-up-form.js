@@ -150,26 +150,24 @@ export default function SignUpForm() {
                     }
                     Submit
                 </Button>
+
+
                 <Button
+                    onClick={() => signIn('google')}
                     variant="primary"
                     className="w-full flex items-center gap-2 uppercase bg-gray-100 text-[#000] font-semibold border"
-                    type="submit"
+                    type="button"
                     disabled={form.formState.isSubmitting}
                 >
-                    {form.formState.isSubmitting ? (
-                        <LuLoader2 className="animate-spin" />
-                    ) : (
-                        <>
-                            <Image
-                                src="/assets/google.webp"
-                                alt="Google"
-                                width={50}
-                                height={50}
-                                className="w-6 h-6 object-cover"
-                            />
-                            Continue with Google
-                        </>
-                    )}
+                    <Image
+                        src="/assets/google.webp"
+                        alt="Google"
+                        width={50}
+                        height={50}
+                        className="w-6 h-6 object-cover"
+                    />
+                    Continue with Google
+
                 </Button>
                 <p className="text-sm opacity-60 text-center">Have account? <Link href="/login" className="text-[#20AD96] font-bold underline">Log in</Link></p>
             </form>

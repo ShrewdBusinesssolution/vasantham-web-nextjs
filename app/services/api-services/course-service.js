@@ -34,9 +34,11 @@ class CourseService {
     static async courseunitLessonView(courseSlug, unitId) {
         try {
             const url = `/api/v1/course/${courseSlug}/unit/${unitId}`;
+            console.log("🚀 ~ CourseService ~ courseunitLessonView ~ /api/v1/course/${courseSlug}/unit/${unitId}:", `/api/v1/course/${courseSlug}/unit/${unitId}`)
             const response = await api.get(url);
             return response
         } catch (error) {
+            console.log("🚀 ~ CourseService ~ courseunitLessonView ~ error:", error)
             throw error;
         }
     }

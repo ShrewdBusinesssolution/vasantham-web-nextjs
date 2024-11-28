@@ -13,16 +13,11 @@ export default async function UnitLesson({ params }) {
                 <section>
                     <CourseBanner title={Response?.courses?.subject?.name} subtitle={Response?.courses?.name} product={options} />
                 </section>
-                
-
                     <UnitClientComponent lesson={Response?.unit?.lessons ?? []} lesson_count={Response?.lesson_count ?? 0} lecture_count={Response?.lecture_count ?? 0} />
-                   
-
             </main>
         )
     } catch (error) {
         const errorMessage = await handlePageError(error);
-
         return (
             <>
                 {errorMessage}
