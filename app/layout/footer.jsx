@@ -70,6 +70,11 @@ export default function Footer() {
             </Link>
           </li>
           <li>
+            <Link className="font-light text-sm md:text-[15px] lg:text-[15px] xl:text-[15px]" href={'/graphic-design'}>
+            Graphic Design
+            </Link>
+          </li>
+          <li>
             <Link className="font-light text-sm md:text-[15px] lg:text-[15px] xl:text-[15px]" href={'/site-development'}>
             Site Development
             </Link>
@@ -79,7 +84,6 @@ export default function Footer() {
             Social Marketing
             </Link>
           </li>
-          <li></li>
           <li>
             <Link className="font-light text-sm md:text-[15px] lg:text-[15px] xl:text-[15px] underline text-[#07A889]" href={'/cources'}>
             View All
@@ -111,7 +115,7 @@ export default function Footer() {
       <div className="brand-container flex justify-between items-center flex-wrap gap-5 py-3">
 
         <p className="text-white text-sm">&copy; Copyright 2024 Vasantham E- Learning All rights reserved.</p>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 max-md:mr-0 mr-10">
           {
             socialLink.map((item, index) => (
               <Link key={index} href={item.link} target='_blank'>

@@ -248,7 +248,7 @@ const Filter = ({ ResponseData, subject, board, standard }) => {
 
     return (
         <main className='bg-[#FCFCFC] py-10 lg:py-16 px-6 md:px-12 lg:px-16 '>
-            <div className='brand-container flex flex-col md:flex-row items-center gap-3'>
+            <div className='brand-container flex flex-col md:flex-row items-center justify-between gap-3'>
                 {/* Search */}
                 <div className="relative rounded-full p-1 pl-4 px-2 flex items-center gap-2 border-[1px] border-[#E9E9E9] bg-white w-full max-w-[300px]">
                     <input
@@ -371,7 +371,7 @@ const Filter = ({ ResponseData, subject, board, standard }) => {
             </div>
 
             <div>
-                <p className='text-[#B0B0B0] text-[16px] mt-5 px-5'>{pagination?.total ?? 0} Courses found</p>
+                <p className='font-semibold text-[16px] mt-5 px-5'>{pagination?.total ?? 0} Courses found</p>
                 {filteredProducts.length === 0 ?
 
                     <div className='h-[50vh] w-full grid place-content-center'>

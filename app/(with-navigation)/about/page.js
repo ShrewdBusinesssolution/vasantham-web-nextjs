@@ -72,7 +72,7 @@ const About = async () => {
       <section className="bg-white py-10">
         <div className=' rounded-2xl p-6 md:p-10 bg-[#F7F7F7] brand-container '>
           <div className="flex flex-col justify-center items-center space-y-4 ">
-            <div className="text-sm font-semibold leading-loose text-primary uppercase tracking-[2px]">
+            <div className="text-sm font-semibold leading-loose text-secondary font-medium uppercase tracking-[2px]">
               join with us
             </div>
             <h2 className="text-lg md:text-[22px] lg:text-[24px] font-bold leading-normal text-center text-neutral-800 px-5 w-full lg:w-[700px]">

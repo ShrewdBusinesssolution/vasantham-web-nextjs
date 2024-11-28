@@ -59,20 +59,20 @@ export default function Header() {
         <div className="hidden lg:flex w-auto lg:space-x-14 items-center">
           <ul className="flex lg:flex-row space-x-8">
             <li>
-              <Link href={'/'} className={`${pathname === '/' ? 'text-primary' : 'text-[#858585] text-[15px]'} hover:text-primary`}>Home</Link>
+              <Link href={'/'} className={`font-medium ${pathname === '/' ? 'text-[#07A889]' : 'text-[#858585] text-[15px]'} hover:text-[#07A889]`}>Home</Link>
             </li>
             <li>
-              <Link href="/about" className={`${pathname === '/about' ? 'text-primary ' : ' text-[#858585] text-[15px]'} hover:text-primary`} >
+              <Link href="/about" className={`font-medium ${pathname === '/about' ? 'text-[#07A889] ' : ' text-[#858585] text-[15px]'} hover:text-[#07A889]`} >
                 About
               </Link>
             </li>
             <li>
-              <Link href="/courses" className={`${pathname === '/Courses' ? ' text-primary' : 'text-[#858585] text-[15px]'} hover:text-primary`}>
+              <Link href="/courses" className={`font-medium ${pathname === '/courses' ? ' text-[#07A889]' : 'text-[#858585] text-[15px]'} hover:text-[#07A889]`}>
                 Courses
               </Link>
             </li>
             <li>
-              <Link href="/contact" className={`${pathname === '/contact' ? ' text-primary' : 'text-[#858585] text-[15px]'} hover:text-primary`}>
+              <Link href="/contact" className={`font-medium ${pathname === '/contact' ? ' text-[#07A889]' : 'text-[#858585] text-[15px]'} hover:text-[#07A889]`}>
                 Contact
               </Link>
             </li>

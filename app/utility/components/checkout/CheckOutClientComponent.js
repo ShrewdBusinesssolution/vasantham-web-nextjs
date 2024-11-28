@@ -261,7 +261,7 @@ const CheckOutClientComponent = () => {
 
                         {/* Right side */}
                         <div className='w-full md:w-1/2 h-[400px] rounded-2xl bg-[#F7F7F7] p-5 border border-[#E9E9E9] flex flex-col'>
-                            <h2 className='text-[24px] underline pb-5'>Summary</h2>
+                            <h2 className='text-[24px] underline decoration-1 underline-offset-4 pb-5'>Summary</h2>
                             <div className='flex flex-col gap-4 pb-4 border-b-2  flex-grow'>
                                 <div className='flex justify-between'>
                                     <p className='font-semibold'>Original Price:</p>
@@ -278,9 +278,9 @@ const CheckOutClientComponent = () => {
                             <div className='flex flex-col gap-6 mt-5'>
                                 <div className='flex justify-between'>
                                     <p className='font-semibold'>Total</p>
-                                    <p className='text-[#B5B6B5] font-medium'>₹ {cartSummary?.order_total ?? 0.00}</p>
+                                    <p className=' font-semibold'>₹ {cartSummary?.order_total ?? 0.00}</p>
                                 </div>
-                                <p className='text-[#535967] text-lg'>By completing your purchase you agree to these <span className='text-primary'>Terms of Service.</span></p>
+                                <p className='text-[#535967] text-lg'>By completing your purchase you agree to these <span className='text-primary underline decoration-1'>Terms of Service.</span></p>
                                 <Button type="submit" className="uppercase w-full mt-4" variant="primary">Proceed to Pay</Button>
                             </div>
                         </div>

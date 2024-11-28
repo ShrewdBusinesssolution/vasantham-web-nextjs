@@ -39,14 +39,14 @@ export function LogoutModal({PopovercloseHandling}) {
             <Link href="/log-out">
             <Button
               variant="primary"
-              className={`px-5  h-fit font-medium rounded-sm bg-[#f7f7f7] border text-[#000] mt-4 uppercase w-fit`}>
+              className={`px-5  h-fit font-medium rounded-md bg-[#f7f7f7] border text-[#000] mt-4 uppercase w-fit`}>
               Yes, I&apos;m sure
             </Button>
             </Link>
             <Button 
               onClick={closeHandling}
               variant="primary"
-              className={`px-5  h-fit font-medium rounded-sm bg-primary mt-4 uppercase w-fit`}>
+              className={`px-5  h-fit font-medium rounded-md bg-primary mt-4 uppercase w-fit`}>
               no
             </Button></div>
         </DialogHeader>

@@ -190,8 +190,8 @@ export default function ContactForm() {
                                     </FormControl>
                                     <FormLabel className="mt-0">
                                         I agree the friendly <span>
-                                            <Link href={'/privacy-policy'} className="text-primary hover:underline">
-                                                Terms & Conditions
+                                            <Link href={'/privacy-policy'} className="text-secondary hover:underline">
+                                                Terms & Conditions.
                                             </Link>
                                         </span>
                                     </FormLabel>
@@ -200,7 +200,7 @@ export default function ContactForm() {
                             </FormItem>
                         )}
                     />
-                    <Button variant="primary" className="w-fit flex gap-2 rounded-md text-[16px]" type="submit" disabled={form.formState.isSubmitting}>
+                    <Button variant="primary" className="w-fit flex gap-2 rounded-md text-[16px] uppercase" type="submit" disabled={form.formState.isSubmitting}>
 
 
                         Send Enquiry
@@ -219,7 +219,7 @@ export default function ContactForm() {
                 <div className="flex flex-col items-center gap-5">
 
                     <div className="flex items-center justify-center">
-                        <Image src="/assets/gif/enquery.gif" className='' width={100} height={100} alt="Image" />
+                        <Image src="/assets/gif/enquery.gif" className='w-auto h-[120px]' width={100} height={100} alt="Image" />
                     </div>
                     <p className="text-[#000] text-[18px] leading-normal text-center font-medium">
                         We have received your enquiry!

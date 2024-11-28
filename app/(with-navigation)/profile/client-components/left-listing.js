@@ -44,8 +44,8 @@ export const LeftListing = ({ onSelect }) => {
         <div className={`flex items-center gap-2 rounded p-2 ${active === 'favourites' ? 'bg-gradient-to-br from-[#fff] to-[#CCF4FF] from-0%' : ''}`} onClick={() => handleSelect('favourites')}>
           <p className="bg-[#f7f7f7] rounded-full p-2"><GoHeart size={20} /></p>
           <div className='flex flex-col'>
-            <span className='font-semibold text-[15px]'>Favourite</span>
-            <p className='text-[#666666] text-sm'>view your Favourite</p>
+            <span className='font-semibold text-[15px]'>Favourites</span>
+            <p className='text-[#666666] text-sm'>view your Favourites</p>
           </div>
           <MdOutlineNavigateNext size={22} className="ml-auto" />
         </div>
@@ -63,7 +63,7 @@ export const LeftListing = ({ onSelect }) => {
           <p className="bg-[#f7f7f7] rounded-full p-2"><IoMailOpenOutline size={20} /></p>
           <div className='flex flex-col'>
             <span className='font-semibold text-[15px]'>My Notifications</span>
-            <p className='text-[#666666] text-sm'>view your Addresses</p>
+            <p className='text-[#666666] text-sm'>view your Notifications</p>
           </div>
           <MdOutlineNavigateNext size={22} className="ml-auto" />
         </div>

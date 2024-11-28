@@ -65,7 +65,7 @@ export function CartModal() {
           <>
             <div className='flex-1 overflow-y-auto hide-y-scrollbar'>
               {cartCourseInformation.map((course, index) => (
-                <div key={index} className='rounded-xl border-2 flex flex-col p-5 mb-4'>
+                <div key={index} className='rounded-xl border-2 flex flex-col px-3 py-2 mb-4'>
                   <CardComponent course={course} />
                 </div>
               ))}
@@ -117,10 +117,10 @@ const CardComponent = ({ course }) => {
   const { removeFromCart, } = useContext(AppContext);
 
   return (
-    <div className="mb-2 md:mb-5 flex flex-col gap-2">
+    <div className="mb-2  flex flex-col gap-2">
       <h4 className="mt-2 text-lg">{course.name}</h4>
-      <p className="font-bold">
-        Course fee: ₹{course.sale_price} <span className="line-through text-gray-400">₹{course.price}</span>
+      <p className="">
+        Course fee: <span className="font-bold"> ₹{course.sale_price} </span><span className="line-through text-gray-400">₹{course.price}</span>
       </p>
       <div className="flex flex-col md:flex-row justify-between gap-4 md:gap-0 items-center">
         <div className='flex items-center gap-4 md:gap-2'>

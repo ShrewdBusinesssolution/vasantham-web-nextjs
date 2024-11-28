@@ -49,7 +49,7 @@ const TestimonialsSection = ({testimonialData}) => {
     <section className="flex flex-col items-center justify-center py-6 md:py-20">
       <div>
         <HeadingSection title={"Testimonials"} subtitle={"Success Stories from person"} />
-        <p className="text-base leading-8 text-center mt-4 w-full md:w-[500px]">
+        <p className="text-base leading-8 text-center mt-4 w-full">
           The ultimate planning solution for busy women who want to reach their personal goals
         </p>
       </div>

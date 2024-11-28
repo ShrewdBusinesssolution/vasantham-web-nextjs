@@ -22,8 +22,6 @@ import { VscEye } from "react-icons/vsc";
 import { PiEyeClosed } from "react-icons/pi";
 
 
-//info:- next auth login
-
 import { signIn as signin, signOut, useSession } from 'next-auth/react'
 import { useContext, useState } from "react";
 import { AppContext } from "../utility/context/context-api";
