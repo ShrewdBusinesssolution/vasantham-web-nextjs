@@ -46,7 +46,7 @@ const NewsletterSection = () => {
       const response = await BasicService.NewsLetter(values);
       console.log(response, "response");
       form.reset();
-      toast.success(response.message, { position: "top-right", duration:2000 })
+      toast.success(response.message, { position: "top-right", duration: 2000 })
     } catch (error) {
       console.error("Caught error:", error);
       const message = error?.response?.data?.message ?? error.message;
@@ -79,28 +79,31 @@ const NewsletterSection = () => {
                   <FormItem className="text-start">
                     <FormLabel className="text-lg">Email Address</FormLabel>
                     <FormControl>
-                      <Input
-                        className=" px-5 h-[52px] border border-[#E2E2E2] placeholder:text-[#B5B6B5] text-[16px] font-arial"
-                        placeholder="Enter your email"
-                        {...field}
-                      />
+                      <div className="relative">
+                        <Input
+                          className=" px-5 h-[52px] border border-[#E2E2E2] placeholder:text-[#B5B6B5] text-[16px] font-arial"
+                          placeholder="Enter your email"
+                          {...field}
+                        />
+                        <Button
+                          variant="primary"
+                          className="absolute top-[5px] right-[5px] text-sm font-medium text-center text-white uppercase bg-primary rounded-md"
+                          type="submit"
+                          disabled={form.formState.isSubmitting}
+                        >
+                          Subscribe
+                          {form.formState.isSubmitting && (
+                            <LuLoader2 className="animate-spin" />
+                          )}
+                        </Button>
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
 
-              <Button
-                variant="primary"
-                className="text-sm font-medium text-center text-white uppercase bg-primary rounded-md"
-                type="submit"
-                disabled={form.formState.isSubmitting}
-              >
-                Subscribe
-                {form.formState.isSubmitting && (
-                  <LuLoader2 className="animate-spin" />
-                )}
-              </Button>
+
             </form>
           </Form>
         </div>

@@ -120,7 +120,7 @@ const CardComponent = ({ course }) => {
     <div className="mb-2  flex flex-col gap-2">
       <h4 className="mt-2 text-lg">{course.name}</h4>
       <p className="">
-        Course fee: <span className="font-bold"> ₹{course.sale_price} </span><span className="line-through text-gray-400">₹{course.price}</span>
+        Course fee :  <span className="font-bold ml-1"> ₹{course.sale_price} </span><span className="line-through text-gray-400">₹{course.price}</span>
       </p>
       <div className="flex flex-col md:flex-row justify-between gap-4 md:gap-0 items-center">
         <div className='flex items-center gap-4 md:gap-2'>

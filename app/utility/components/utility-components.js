@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import Link from "next/link";
 import { AppContext } from "../context/context-api";
 import { BsCart2, BsCheckCircle, BsTrash } from "react-icons/bs";
+import { getSession } from "next-auth/react";
 
 const HeadingSection = ({ title = "Why choose us", subtitle = "Why choose our courses?" }) => {
   return (
@@ -111,6 +112,7 @@ const StatCard = ({ title, value, unit, description }) => {
 const ProductCard = ({ product, homePage, fromwalkingUser = true }) => {
   const [isInWishlist, setIsInWishlist] = useState(product?.wishlist ?? false);
   const link = `/course-detail/${product?.slug}`;
+  const {data: session} = getSession();
 
   const handleWishlistToggle = () => {
     if (homePage) {
@@ -121,6 +123,10 @@ const ProductCard = ({ product, homePage, fromwalkingUser = true }) => {
 
   const HandlingWishlist = async () => {
     try {
+      if(!session) {
+        toast.warning("Please Login",{position:"top-right"});
+        return null;
+      }
       const response = await ProfileService.wishlistUpdate({
         course_id: product.id,
         status: !isInWishlist
@@ -138,64 +144,70 @@ const ProductCard = ({ product, homePage, fromwalkingUser = true }) => {
   return (
     <div className="bg-white rounded-3xl shadow-sm overflow-hidden w-full max-w-xs relative">
       {/* Image */}
-      <div className="relative w-full">
-        <Image
-          src={product.image}
-          width={300}
-          height={300}
-          alt="product"
-          className="w-full h-auto object-cover object-center max-h-[200px] aspect-square"
-        />
-        <div className="absolute bottom-0 right-0 bg-secondary rounded-none rounded-tl-xl px-3 py-2 flex gap-2 items-center">
-          <small className="text-white line-through">
-            ₹  {product.price}
-          </small>
-          <p className=" text-white text-sm md:text-lg ">
-            ₹ {product.sale_price}
-          </p>
+      <Link href={link}>
+
+        <div className="relative w-full">
+
+          <Image
+            src={product.image}
+            width={300}
+            height={300}
+            alt="product"
+            className="w-full h-auto object-cover object-center max-h-[200px] aspect-square"
+          />
+
+          <div className="absolute bottom-0 right-0 bg-secondary rounded-none rounded-tl-xl px-3 py-2 flex gap-2 items-center">
+            <small className="text-white line-through">
+              ₹  {product.price}
+            </small>
+            <p className=" text-white text-sm md:text-lg ">
+              ₹ {product.sale_price}
+            </p>
+          </div>
         </div>
-        {/* Wishlist Button */}
-        {homePage && (
-          <button
-            onClick={handleWishlistToggle}
-            className={`absolute top-4 right-4 p-2 rounded-full bg-[#F2F2F2] shadow-sm transition-all ${isInWishlist ? 'text-primary' : 'text-black'
-              } flex items-center gap-x-1`}
-          >
-            {isInWishlist ? (
-              <IoHeartSharp className="h-5 w-5 text-red-500" />
-            ) : (
-              <HiOutlineHeart className="h-5 w-5" />
-            )}
-          </button>
-        )}
-      </div>
-      <div className="p-4 space-y-3 md:py-5 lg:py-8">
-        <h3 className="text-[13px] text-secondary font-semibold uppercase">{product?.subject?.name}</h3>
-        {/* Reviews */}
-        <div className="flex flex-row items-center space-x-1">
-          <p className="text-sm mt-1">{product.ratings}</p>
-          <span className="text-yellow-500 text-lg">
-            <FaStar />
-          </span>
-          <span className="text-[#979797]">(22 reviews)</span>
-        </div>
-        <Link href={link}>
+      </Link>
+      {/* Wishlist Button */}
+      {homePage && (
+        <button
+          onClick={handleWishlistToggle}
+          className={`absolute top-4 right-4 p-2 rounded-full bg-[#F2F2F2] shadow-sm transition-all ${isInWishlist ? 'text-primary' : 'text-black'
+            } flex items-center gap-x-1`}
+        >
+          {isInWishlist ? (
+            <IoHeartSharp className="h-5 w-5 text-red-500" />
+          ) : (
+            <HiOutlineHeart className="h-5 w-5" />
+          )}
+        </button>
+      )}
+      <Link href={link}>
+        <div className="p-4 space-y-3 md:py-5 lg:py-8">
+          <h3 className="text-[13px] text-secondary font-semibold uppercase">{product?.subject?.name}</h3>
+          {/* Reviews */}
+          <div className="flex flex-row items-center space-x-1">
+            <p className="text-sm mt-1">{product.ratings}</p>
+            <span className="text-yellow-500 text-lg">
+              <FaStar />
+            </span>
+            <span className="text-[#979797]">(22 reviews)</span>
+          </div>
           <h2 className="text-[16px] md:text-lg lg:text-[19px] leading-normal font-bold text-gray-800">
             {product.name}
           </h2>
-        </Link>
-        {/* Info */}
-        <div className="flex items-center space-x-3 text-sm text-gray-600">
-          <div className="flex items-center space-x-1 mt-2">
-            <span className="text-secondary"><FaUser size={16} /></span>
-            <span className="text-[#696969] mt-1">{product?.people ?? 0}</span>
-          </div>
-          <div className="flex items-center space-x-1 mt-2">
-            <span className="text-secondary"><IoDocumentTextOutline size={20} /></span>
-            <span className="text-[#696969]">{product?.lecture_count ?? 0}</span>
+          {/* Info */}
+          <div className="flex items-center space-x-3 text-sm text-gray-600">
+            <div className="flex items-center space-x-1 mt-2">
+              <span className="text-secondary"><FaUser size={16} /></span>
+              <span className="text-[#696969] mt-1">{product?.people ?? 0}</span>
+            </div>
+            <div className="flex items-center space-x-1 mt-2">
+              <span className="text-secondary"><IoDocumentTextOutline size={20} /></span>
+              <span className="text-[#696969]">{product?.lecture_count ?? 0}</span>
+            </div>
           </div>
         </div>
-      </div>
+      </Link>
+
     </div>
   )
 }
@@ -215,7 +227,7 @@ const CustomizedAlert = ({ isOpen, isOpenHandler, children }) => {
   )
 }
 
-const AddtoCartButton = ({ product_id, bought = false , slug}) => {
+const AddtoCartButton = ({ product_id, bought = false, slug }) => {
   const { cartData = [], addToCart, removeFromCart } = useContext(AppContext); // Default to an empty array
   const [isAdded, setIsAdded] = useState(false);
 
@@ -228,13 +240,13 @@ const AddtoCartButton = ({ product_id, bought = false , slug}) => {
     <div className="flex justify-center items-center">
       {bought ? (
         <Link href={`/course-unit-detail/${slug}`}>
-        <Button
-          variant="primary"
-          className="mt-2 px-8 text-sm flex items-center gap-x-2 w-full"
-          disabled
-        >
-          View Unit
-        </Button>
+          <Button
+            variant="primary"
+            className="mt-2 px-8 text-sm flex items-center gap-x-2 w-full"
+            disabled
+          >
+            View Unit
+          </Button>
         </Link>
       ) : isAdded ? (
         <Button
