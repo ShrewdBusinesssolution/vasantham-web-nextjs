@@ -41,7 +41,7 @@ const formSchema = z.object({
         .max(100, {
             message: "Last Name must be less than 100 characters.",
         }),
-        email: z.string()
+    email: z.string()
         .min(1, {
             message: "Email is required.",
         })
@@ -55,7 +55,7 @@ const formSchema = z.object({
         .regex(/^[0-9]+$/, {
             message: "Phone number must be numeric.",
         }),
-        message: z.string()
+    message: z.string()
         .min(1, {
             message: "Note is required.",
         }),
@@ -86,7 +86,7 @@ export default function ContactForm() {
             await delay(2000)
             setIsDialogOpen(true)
             const response = await BasicService.EnquirySave(values);
-            console.log(response,"response")
+            console.log(response, "response")
             // toast.success(response.message, { position: "top-right" })
             form.reset();
 

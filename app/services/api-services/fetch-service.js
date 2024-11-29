@@ -7,10 +7,10 @@ const baseURL = process.env.NEXT_PUBLIC_BASEURL;
 
 const setAuthHeader = async () => {
   let session;
-  if (typeof window !== 'undefined') {
+  if (typeof window !== 'undefined') { //INFO ITS AN CLIENT SIDE
     session = await getSession();
   } else {
-    session = await getServerSession(authOptions);
+    session = await getServerSession(authOptions); //INFO ITS AN SERVER SIDE
     
   }
   return session?.user?.token ? `Bearer ${session.user.token}` : null;
@@ -18,7 +18,7 @@ const setAuthHeader = async () => {
 
 const navigate = (path) => {
   try {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined') { //INFO ITS AN CLIENT SIDE
       // You can safely use window here
       window.location.href = path; // This will change the browser URL
     } else {

@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { HeadingSection } from '@/app/utility/components/utility-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css'; // Import Swiper styles
@@ -42,8 +42,14 @@ const testimonials = [
   }
 ];
 
-const TestimonialsSection = ({testimonialData}) => {
-  const categorySplide = useRef(null);
+const TestimonialsSection = ({ testimonialData }) => {
+  const swiperRef = useRef(null); // Reference to the Swiper instance
+  const [activeIndex, setActiveIndex] = useState(0); // Track the active slide index
+
+  const handleDotClick = (index) => {
+    swiperRef.current?.slideToLoop(index); // Navigate to the slide
+    setActiveIndex(index); // Update the active index for dots
+  };
 
   return (
     <section className="flex flex-col items-center justify-center py-6 md:py-20">
@@ -55,6 +61,8 @@ const TestimonialsSection = ({testimonialData}) => {
       </div>
       <div className="w-full max-w-6xl py-10">
         <Swiper
+          onSwiper={(swiper) => (swiperRef.current = swiper)} // Capture Swiper instance
+          onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)} // Track the active slide
           centeredSlides={true} // Center the active slide
           slidesPerView={1} // Show one slide at a time by default
           spaceBetween={30} // Space between slides
@@ -62,12 +70,6 @@ const TestimonialsSection = ({testimonialData}) => {
           autoplay={{
             delay: 3000,
             disableOnInteraction: false,
-          }}
-          pagination={{
-            clickable: true,
-            renderBullet: (index, className) => {
-              return `<span class="${className} rounded-full w-4 h-4 bg-gray-900 mx-1"></span>`;
-            },
           }}
           breakpoints={{
             640: {
@@ -90,6 +92,18 @@ const TestimonialsSection = ({testimonialData}) => {
             </SwiperSlide>
           ))}
         </Swiper>
+
+        {/* Custom Pagination */}
+        <div className="flex gap-2 justify-center mt-10">
+          {testimonialData?.map((_, index) => (
+            <button
+              key={index}
+              className={`w-2 h-2 rounded-full transition-all duration-300  ${index === activeIndex ? 'bg-secondary scale-150' : 'bg-[#D6D6D6]'}`}
+              onClick={() => handleDotClick(index)} // Handle click to go to the slide
+            >
+            </button>
+          ))}
+        </div>
       </div>
     </section>
   );

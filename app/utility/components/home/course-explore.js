@@ -66,7 +66,7 @@ const CourseExploreSection = ({ standards, courses }) => {
             {loading ? (
               <Spinner />
             ) : courseData?.length > 0 ? (
-              <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
+              <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8'>
 
                 {courseData?.map((product, index) => (
                   <ProductCard key={index} product={product} homePage={false} />

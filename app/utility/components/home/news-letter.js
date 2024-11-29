@@ -58,7 +58,7 @@ const NewsletterSection = () => {
     <section className="rounded-2xl p-6 md:p-10 bg-[#F7F7F7]">
       <div className="flex gap-5 flex-col md:flex-row justify-between">
         <div className="w-full md:w-1/2 flex flex-col">
-          <div className="self-start text-sm font-semibold leading-loose text-primary uppercase tracking-[2px]">
+          <div className="self-start text-sm font-semibold leading-loose text-secondary uppercase tracking-[2px]">
             Newsletter
           </div>
           <h2 className="mt-5 md:mt-7 text-2xl md:text-3xl lg:text-4xl font-bold leading-none text-neutral-800">
@@ -77,7 +77,7 @@ const NewsletterSection = () => {
                 name="email"
                 render={({ field }) => (
                   <FormItem className="text-start">
-                    <FormLabel className="text-lg">Email Address</FormLabel>
+                    <FormLabel className="text-lg hidden">Email Address</FormLabel>
                     <FormControl>
                       <div className="relative">
                         <Input

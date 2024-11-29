@@ -90,7 +90,6 @@ class BasicService {
     static async AboutPage() {
         try {
             const response = await api.get(`/api/v1/page/about`);
-            console.log("🚀 ~ BasicService ~ AboutPage ~ response:", response)
             return response.data;
         } catch (error) {
             throw error;

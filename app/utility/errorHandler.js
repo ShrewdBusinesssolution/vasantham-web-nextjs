@@ -3,8 +3,7 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
 export const handlePageError = async (error) => {
-  console.log("🚀 ~ handlePageError ~ error:", error)
-  switch (error?.status) {
+    switch (error?.status) {
     case 503:
       redirect('/maintenance'); // Server under maintenance
     case 429:

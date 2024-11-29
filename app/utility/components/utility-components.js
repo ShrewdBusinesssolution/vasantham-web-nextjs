@@ -12,6 +12,7 @@ import Link from "next/link";
 import { AppContext } from "../context/context-api";
 import { BsCart2, BsCheckCircle, BsTrash } from "react-icons/bs";
 import { getSession } from "next-auth/react";
+import { LuLoader2 } from "react-icons/lu";
 
 const HeadingSection = ({ title = "Why choose us", subtitle = "Why choose our courses?" }) => {
   return (
@@ -111,8 +112,8 @@ const StatCard = ({ title, value, unit, description }) => {
 
 const ProductCard = ({ product, homePage, fromwalkingUser = true }) => {
   const [isInWishlist, setIsInWishlist] = useState(product?.wishlist ?? false);
+  const [wishlistLoading, setwishlistLoading] = useState(false);
   const link = `/course-detail/${product?.slug}`;
-  const {data: session} = getSession();
 
   const handleWishlistToggle = () => {
     if (homePage) {
@@ -123,10 +124,12 @@ const ProductCard = ({ product, homePage, fromwalkingUser = true }) => {
 
   const HandlingWishlist = async () => {
     try {
-      if(!session) {
-        toast.warning("Please Login",{position:"top-right"});
+      const session = await getSession();
+      if (!session) {
+        toast.warning("Please Login", { position: "top-right" });
         return null;
       }
+      setwishlistLoading(true);
       const response = await ProfileService.wishlistUpdate({
         course_id: product.id,
         status: !isInWishlist
@@ -138,11 +141,14 @@ const ProductCard = ({ product, homePage, fromwalkingUser = true }) => {
     } catch (error) {
       const message = error?.response?.data?.message ?? error.message;
       toast.error(message, { position: 'top-right', duration: "2000" })
+    } finally {
+      setwishlistLoading(false);
+
     }
   }
 
   return (
-    <div className="bg-white rounded-3xl shadow-sm overflow-hidden w-full max-w-xs relative">
+    <div className="bg-white rounded-3xl shadow-sm overflow-hidden w-full relative">
       {/* Image */}
       <Link href={link}>
 
@@ -153,7 +159,7 @@ const ProductCard = ({ product, homePage, fromwalkingUser = true }) => {
             width={300}
             height={300}
             alt="product"
-            className="w-full h-auto object-cover object-center max-h-[200px] aspect-square"
+            className="w-full  object-cover object-center max-sm:h-[20vh] h-[180px] aspect-square"
           />
 
           <div className="absolute bottom-0 right-0 bg-secondary rounded-none rounded-tl-xl px-3 py-2 flex gap-2 items-center">
@@ -173,11 +179,14 @@ const ProductCard = ({ product, homePage, fromwalkingUser = true }) => {
           className={`absolute top-4 right-4 p-2 rounded-full bg-[#F2F2F2] shadow-sm transition-all ${isInWishlist ? 'text-primary' : 'text-black'
             } flex items-center gap-x-1`}
         >
-          {isInWishlist ? (
+          {wishlistLoading ? (
+            <LuLoader2 className="h-5 w-5 text-primary animate-spin" />
+          ) : isInWishlist ? (
             <IoHeartSharp className="h-5 w-5 text-red-500" />
           ) : (
             <HiOutlineHeart className="h-5 w-5" />
           )}
+
         </button>
       )}
       <Link href={link}>
