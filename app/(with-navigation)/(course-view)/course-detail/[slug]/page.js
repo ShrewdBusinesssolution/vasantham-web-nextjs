@@ -24,7 +24,7 @@ export default async function CourseView({ params }) {
                         {/* Left side */}
                         <div className="flex flex-col gap-4">
                             <h4 className="text-[#222] text-[32px]">Course Overview</h4>
-                            <p className="text-[#222] font-medium text-[16px] w-full  lg:w-[820px]">
+                            <p className="text-[#222] font-medium text-[16px] w-full ">
                                 {Response?.overview}
                             </p>
                         </div>
