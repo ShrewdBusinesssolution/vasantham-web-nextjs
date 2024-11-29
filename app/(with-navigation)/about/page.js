@@ -32,7 +32,7 @@ const About = async () => {
             <p className='text-sm text-[#222222] mt-2  leading-6 first-letter:ml-10 text-justify'>Students get counseling for their future endeavors and our institution stands as a pillar to our student’s growth. We pay special attention to the books, so we mobilize our materials created by the experts on time. Social circumstances are not a bane to the education and enrichment of the students anymore. Expert lectures and easy communication make the complex subject engaging. Practice tests, personalized reports, and our expert’s understanding of students make exams easier. We are devoted to creating an exceptional future with our services. We starting with Maths classes online in Tamil.</p>
           </div>
           {/* right */}
-          <Image src={"/assets/about/about-1.webp"} className="w-full h-[350px] md:w-[400px] md:h-[402px] rounded-xl" width={500} height={500} alt="Image" />
+          <Image src={"/assets/about/about-1.webp"} className="w-auto h-[350px] md:w-[400px] md:h-[402px] rounded-xl" width={500} height={500} alt="Image" />
         </div>
       </section>
 
@@ -40,7 +40,7 @@ const About = async () => {
       <section className='bg-[#FCFCFC] py-10 md:py-16 lg:py-20'>
         <div className='brand-container flex  max-lg:flex-col-reverse flex-row max-lg:gap-5  gap-20 items-center justify-between max-lg:px-5 px-20'>
           {/* left */}
-          <Image src={"/assets/about/about-2.webp"} className="w-full h-[350px] md:w-[400px] md:h-[402px] rounded-xl" alt="Images" width={500} height={500} />
+          <Image src={"/assets/about/about-2.webp"} className="w-auto h-[350px] md:w-[400px] md:h-[402px] rounded-xl" alt="Images" width={500} height={500} />
           {/* right */}
           <div className='flex flex-col gap-2 w-full'>
             <h4 className='uppercase text-secondary text-sm font-medium'>How it works</h4>
