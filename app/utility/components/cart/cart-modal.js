@@ -9,6 +9,7 @@ import Image from "next/image";
 import { useContext, useEffect } from "react";
 import { AppContext } from "../../context/context-api";
 import { useSession } from "next-auth/react";
+import { IoCloseSharp } from "react-icons/io5";
 
 const courses = [
   {
@@ -55,15 +56,19 @@ export function CartModal() {
           />
         </button>
       </SheetTrigger>
-      <SheetContent className="flex flex-col h-full overflow-hidden">
-        <SheetHeader className="border-b-2">
-          <SheetTitle className="text-lg font-bold">My Cart</SheetTitle>
+      <SheetContent closeicon={false} className="flex flex-col h-full overflow-hidden px-0">
+        <SheetHeader className="border-b px-4">
+          <div className="flex justify-between mb-2">
+            <SheetTitle className="text-lg font-bold">My Cart</SheetTitle>
+            <IoCloseSharp onClick={()=>setCartModal(false)} className="active:opacity-65 cursor-pointer" size={24} />
+          </div>
         </SheetHeader>
+
 
         {/* Card Design */}
         {session ?
           <>
-            <div className='flex-1 overflow-y-auto hide-y-scrollbar'>
+            <div className='flex-1 overflow-y-auto hide-y-scrollbar px-4'>
               {cartCourseInformation.map((course, index) => (
                 <div key={index} className='rounded-xl border-2 flex flex-col px-3 py-2 mb-4'>
                   <CardComponent course={course} />
@@ -71,7 +76,7 @@ export function CartModal() {
               ))}
             </div>
             {/* Total Price Section */}
-            <div className="flex flex-col justify-center bg-white">
+            <div className="flex flex-col justify-center bg-white px-4">
               <p className="mt-4 text-start font-medium">
                 Total: <span className='font-bold'>₹ {cartSummary?.order_total ?? 0.00}</span>
 
@@ -93,18 +98,18 @@ export function CartModal() {
           </>
 
           :
-          <div className="w-full h-full grid place-items-center">
+          <div className="w-full h-full grid place-items-center px-3">
 
-          <div className="flex flex-col items-center gap-5 justify-center">
-            <p>You Have to Login</p>
-            <Link onClick={() => setCartModal(false)} href={'/login'}>
-            
-            <Button  variant="primary">
-              Login
-            </Button>
-            </Link>
+            <div className="flex flex-col items-center gap-5 justify-center">
+              <p>You Have to Login</p>
+              <Link onClick={() => setCartModal(false)} href={'/login'}>
 
-          </div>
+                <Button variant="primary">
+                  Login
+                </Button>
+              </Link>
+
+            </div>
           </div>
         }
 

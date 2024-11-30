@@ -224,7 +224,7 @@ export default function CourseUnitDetailclientComponent({ unitdetails, slug }) {
 const UnitCard = ({ data, linkSlug }) => {
     return (
         <div className=" rounded-lg bg-[#f7f7f7] border border-[#E9E9E9]">
-            <div className="p-5 flex flex-col md:flex-row justify-between max-md:items-start items-center">
+            <div className="p-5 flex flex-col md:flex-row justify-between max-md:items-start items-center gap-5">
                 <div className="flex flex-col gap-4">
                     <div className="flex  items-center gap-2">
                         <h3 className="text-[20px] font-medium text-nowrap text-[#535967]">Unit {data?.unit_number}</h3>
@@ -237,7 +237,7 @@ const UnitCard = ({ data, linkSlug }) => {
                 </div>
 
                 <div className="flex flex-row gap-5 items-start md:items-center justify-start">
-                    <div className="flex flex-row justify-center items-center gap-2 mt-2 md:mt-0">
+                    <div className={`${data?.viewed_percentage !== 0 ? 'flex' :'hidden'} flex-row justify-center items-center gap-2 mt-2 md:mt-0`}>
                         {data?.viewed_percentage !== 0 ? <ProgressBar percentage={data?.viewed_percentage} /> : null}
                     </div>
                     {data?.viewed_percentage === 0

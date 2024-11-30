@@ -75,7 +75,7 @@ const Accordion = ({ lesson }) => {
                                 onClick={() => toggleItem(index)}
                                 className="flex items-center justify-between w-full px-4 py-5 sm:p-6"
                             >
-                                <span className="flex text-lg font-semibold text-black">
+                                <span className="flex text-lg font-semibold text-black text-left">
                                     {item.name}
                                 </span>
                                 <div className='flex gap-3 items-center'>
@@ -111,18 +111,18 @@ const List = ({ data }) => {
         setIsModalOpen(!isModalOpen);
     };
     return (
-        <div className='flex flex-row justify-between gap-2 items-center'>
+        <div className='flex max-sm:flex-col flex-row max-sm:items-start justify-between gap-2 gap-y-5 items-center'>
             <div className='flex flex-row gap-4 items-center'>
                 {data?.viewed ?
-                    <RiCheckDoubleFill className='text-[#07A858]' size={22} />
+                    <RiCheckDoubleFill className='text-[#07A858] aspect-square' size={22}   style={{ width: '22px', height: '22px' }}/>
                     :
                     <LuDot size={22} />
                 }
-                <p className={`${data?.viewed ? 'text-[#07A858]' : ''} text-[18px] font-medium`}>{data?.name}</p>
+                <p className={`${data?.viewed ? 'text-[#07A858]' : ''} text-[18px] font-medium `}>{data?.name}</p>
             </div>
             <div className='flex flex-row items-center gap-3'>
                 {data?.viewed && (data?.score === 0 || data?.score == null) ? (
-                    <Link href="/test/1">
+                    <Link href={`/test/${data?.id}`}>
                         <Button variant="primary" className="uppercase">Take Test</Button>
                     </Link>
                 ) : (
@@ -144,7 +144,7 @@ const ProgressBar = ({ percentage }) => {
             <div className="w-[10vw] bg-gray-200 rounded-full h-3">
                 <div className="bg-gradient-to-r from-[#00FFD5] to-[#00FF44] h-3 rounded-full" style={{ width: `${percentage}%` }}></div>
             </div>
-            <p className="mt-2 text-sm text-center text-gray-600">{percentage}% </p>
+            <p className="mt-0 text-sm text-center text-gray-600">{percentage}% </p>
         </div>
     )
 
