@@ -1,4 +1,5 @@
 import CourseService from '@/app/services/api-services/course-service'
+import RelatedCourse from '@/app/utility/components/related-course';
 import { AddtoCartButton, CourseBanner } from '@/app/utility/components/utility-components'
 import { handlePageError } from '@/app/utility/errorHandler';
 import { Button } from '@/components/ui/button';
@@ -10,12 +11,12 @@ export default async function CourseView({ params }) {
 
     try {
         const Response = (await CourseService.courseDetailWalkingStudent(params.slug)).data;
-        const options ={ students: `${Response?.people ?? 0} Students` , lessons: `${Response?.lecture_count ?? 0} Lessons`, rating: "4", reviews: "41" }
+        const options = { students: `${Response?.people ?? 0} Students`, lessons: `${Response?.lecture_count ?? 0} Lessons`, rating: "4", reviews: "41" }
         return (
             <main className='bg-[#fcfcfc]'>
                 {/* Banner */}
                 <section>
-                    <CourseBanner title={Response?.subject?.name} subtitle={Response?.name} product = {options}/>
+                    <CourseBanner title={Response?.subject?.name} subtitle={Response?.name} product={options} />
                 </section>
 
                 <section className='brand-container py-10 '>
@@ -52,6 +53,11 @@ export default async function CourseView({ params }) {
                         </div>
                     </div>
                 </section>
+                {Response?.similar_course?.length > 0 && (
+                    <section className="brand-container">
+                        <RelatedCourse course={Response.similar_course} />
+                    </section>
+                )}
 
             </main>
         )

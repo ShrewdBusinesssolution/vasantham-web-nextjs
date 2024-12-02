@@ -248,7 +248,7 @@ const Filter = ({ ResponseData, subject, board, standard }) => {
 
     return (
         <main className='bg-[#FCFCFC] py-10 lg:py-16 px-6 md:px-12 lg:px-16 '>
-            <div className='brand-container flex flex-col md:flex-row items-center justify-between gap-3'>
+            <div className='brand-container flex flex-col xl:flex-row   items-center justify-between gap-3'>
                 {/* Search */}
                 <div className="relative rounded-full p-1 pl-4 px-2 flex items-center gap-2 border-[1px] border-[#E9E9E9] bg-white w-full max-w-[300px]">
                     <input
@@ -264,14 +264,14 @@ const Filter = ({ ResponseData, subject, board, standard }) => {
                 </div>
 
                 {/* Center courses */}
-                <div className="flex items-center">
+                <div className="flex items-center ">
                     <div className="relative flex items-center">
                         <button
                             className="absolute left-2 z-10 cursor-pointer text-xl bg-[#F7F7F7] border rounded-full p-1"
                             onClick={scrollLeft}>
                             <FiChevronLeft />
                         </button>
-                        <div className='bg-[#F7F7F7] rounded-full border w-[370px] md:w-[600px] lg:w-[640px] px-12 lg:px-18'>
+                        <div className='bg-[#F7F7F7] rounded-full border  max-lg:w-[90vw] xl:w-[640px] px-12 lg:px-18'>
                             <div
                                 ref={scrollRef}
                                 className="hide-scrollbar flex overflow-x-auto p-1">
@@ -370,8 +370,8 @@ const Filter = ({ ResponseData, subject, board, standard }) => {
                 </div>
             </div>
 
-            <div>
-                <p className='font-semibold text-[16px] mt-5 px-5'>{pagination?.total ?? 0} Courses found</p>
+            <div className='brand-container'>
+                <p className='font-semibold text-[16px] mt-5'>{pagination?.total ?? 0} Courses found</p>
                 {filteredProducts.length === 0 ?
 
                     <div className='h-[50vh] w-full grid place-content-center'>
@@ -380,7 +380,7 @@ const Filter = ({ ResponseData, subject, board, standard }) => {
                     </div>
                     :
 
-                    <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-5 justify-items-center py-5 px-5'>
+                    <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-5 justify-items-center py-5 '>
                         {filteredProducts?.map((item, index) => (
                             <ProductCard key={index} product={item} homePage={true} />
 
