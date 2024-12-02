@@ -240,12 +240,10 @@ const UnitCard = ({ data, linkSlug }) => {
                     <div className={`${data?.viewed_percentage !== 0 ? 'flex' :'hidden'} flex-row justify-center items-center gap-2 mt-2 md:mt-0`}>
                         {data?.viewed_percentage !== 0 ? <ProgressBar percentage={data?.viewed_percentage} /> : null}
                     </div>
-                    {data?.viewed_percentage === 0
-                        ?
+                    
                         <Link href={`/course-unit-lesson/${linkSlug}/unit/${data.id}`}>
-                            <Button variant="primary" className="uppercase text-sm">start unit</Button>
+                            <Button variant="primary" className="uppercase text-sm">{data?.viewed_percentage === 0 ? "start unit" : "Continue" }</Button>
                         </Link>
-                        : null}
 
 
                 </div>
