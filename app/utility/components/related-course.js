@@ -11,8 +11,10 @@ const RelatedCourse = ({ course }) => {
   const splideRef = useRef(null);
 
   useEffect(() => {
-    if (splideRef.current) {
+    if (splideRef.current && nextRef.current && prevRef.current) {
       const splide = splideRef.current.splide;
+  
+      // Attach click handlers only if refs are properly assigned
       nextRef.current.onclick = () => splide.go('+');
       prevRef.current.onclick = () => splide.go('-');
     }
