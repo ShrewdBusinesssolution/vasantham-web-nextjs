@@ -5,6 +5,7 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/splide/dist/css/splide.min.css';
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa6";
 
+
 const RelatedCourse = ({ course }) => {
   const nextRef = useRef(null);
   const prevRef = useRef(null);
