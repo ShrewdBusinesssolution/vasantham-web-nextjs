@@ -25,14 +25,14 @@ export default async function CourseView({ params }) {
                         {/* Left side */}
                         <div className="flex flex-col gap-4">
                             <h4 className="text-[#222] text-[32px]">Course Overview</h4>
-                            <p className="text-[#222] font-medium text-[16px] w-full ">
+                            <p className="text-[#222] font-medium text-[16px] w-full text-justify">
                                 {Response?.overview}
                             </p>
                         </div>
                         {/* Right side */}
                         <div className="bg-gradient-to-br from-[#fff] to-[#CCF4FF] p-5 rounded-xl flex flex-col gap-4 max-md:w-full">
                             <h3 className="text-sm text-secondary uppercase">Fee Details</h3>
-                            <p className="font-bold text-[26px]">₹ {Response?.sale_price} <span className="pl-1 font-semibold text-lg line-through text-gray-400">₹ {Response?.price}</span></p>
+                            <p className="font-bold text-[26px] whitespace-nowrap">₹ {Response?.sale_price} <span className="pl-1 font-semibold text-lg line-through text-gray-400 whitespace-nowrap">₹ {Response?.price}</span></p>
                             <h3 className="text-sm text-secondary uppercase mt-2">Duration</h3>
                             <p className="font-bold text-[26px]">24 Hrs</p>
                             {/* Button */}
@@ -44,9 +44,12 @@ export default async function CourseView({ params }) {
                         <h4 className="text-[#222] text-[32px]">What you&apos;ll learn</h4>
                         <div className='flex flex-col gap-2'>
                             {Response.what_you_learn?.map((text, index) => (
-                                <div key={index} className='flex items-center gap-4'>
-                                    <Image src={"/assets/svg/tick.svg"} width={50} height={50} className='w-[16px] h-[16px]' alt="Tick" />
-                                    <p className='text-[16px] font-semibold'>{text}</p>
+                                <div key={index} className='flex items-start gap-4'>
+                                    <Image src={"/assets/svg/tick.svg"} width={50} height={50} className='w-[16px] h-[16px] mt-1' alt="Tick" />
+                                    <p className={`text-[16px] font-semibold ${text.length > 150 ? 'text-justify':''}`}>
+                                    {text}
+                                    </p>
+
                                 </div>
                             ))}
 

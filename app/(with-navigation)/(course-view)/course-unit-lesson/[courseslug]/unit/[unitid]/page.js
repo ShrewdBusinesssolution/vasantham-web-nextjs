@@ -7,7 +7,7 @@ import UnitClientComponent from './component/unit-client-component';
 export default async function UnitLesson({ params }) {
     try {
         const Response = (await CourseService.courseunitLessonView(params.courseslug, params.unitid)).data;
-        const options = { students: `${Response?.people ?? 0} Students`, lessons: `${Response?.lecture_count ?? 0} Lessons`, rating: "4", reviews: "41" }
+        const options = { students: `${Response?.courses?.people ?? 0} Students`, lessons: `${Response?.lecture_count ?? 0} Lessons`, rating: "4", reviews: "41" }
         return (
             <main className='bg-[#fcfcfc]'>
                 <section>

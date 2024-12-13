@@ -22,7 +22,7 @@ const About = async () => {
       {/* Banner */}
       <AboutBanner title={"Know about us"} subtitle={"Grow strong to take up the challenges of life."} />
       {/* Our Service */}
-      <section className='bg-[#FCFCFC] py-10'>
+      <section className='bg-[#FCFCFC] pt-10'>
         <div className='brand-container flex flex-col md:flex-col lg:flex-row xl:flex-row max-lg:gap-5  gap-20 items-center justify-between max-lg:px-5 px-20'>
           {/* left */}
           <div className='flex flex-col gap-5'>
@@ -38,15 +38,14 @@ const About = async () => {
 
       {/* How it work */}
       <section className='bg-[#FCFCFC] py-10 md:py-16 lg:py-20'>
-        <div className='brand-container flex  max-lg:flex-col-reverse flex-row max-lg:gap-5  gap-20 items-center justify-between max-lg:px-5 px-20'>
+        <div className='brand-container flex  max-lg:flex-col-reverse flex-row max-lg:gap-5  gap-20 max-lg:items-center items-start justify-between max-lg:px-5 px-20'>
           {/* left */}
           <Image src={"/assets/about/about-2.webp"} className="w-auto h-[350px] md:w-[400px] md:h-[402px] rounded-xl" alt="Images" width={500} height={500} />
           {/* right */}
           <div className='flex flex-col gap-2 w-full'>
             <h4 className='uppercase text-secondary text-sm font-medium'>How it works</h4>
-            <h3 className='text-[32px] mt-4 md:mt-6'>Upgrade Your Skill</h3>
-            <h3 className='text-[32px]'>Upgrade Your Life</h3>
-            <p className='text-sm text-[#222222] w-full  leading-6 mt-4 pb-10 md:pb-22 lg:pb-28 first-letter:ml-10 text-justify'>Our institution aims to expand our hands to the students anywhere, anytime. Educating, exploring, and expanding the freedom of the students is our intention. Future is the combination of man and medium. Here, we become the medium to reach the dream of the students. Kids find exams as their frightful flight. Our Institution and our experts become a guide to make their adventure way more effortless and engrossing. Questioning openly, sharing their independent thoughts are encouraged. Having the potential to get good marks is a skill, anyone can acquire with our guidance. We have been guiding the students for more than 15 years under time and space limits.</p>
+            <h5 className=''>Upgrade Your Skill Upgrade Your Life</h5>
+            <p className='text-sm text-[#222222] w-full  leading-6 mt-4  first-letter:ml-10 text-justify'>Our institution aims to expand our hands to the students anywhere, anytime. Educating, exploring, and expanding the freedom of the students is our intention. Future is the combination of man and medium. Here, we become the medium to reach the dream of the students. Kids find exams as their frightful flight. Our Institution and our experts become a guide to make their adventure way more effortless and engrossing. Questioning openly, sharing their independent thoughts are encouraged. Having the potential to get good marks is a skill, anyone can acquire with our guidance. We have been guiding the students for more than 15 years under time and space limits.</p>
           </div>
         </div>
       </section>
@@ -60,7 +59,7 @@ const About = async () => {
         </div>
         {/* ProductCard */}
         <div className='brand-container'>
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center gap-5 px-4 md:px-6 lg:px-10 py-10">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center gap-5 px-4 md:px-6 lg:px-10 pb-10">
             {responseAboutData?.team?.map((item,index)=>(
               <StaffCard key={index} staff={item} />
             ))}
@@ -115,8 +114,8 @@ const StaffCard = ({ staff }) => {
         />
       {/* </div> */}
       <div className="text-center space-y-3 mt-3 py-2">
-        <h3 className="text-[17px] font-medium">{staff.name}</h3>
-        <p className="text-[14px] leading-normal font-light text-[#B5B6B5]">
+        <h3 className="text-[17px] font-medium line-clamp-2">{staff.name}</h3>
+        <p className="text-[14px] leading-normal font-light text-[#B5B6B5] line-clamp-2">
           {staff.designation}
         </p>
       </div>

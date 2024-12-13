@@ -42,18 +42,18 @@ const formSchema = z.object({
             message: "Name must be less than 100 characters.",
         }),
     password: z.string()
-        .min(6, {
-            message: "Password must be at least 6 characters.",
+        .min(8, {
+            message: "Password must be at least 8 characters.",
         })
-        .max(15, {
-            message: "Password must be at most 15 characters.",
+        .max(16, {
+            message: "Password must be at most 16 characters.",
         }),
 })
 
 export default function SignUpForm() {
     const router = useRouter()
     const { setSignUpInformation } = useContext(AppContext);
-    const [passwordtype, setPasswordtype] = useState(true)
+    const [passwordtype, setPasswordtype] = useState(false)
 
 
     const form = useForm({
@@ -103,7 +103,7 @@ export default function SignUpForm() {
                         <FormItem className="mt-5">
                             <FormLabel className="font-semibold text-lg"> Full Name <small className="text-red-500">*</small></FormLabel>
                             <FormControl>
-                                <Input className="text-sm placeholder:text-[#B5B6B5]" placeholder="Enter your name" {...field} />
+                                <Input className="text-md placeholder:text-[#B5B6B5]" placeholder="Enter your name" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -116,7 +116,7 @@ export default function SignUpForm() {
                         <FormItem>
                             <FormLabel className="font-semibold text-lg">Email Address <small className="text-red-500">*</small></FormLabel>
                             <FormControl>
-                                <Input className="text-sm placeholder:text-[#B5B6B5]" placeholder="Enter your email" {...field} />
+                                <Input className="text-md placeholder:text-[#B5B6B5]" placeholder="Enter your email" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -136,8 +136,9 @@ export default function SignUpForm() {
                                             {passwordtype ? <VscEye size={20} className="hover:text-primary" /> : <PiEyeClosed size={20} className="hover:text-primary" />}
                                         </div>
                                     </div>
-                                    <Input type={passwordtype ? 'password' : 'text'} maxLength={15} className="text-sm placeholder:text-[#B5B6B5]" placeholder="Enter Password" {...field} />
+                                    <Input type={!passwordtype ? 'password' : 'text'} maxLength={15} className={`text-md placeholder:text-[#B5B6B5] ${!passwordtype && field.value.length !== 0 ? 'text-3xl' : 'text-md'}`} placeholder="Enter Password" {...field} />
                                 </div>
+
                             </FormControl>
                             <FormMessage />
                         </FormItem>

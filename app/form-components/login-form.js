@@ -39,17 +39,17 @@ const formSchema = z.object({
         }),
 
     password: z.string()
-        .min(6, {
-            message: "Password must be at least 6 characters.",
+        .min(8, {
+            message: "Password must be at least 8 characters.",
         })
-        .max(30, {
-            message: "Password must be at most 30 characters.",
+        .max(16, {
+            message: "Password must be at most 16 characters.",
         }),
 })
 
 export default function LoginForm() {
     const { data: session } = useSession()
-    const [passwordtype, setPasswordtype] = useState(true)
+    const [passwordtype, setPasswordtype] = useState(false)
     const { setPreLoader } = useContext(AppContext)
     const router = useRouter();
 
@@ -110,7 +110,7 @@ export default function LoginForm() {
                         <FormItem className="mt-5">
                             <FormLabel className="font-semibold text-lg">Email Address<small className="text-red-500"> *</small></FormLabel>
                             <FormControl>
-                                <Input className="placeholder:text-[#B5B6B5]" placeholder="Enter  your email" {...field} />
+                                <Input className="placeholder:text-[#B5B6B5] text-md" placeholder="Enter  your email" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -124,20 +124,32 @@ export default function LoginForm() {
                         <FormItem>
                             <div className="flex justify-between items-center">
                                 <FormLabel className="font-semibold text-lg">Password<small className="text-red-500"> *</small></FormLabel>
-                                <Link href={'/forgot-password'} className="text-sm text-[#07A889]">
-                                    <small>
-                                        Forgot Password?
-                                    </small>
+                                <Link href="/forgot-password" className="text-lg text-[#07A889]">
+                                    <small>Forgot Password?</small>
                                 </Link>
                             </div>
                             <FormControl>
-                                <div className="relative ">
-                                    <div className=" absolute right-0 top-0 bottom-0 z-10 h-full grid place-content-center px-5 ">
-                                        <div onClick={() => { setPasswordtype(!passwordtype) }} className="cursor-pointer active:opacity-30">
-                                            {passwordtype ? <VscEye size={20} className="hover:text-primary" /> : <PiEyeClosed size={20} className="hover:text-primary" />}
-                                        </div>
+                                <div className="relative">
+                                    <div className="absolute right-0 top-0 bottom-0 z-10 h-full grid place-content-center px-5">
+                                        <button
+                                            type="button"
+                                            onClick={() => setPasswordtype(!passwordtype)}
+                                            className="cursor-pointer active:opacity-30"
+                                            aria-label={passwordtype ? "Hide password" : "Show password"}
+                                        >
+                                            {passwordtype ? (
+                                                <VscEye size={20} className="hover:text-primary" />
+                                            ) : (
+                                                <PiEyeClosed size={20} className="hover:text-primary" />
+                                            )}
+                                        </button>
                                     </div>
-                                    <Input type={passwordtype ? 'password' : 'text'} placeholder="Enter Password" {...field} className="relative placeholder:text-[#B5B6B5]" />
+                                    <Input
+                                        type={passwordtype ? 'text' : 'password'}
+                                        placeholder="Enter Password"
+                                        {...field}
+                                        className={`relative ${!passwordtype && field.value.length !== 0 ? 'text-3xl' : 'text-md'} placeholder:text-[#B5B6B5] flex items-center`}
+                                    />
                                 </div>
                             </FormControl>
                             <FormMessage />

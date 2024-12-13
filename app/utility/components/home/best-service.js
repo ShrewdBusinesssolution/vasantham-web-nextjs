@@ -25,7 +25,7 @@ const servicesData = [
 
 const ServiceCard = ({ title, value, description }) => (
   <div className="relative bg-white flex flex-col gap-5 p-3 rounded-xl hover:bg-gradient-to-br from-white to-blue-100 from-20% transition-all duration-300">
-    <h3 className="text-[16px] font-bold text-[#222]">{title}</h3>
+    <h3 className="text-[16px] font-bold text-[#222] line-clamp-1">{title}</h3>
     <h2 className="text-primary">{value}</h2>
     <p className="text-[15px] text-[#535967]">{description}</p>
   </div>

@@ -12,9 +12,9 @@ import { AppContext } from '@/app/utility/context/context-api';
 
 const SubmitModal = () => {
   const percentage = 60; //percentage
-  const{ TestModalopen, 
+  const { TestModalopen,
     setTestModalopen,
-    TestScore}= useContext(AppContext);
+    TestScore } = useContext(AppContext);
 
   return (
     <Dialog open={TestModalopen} onOpenChange={setTestModalopen}>
@@ -24,7 +24,7 @@ const SubmitModal = () => {
         </Button>
       </DialogTrigger>
 
-      <DialogContent  className="max-w-[280px] h-[280px] p-5 flex flex-col items-center justify-center gap-4">
+      <DialogContent className="max-w-[280px] h-[280px] p-5 flex flex-col items-center justify-center gap-4">
         <DialogHeader>
         </DialogHeader>
         <h4 className="text-[#21242B] text-[17px] leading-normal font-semibold mb-2 text-center">
@@ -37,12 +37,13 @@ const SubmitModal = () => {
             text={`${TestScore}%`}
             styles={{
               path: { stroke: '#008DF1' }, // progress bar
-              text: { fill: '#222', fontSize: '22px', fontWeight: 'bold', textAnchor: "middle" }, // Text
+              text: { fill: '#222', fontSize: '22px', fontWeight: 'bold', textAnchor: "middle", dominantBaseline: 'middle', // Vertical alignment
+              }, // Text
               trail: { stroke: '#d6d6d6' }, // trail color
             }} />
         </div>
         <h4 className="text-[#21242B] text-[17px] leading-normal font-semibold text-center">
-          Here&apos;s your final score.
+          Here&apos;s your final score..
         </h4>
       </DialogContent>
     </Dialog>

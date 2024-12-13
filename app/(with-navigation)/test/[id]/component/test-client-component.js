@@ -6,11 +6,16 @@ import { toast } from "sonner";
 import TestService from "@/app/services/api-services/test-service";
 import { AppContext } from "@/app/utility/context/context-api";
 import { LuLoader2 } from "react-icons/lu";
+import { useRouter } from "next/navigation";
 
 export default function TestClientComponent({ lectureId, questions }) {
     const [selectedOptions, setSelectedOptions] = useState({});
     const [loading, setLoading] = useState(false);
     const { setTestModalopen, setTestScrore } = useContext(AppContext);
+    const [alreadyAnswered, setAlreadyAnswered] = useState(false);
+
+    const router = useRouter();
+
 
     // Handle radio button change
     const handleOptionChange = (questionId, answerId) => {
@@ -43,10 +48,26 @@ export default function TestClientComponent({ lectureId, questions }) {
         } catch (error) {
             const message = error?.response?.data?.message ?? error.message;
             toast.error(message, { position: "top-right", duration: 2000 });
+
+            if(message === 'You have already submitted answers for this lecture.'){
+                setAlreadyAnswered(true)
+            }
+
         } finally {
             setLoading(false);
         }
     };
+
+    if(alreadyAnswered){
+        return(
+            <div className="py-10 flex flex-col items-center gap-5">
+                <h5>You have already submitted answers for this lecture.</h5>
+                <Button onClick={() => router.back()} variant="primary" className="w-fit">
+                    Back
+                </Button>
+            </div>
+        )
+    }
 
     return (
         <>
@@ -60,7 +81,7 @@ export default function TestClientComponent({ lectureId, questions }) {
                         <ul className="mt-2">
                             {item.answers.map((option) => (
                                 <li key={option.answer_id}>
-                                    <label className="flex items-center text-[#858585] font-medium">
+                                    <label className="flex items-start text-[#858585] font-medium">
                                         <input
                                             type="radio"
                                             value={option.answer_id}
@@ -69,7 +90,7 @@ export default function TestClientComponent({ lectureId, questions }) {
                                             className="hidden"
                                         />
                                         <span
-                                            className={`w-5 h-5 flex justify-center items-center border rounded-full mr-2 ${selectedOptions[item.question_id] === option.answer_id
+                                            className={`w-5 h-5 aspect-square flex justify-center items-center border rounded-full mr-2 mt-1 ${selectedOptions[item.question_id] === option.answer_id
                                                 ? "bg-green-600 text-white"
                                                 : "border-gray-400"
                                                 }`}

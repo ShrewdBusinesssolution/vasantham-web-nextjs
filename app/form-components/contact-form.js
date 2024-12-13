@@ -71,9 +71,10 @@ export default function ContactForm() {
         resolver: zodResolver(formSchema),
         defaultValues: {
             email: "",
-            firstName: "",
-            lastName: "",
+            first_name: "",
+            last_name: "",
             mobile_number: "",
+            message: "",
             terms: true,
             note: ""
         },
@@ -81,16 +82,16 @@ export default function ContactForm() {
 
     // 2. Define a submit handler.
     async function onSubmit(values) {
-
+        
         try {
-            await delay(2000)
-            setIsDialogOpen(true)
             const response = await BasicService.EnquirySave(values);
-            console.log(response, "response")
             // toast.success(response.message, { position: "top-right" })
             form.reset();
+            setIsDialogOpen(true)
+
 
         } catch (error) {
+            console.log("🚀 ~ onSubmit ~ error:", error)
             const message = error?.response?.data?.message ?? error.message;
             toast.error(message, { position: 'top-right' })
 
@@ -120,7 +121,7 @@ export default function ContactForm() {
                         name="last_name"
                         render={({ field }) => (
                             <FormItem className="text-start">
-                                <FormLabel className="text-lg font-dm_serif_display invisible">Last Name</FormLabel>
+                                <FormLabel className="text-lg font-dm_serif_display max-lg:hidden opacity-0">Last Name</FormLabel>
                                 <FormControl>
                                     <Input className="px-5 h-[52px] border border-[#E2E2E2] placeholder:text-[#B5B6B5] text-[16px] font-arial" placeholder="Last Name" {...field} />
                                 </FormControl>
@@ -152,7 +153,7 @@ export default function ContactForm() {
                         <FormItem className="text-start">
                             <FormLabel className="text-lg font-dm_serif_display">Phone Number</FormLabel>
                             <FormControl>
-                                <Input className=" px-5 h-[52px] border border-[#E2E2E2] placeholder:text-[#B5B6B5] text-[16px]" placeholder="+ 91" {...field} />
+                                <Input type="tel" pattern="[0-9]*" inputmode="numeric" className=" px-5 h-[52px] border border-[#E2E2E2] placeholder:text-[#B5B6B5] text-[16px]" placeholder="+ 91" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -185,7 +186,7 @@ export default function ContactForm() {
                                         <Checkbox
                                             checked={field.value}
                                             onCheckedChange={field.onChange}
-                                            className="accent-primary  "
+                                            className={`accent-primary  border ${field.value ? 'border-transparent' : 'border-black/80' } rounded-sm`}
                                         />
                                     </FormControl>
                                     <FormLabel className="mt-0">
@@ -201,8 +202,6 @@ export default function ContactForm() {
                         )}
                     />
                     <Button variant="primary" className="w-fit flex gap-2 rounded-md text-[16px] uppercase" type="submit" disabled={form.formState.isSubmitting}>
-
-
                         Send Enquiry
                         {form.formState.isSubmitting ?
                             <LuLoader2 className="animate-spin" /> : <IoMdArrowUp />

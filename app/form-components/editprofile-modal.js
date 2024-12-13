@@ -113,7 +113,7 @@ console.log(response,"update data")
           <LuPencilLine size={22} className="text-primary" />
         </div>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[600px] h-auto p-3 flex flex-col md:px-5">
+      <DialogContent className="sm:max-w-[00px] h-auto p-3 flex flex-col md:px-5">
         <h5 className="text-[18px]">Edit Profile</h5>
 
         <div className="flex flex-col space-y-2">

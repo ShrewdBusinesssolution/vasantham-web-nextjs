@@ -1,6 +1,6 @@
 // Logo Paths
-const WHITELOGOPATH = "/assets/logo-white.webp";
-const COLORLOGOPATH = "/assets/logo-color.webp"
+const WHITELOGOPATH = "/assets/logo-white.png";
+const COLORLOGOPATH = "/assets/logo-color.png"
 
 
 export{

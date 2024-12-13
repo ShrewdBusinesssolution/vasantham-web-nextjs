@@ -20,7 +20,7 @@ export default function UnitClientComponent({ lesson, lesson_count, lecture_coun
 
     return (
         <section className='brand-container flex flex-col py-10 '>
-            <p className='text-[#B0B0B0] text-lg'>{lesson_count} Section. {lecture_count} lectures</p>
+            <p className='text-[#B0B0B0] text-lg'>{lesson_count} Lessons. {lecture_count} lectures</p>
             {lesson?.length !== 0
                 ?
                 <Accordion lesson={lesson} />
@@ -75,7 +75,7 @@ const Accordion = ({ lesson }) => {
                                 onClick={() => toggleItem(index)}
                                 className="flex items-center justify-between w-full px-4 py-5 sm:p-6"
                             >
-                                <span className="flex text-lg font-semibold text-black text-left">
+                                <span className=" flex-1 text-lg font-semibold text-black text-left">
                                     {item.name}
                                 </span>
                                 <div className='flex gap-3 items-center'>
@@ -112,13 +112,13 @@ const List = ({ data }) => {
     };
     return (
         <div className='flex max-sm:flex-col flex-row max-sm:items-start justify-between gap-2 gap-y-5 items-center'>
-            <div className='flex flex-row gap-4 items-center'>
+            <div className='flex flex-row gap-4 items-center justify-start'>
                 {data?.viewed ?
-                    <RiCheckDoubleFill className='text-[#07A858] aspect-square' size={22}   style={{ width: '22px', height: '22px' }}/>
+                    <RiCheckDoubleFill className='text-[#07A858] aspect-square text-5xl' size={22} />
                     :
-                    <LuDot size={22} />
+                    <LuDot size={22} className='' />
                 }
-                <p className={`${data?.viewed ? 'text-[#07A858]' : ''} text-[18px] font-medium `}>{data?.name}</p>
+                <p className={`${data?.viewed ? 'text-[#07A858]' : ''} text-[18px] font-medium flex-1 line-clamp-2`}>{data?.name}</p>
             </div>
             <div className='flex flex-row items-center gap-3'>
                 {data?.viewed && (data?.score === 0 || data?.score == null) ? (
@@ -126,10 +126,12 @@ const List = ({ data }) => {
                         <Button variant="primary" className="uppercase">Take Test</Button>
                     </Link>
                 ) : (
-                    <p>{data?.score !== 0 && data?.score != null ? `${data?.score} %` : null}</p>
+                    <p className='whitespace-nowrap'>{data?.score !== 0 && data?.score != null ? `${data?.score} %` : null}</p>
                 )}
-                <div onClick={toggleModal} className='bg-[#E9E9E9] p-2 rounded-full'>
-                    <Image src="/assets/svg/video.svg" width={22} height={22} alt="video_icon" className="" />
+                <div className=' w-[40px]'>
+                <div onClick={toggleModal} className='bg-[#E9E9E9] p-2 rounded-full flex-1'>
+                    <Image src="/assets/svg/video.svg" width={22} height={22} alt="video_icon w-[22px] h-auto" className="" />
+                </div>
                 </div>
             </div>
             <VideoIfram OpenHandler={toggleModal} openFlag={isModalOpen} title={data?.name} id={data?.video_id} />
@@ -144,7 +146,7 @@ const ProgressBar = ({ percentage }) => {
             <div className="w-[10vw] bg-gray-200 rounded-full h-3">
                 <div className="bg-gradient-to-r from-[#00FFD5] to-[#00FF44] h-3 rounded-full" style={{ width: `${percentage}%` }}></div>
             </div>
-            <p className="mt-0 text-sm text-center text-gray-600">{percentage}% </p>
+            <p className="mt-0 text-sm text-center text-gray-600 w-[20px]">{percentage}% </p>
         </div>
     )
 
@@ -170,6 +172,11 @@ const VideoIfram = ({ OpenHandler, openFlag, title, id }) => {
         }
     };
 
+    const closeHandling = () =>{
+        OpenHandler();
+        window.location.reload();
+    }
+
     useEffect(() => {
         if (openFlag && id !== '') {
             GetVideoInformation();
@@ -190,12 +197,12 @@ const VideoIfram = ({ OpenHandler, openFlag, title, id }) => {
                     {id ? (
                         <div className="bg-white rounded-xl p-4 w-[90%] md:w-[60%] relative">
                             {loading ? (
-                                <div className="grid place-items-center py-20">
+                                <div className="grid place-items-center py-20  ">
                                     <LuLoader2 className="animate-spin text-primary" size={30} />
                                 </div>
                             ) : (
                                 <>
-                                    <p className="font-medium">{title}</p>
+                                    <h5 className='line-clamp-1 mb-2 overflow-hidden'>{title}</h5>
                                     <iframe
                                         className="rounded-xl"
                                         src={`https://player.vdocipher.com/v2/?otp=${videoData?.otp ?? ""}&playbackInfo=${videoData?.playbackInfo}`}
@@ -207,7 +214,7 @@ const VideoIfram = ({ OpenHandler, openFlag, title, id }) => {
                             )}
                             <div className="flex justify-end pt-3">
                                 <Button
-                                    onClick={OpenHandler}
+                                    onClick={closeHandling}
                                     className="font-bold"
                                     variant="secondary"
                                 >

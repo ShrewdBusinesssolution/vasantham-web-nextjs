@@ -37,6 +37,7 @@ const formSchema = z.object({
 export default function OtpVerifyForm() {
     const { signUpInformation, forgotPasswordemail, setForgotPasswordemailotpVerify } = useContext(AppContext);
     const router = useRouter()
+    const DefaultTime = 180; //seconds
 
     const form = useForm({
         resolver: zodResolver(formSchema),
@@ -45,29 +46,21 @@ export default function OtpVerifyForm() {
         },
     })
 
-    const [timer, setTimer] = useState(180); // 3 minutes = 180 seconds
+    const [timer, setTimer] = useState(DefaultTime); // 3 minutes = 180 seconds
     const [isDisabled, setIsDisabled] = useState(true);
     const [resendCodeLoading, setResendCodeLoading] = useState(false);
-  
+
     useEffect(() => {
-      if (timer > 0) {
-        const countdown = setInterval(() => {
-          setTimer((prev) => prev - 1);
-        }, 1000);
-  
-        return () => clearInterval(countdown); // Cleanup on unmount
-      } else {
-        setIsDisabled(false); // Enable the resend OTP button when timer reaches 0
-      }
+        if (timer > 0) {
+            const countdown = setInterval(() => {
+                setTimer((prev) => prev - 1);
+            }, 1000);
+
+            return () => clearInterval(countdown); // Cleanup on unmount
+        } else {
+            setIsDisabled(false); // Enable the resend OTP button when timer reaches 0
+        }
     }, [timer]);
-
-    useEffect(() => {
-
-        // if(!signUpInformation.email){
-        //     router.push('sign-up')
-        // }
-
-    }, [signUpInformation])
 
 
 
@@ -89,7 +82,7 @@ export default function OtpVerifyForm() {
             values.email = forgotPasswordemail;
             const response = await AuthService.ForgototpVerify(values)
             if (response.status) {
-                setTimer(180); 
+                setTimer(180);
                 setIsDisabled(true);
                 toast.success(response.message, { position: "top-right" })
                 setForgotPasswordemailotpVerify(true)
@@ -105,6 +98,28 @@ export default function OtpVerifyForm() {
         }
     }
 
+    const resendOtp = async () => {
+        try {
+            setResendCodeLoading(true)
+            const resp = await AuthService.ForgototpReSend(
+                { email: forgotPasswordemail }
+            )
+
+
+            if (resp.status) {
+                toast.success(resp?.message, { position: "top-right" })
+                setTimer(DefaultTime)
+                setIsDisabled(true)
+            }
+
+        } catch (error) {
+            console.log("🚀 ~ resendOtp ~ error:", error)
+
+        } finally {
+            setResendCodeLoading(false)
+        }
+    }
+
     const formatTime = (seconds) => {
         const minutes = Math.floor(seconds / 60);
         const remainingSeconds = seconds % 60;
@@ -113,8 +128,8 @@ export default function OtpVerifyForm() {
     return (
         <Form {...form}>
             <div className="">
-            {/* <small className='text-[#7C8B9D] '>We&apos;ve sent a code to <span className='text-primary underline'>{forgotPasswordemail}</span></small> */}
-            <p className="text-[15px]">We have sent the OTP to <span className="text-[#07A889]">{forgotPasswordemail}</span></p>
+                {/* <small className='text-[#7C8B9D] '>We&apos;ve sent a code to <span className='text-primary underline'>{forgotPasswordemail}</span></small> */}
+                <p className="text-[15px]">We have sent the OTP to <span className="text-[#07A889]">{forgotPasswordemail}</span></p>
             </div>
             <h6 className="text-[18px]" >Verify OTP</h6>
 
@@ -127,31 +142,29 @@ export default function OtpVerifyForm() {
                         <FormItem>
                             {/* <FormLabel>One-Time Password</FormLabel> */}
                             <FormControl>
-                                <div className="flex flex-col md:flex-row items-end justify-between ">
-                                <InputOTP maxLength={6} {...field}>
-                                    <InputOTPGroup className="flex gap-2 w-full">
-                                        <InputOTPSlot className="border h-[42px] w-[42px] rounded-md text-md" index={0} />
-                                        <InputOTPSlot className="border h-[42px] w-[42px] rounded-md text-md" index={1} />
-                                        <InputOTPSlot className="border h-[42px] w-[42px] rounded-md text-md" index={2} />
-                                        <InputOTPSlot className="border h-[42px] w-[42px] rounded-md text-md" index={3} />
-                                        <InputOTPSlot className="border h-[42px] w-[42px] rounded-md text-md" index={4} />
-                                        <InputOTPSlot className="border h-[42px] w-[42px] rounded-md text-md" index={5} />
-                                    </InputOTPGroup>
-                                </InputOTP>
-                                <p className="text-[14px] pt-2 whitespace-nowrap font-arial flex items-center gap-3">
-                                OTP Expires in{" "}
-                        {resendCodeLoading ? (
-                            <BiLoaderCircle className="w-5 h-5 text-primary animate-spin" />
-                        ) : (
-                            <span
-                                onClick={onSubmit}
-                                className={`text-primary ${isDisabled ? 'pointer-events-none opacity-30' : 'cursor-pointer'}`}
-                            >
-                                Resend {isDisabled ? formatTime(timer) : ''}
-                            </span>
-                        )}
-                    </p>
-                                {/* <p className="text-[14px]">OTP Expires in <span className="text-[#07A889]">00.02.59 </span></p> */}
+                                <div className="flex flex-col md:flex-row items-center justify-between ">
+                                    <InputOTP maxLength={6} {...field}>
+                                        <InputOTPGroup className="flex gap-2 w-full">
+                                            <InputOTPSlot className="border h-[42px] w-[42px] rounded-md text-md" index={0} />
+                                            <InputOTPSlot className="border h-[42px] w-[42px] rounded-md text-md" index={1} />
+                                            <InputOTPSlot className="border h-[42px] w-[42px] rounded-md text-md" index={2} />
+                                            <InputOTPSlot className="border h-[42px] w-[42px] rounded-md text-md" index={3} />
+                                            <InputOTPSlot className="border h-[42px] w-[42px] rounded-md text-md" index={4} />
+                                            <InputOTPSlot className="border h-[42px] w-[42px] rounded-md text-md" index={5} />
+                                        </InputOTPGroup>
+                                    </InputOTP>
+                                    {isDisabled && (
+                                        <p className="text-[14px] pt-2 whitespace-nowrap font-arial flex items-center gap-3">
+                                            OTP Expires in
+                                            <span
+                                                className={`text-primary ${isDisabled ? 'pointer-events-none opacity-30' : 'cursor-pointer'}`}
+                                            >
+                                                {isDisabled ? formatTime(timer) : ''}
+                                            </span>
+
+                                        </p>
+                                    )}
+                                    {/* <p className="text-[14px]">OTP Expires in <span className="text-[#07A889]">00.02.59 </span></p> */}
                                 </div>
                             </FormControl>
                             {/* <FormDescription>
@@ -162,31 +175,28 @@ export default function OtpVerifyForm() {
                     )}
                 />
                 <div className="space-y-3 flex flex-col gap-2">
-                <Link href={form.formState.isValid && !form.formState.isSubmitting ? '/new-password' : '#'} className="w-full">
-    <Button
-        variant="primary"
-        className="w-full flex gap-2 font-medium uppercase"
-        type="button"
-        disabled={form.formState.isSubmitting || !form.formState.isValid} // Disable if form is submitting or invalid
-    >
-        Verify OTP
-        {form.formState.isSubmitting ? (
-            <LuLoader2 className="w-5 h-5 text-white animate-spin" />
-        ) : (
-            <></>
-        )}
-    </Button>
-</Link>
-                        
+                    <Button
+                        variant="primary"
+                        className="w-full flex gap-2 font-medium uppercase"
+                        type="submit"
+                        disabled={form.formState.isSubmitting} // Disable if form is submitting or invalid
+                    >
+                        Verify OTP
+                        {form.formState.isSubmitting ? (
+                            <LuLoader2 className="w-5 h-5 text-white animate-spin" />
+                        ) : (
+                            <></>
+                        )}
+                    </Button>
 
-<Link href={'/forgot-password'}>
-                        <Button variant="primary" className="w-full flex gap-2 font-medium uppercase bg-gray-100 border text-black" type="submit" disabled={form.formState.isSubmitting}>
-                            {form.formState.isSubmitting ?
+                    {!isDisabled && (
+                        <Button onClick={resendOtp} type="button" variant="primary" className="w-full flex gap-2 font-medium uppercase bg-gray-100 border text-black" disabled={form.formState.isSubmitting || resendCodeLoading}>
+                            {resendCodeLoading ?
                                 <LuLoader2 className="animate-spin" /> : <></>
                             }
                             resend otp
                         </Button>
-                        </Link>
+                    )}
                     {/* <p className="text-sm opacity-60">Didn&apos;t get a code?  <Link href="#" className="text-primary underline">Click here to resend code.</Link></p> */}
 
                 </div>

@@ -11,6 +11,15 @@ class AuthService {
         }
     }
 
+    static async ForgototpReSend(payload) {
+        try {
+            const response = await api.post(`/api/v1/forgot-password/re-send-otp`, payload);
+            return response;
+        } catch (error) {
+            throw error;
+        }
+    }
+
     static async ForgototpVerify(payload) {
         try {
             const response = await api.post(`/api/v1/forgot-password/verify-otp`, payload);

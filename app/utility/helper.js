@@ -45,6 +45,14 @@ const generateQueryString = (params) => {
   if (!params) return '';
   return new URLSearchParams(params).toString();
 };
+
+const removePageFromQueryString = (queryString) => {
+  const params = new URLSearchParams(queryString);
+  params.delete('page');
+  return params.toString();
+};
+
+
 const TruncateText = (text, length = 6) => text.length > length ? text.substring(0, length) + '...' : text;
 
 function timeAgo(dateString) {
@@ -72,5 +80,6 @@ function getInitials(name) {
     generateQueryString,
     TruncateText,
     timeAgo,
-    getInitials
+    getInitials,
+    removePageFromQueryString
   }

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
 export const handlePageError = async (error) => {
-    switch (error?.status) {
+  switch (error?.status) {
     case 503:
       redirect('/maintenance'); // Server under maintenance
     case 429:
@@ -17,7 +17,11 @@ export const handlePageError = async (error) => {
       return (
         <main className="h-auto w-full py-20 ">
           <div className="flex flex-col gap-5 items-center">
-            <h6>{error?.message || 'An unknown error occurred'}</h6>
+            <h6>
+              {error?.message === 'Unauthorized'
+                ? 'Please Login to Continue'
+                : error?.message || 'An unknown error occurred'}
+            </h6>
             <Link href="/">
               <Button variant="primary">
                 Home

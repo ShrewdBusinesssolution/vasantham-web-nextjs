@@ -50,6 +50,7 @@ export function CartModal() {
           }
           <Image
             src="/assets/svg/cart.svg"
+            className="max-sm:w-[3vw] max-sm:h-auto"
             width={20}
             height={20}
             alt="cart"
@@ -60,7 +61,7 @@ export function CartModal() {
         <SheetHeader className="border-b px-4">
           <div className="flex justify-between mb-2">
             <SheetTitle className="text-lg font-bold">My Cart</SheetTitle>
-            <IoCloseSharp onClick={()=>setCartModal(false)} className="active:opacity-65 cursor-pointer" size={24} />
+            <IoCloseSharp onClick={() => setCartModal(false)} className="active:opacity-65 cursor-pointer" size={24} />
           </div>
         </SheetHeader>
 
@@ -80,13 +81,11 @@ export function CartModal() {
               <p className="mt-4 text-start font-medium">
                 Total: <span className='font-bold'>₹ {cartSummary?.order_total ?? 0.00}</span>
 
-                {cartSummary?.order_discount !== 0 ?
+                {cartSummary && Object.keys(cartSummary).length > 0 && cartSummary.order_discount !== 0 ?
                   <span className="line-through text-[16px] text-gray-500 font-normal">
-                    ₹ {cartSummary?.order_discount_value ?? 0.00}
+                    ₹ {cartSummary.order_discount_value ?? 0.00}
                   </span>
-
-                  :
-                  null
+                  : null
                 }
               </p>
               <div className="mt-2">

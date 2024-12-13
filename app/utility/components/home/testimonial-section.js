@@ -63,7 +63,7 @@ const TestimonialsSection = ({ testimonialData }) => {
         <Swiper
           onSwiper={(swiper) => (swiperRef.current = swiper)} // Capture Swiper instance
           onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)} // Track the active slide
-          centeredSlides={true} // Center the active slide
+          centeredSlides={false} // Center the active slide
           slidesPerView={1} // Show one slide at a time by default
           spaceBetween={30} // Space between slides
           loop={true} // Enable loop
@@ -113,13 +113,13 @@ export default TestimonialsSection;
 
 const TestimonialCard = ({ name, content }) => {
   return (
-    <div className="flex flex-col space-y-4 p-8 bg-white bg-opacity-50 rounded-3xl max-md:px-5 h-full group">
+    <div className="flex flex-col space-y-4 p-8 bg-white bg-opacity-50 rounded-3xl max-md:px-5 h-full min-h-[280px] group">
       <div className="flex flex-row justify-end">
         <Image src={"/assets/basic/quotes.webp"} width={50} height={50} alt="quotes" className="group-hover:scale-125 group-hover:-rotate-3 transition-all duration-300" />
       </div>
       <div className="flex flex-col space-y-3">
-        <h4 className="text-2xl font-semibold leading-none text-primary mt-4">{name}</h4>
-        <p className=" text-[16px] leading-8 text-[#535967]">{content}</p>
+        <h4 className="text-2xl font-semibold leading-none text-primary mt-4 line-clamp-2">{name}</h4>
+        <p className=" text-[16px] leading-8 text-[#535967] line-clamp-2">{content}</p>
       </div>
     </div>
   );

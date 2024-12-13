@@ -26,7 +26,7 @@ const Home = async () => {
     return (
       <main>
         {/* Banner */}
-        <section className='flex flex-col justify-center py-16 md:py-24 bg-cover md:bg-bottom relative overflow-hidden' style={{ backgroundImage: `url("/assets/basic/home-banner.webp")` }}>
+        <section className='flex flex-col justify-center py-16 md:py-24 bg-cover md:bg-bottom relative overflow-hidden repeat-0 bg-right' style={{ backgroundImage: `url("/assets/basic/home-banner.webp")` }}>
           <div className="relative z-10 brand-container px-5 md:px-10 flex flex-col gap-6 md:gap-8">
             {/* Text */}
             <h6 className='text-[#07A889] font-medium uppercase text-[15px] animate-slide-in-top delay-100'>Expert Instruction</h6>
@@ -38,7 +38,7 @@ const Home = async () => {
               <Link href={'/courses'}>
                 <Button variant="primary" size="lg" className
                   ="rounded-sm uppercase">
-                  Book Free session
+                  Explore Courses
                 </Button>
               </Link>
               <Link href={'/courses'}>
@@ -63,7 +63,7 @@ const Home = async () => {
         {/* Our Service  */}
         <section className='bg-gradient-to-br from-[#fff] to-[#CCF4FF] from-0%'>
           <div className='flex flex-col md:flex-row gap-10 brand-container px-8 py-10'>
-            <div className='relative w-full md:w-1/2 flex items-center '>
+            <div className='relative w-full md:w-1/2 flex items-center justify-center '>
               {/* Base image with background color and opacity */}
               <div className='relative'>
                 <Image
@@ -88,8 +88,8 @@ const Home = async () => {
             <div className='w-full md:w-1/2 flex flex-col justify-center '>
               <h4 className='text-[#20AD96] text-sm uppercase'>Our services</h4>
               <div className='flex flex-col gap-5 mt-6 md:mt-10'>
-                <h2 className='text-[32px]'>Get Instant Access Pro Courses</h2>
-                <p className='text-sm w-full md:w-11/12'>The ultimate planning solution for busy women who want to reach their personal
+                <h4 className=''>Get Instant Access Pro Courses</h4>
+                <p className='text-sm w-full md:w-11/12 text-justify'>The ultimate planning solution for busy women who want to reach their personal
                   goals.Effortless comfortable eye-catching unique detail</p>
                 <div className='flex flex-col gap-2'>
                   <div className='flex items-center gap-4'>

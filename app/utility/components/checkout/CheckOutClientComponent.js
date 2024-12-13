@@ -72,7 +72,6 @@ const CheckOutClientComponent = () => {
             values.courses = cartData;
             values.coupon_code = null;
             const response = await OrderService.placeOrder(values);
-            form.reset();
 
             if (response.status) {
                 OnlineRazorpayPayment(response.data)
@@ -131,6 +130,7 @@ const CheckOutClientComponent = () => {
             setPreLoader(true)
             const response = await OrderService.OrderVerify(data);
             if (response.status) {
+                form.reset();
                 successRdirect()
             }
         } catch (error) {

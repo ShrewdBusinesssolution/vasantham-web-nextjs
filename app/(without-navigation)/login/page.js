@@ -16,7 +16,7 @@ export default async function Login() {
                     alt="Image"
                     />
                 </div>
-                <div className='py-10 md:py-0 px-5 md:px-10 xl:px-20 flex flex-col justify-center space-y-3'>
+                <div className='py-10 md:py-0 px-5 md:px-10 xl:px-20 flex flex-col justify-center space-y-3 bg-white'>
                     
                     <h6 className='font-bold'>Login your Account</h6>
                     <LoginForm />

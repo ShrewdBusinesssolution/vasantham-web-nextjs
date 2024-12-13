@@ -15,7 +15,7 @@ const Contact = () => {
         <div className="mt-3 mx-auto w-full xl:w-[650px]">
           <p className="text-sm md:text-[16px] text-center">Have a question or feedback? We are here to help you. Send us a message and get a response within 24 hours.</p>
         </div>
-        <div className="lg:px-20 py-5 mt-5">
+        <div className="lg:px-20 mt-5 -mb-5">
           <ContactForm />
         </div>
       </div>

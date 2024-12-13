@@ -213,9 +213,15 @@ export default function CourseUnitDetailclientComponent({ unitdetails, slug }) {
                 </div>
             </section>
             <section className='flex flex-col gap-5 brand-container py-5'>
-                {unitInformation?.map((item, index) => (
-                    <UnitCard key={index} data={item} linkSlug={slug} />
-                ))}
+                {unitInformation?.length > 0 ? (
+                    unitInformation.map((item, index) => (
+                        <UnitCard key={index} data={item} linkSlug={slug} />
+                    ))
+                ) : (
+                    <div className='py-10'>
+                        <p className="text-center text-gray-500">No units found as per your filter.</p>
+                    </div>
+                )}
             </section>
         </>
     )
@@ -237,13 +243,13 @@ const UnitCard = ({ data, linkSlug }) => {
                 </div>
 
                 <div className="flex flex-row gap-5 items-start md:items-center justify-start">
-                    <div className={`${data?.viewed_percentage !== 0 ? 'flex' :'hidden'} flex-row justify-center items-center gap-2 mt-2 md:mt-0`}>
+                    <div className={`${data?.viewed_percentage !== 0 ? 'flex' : 'hidden'} flex-row justify-center items-center gap-2 mt-2 md:mt-0`}>
                         {data?.viewed_percentage !== 0 ? <ProgressBar percentage={data?.viewed_percentage} /> : null}
                     </div>
-                    
-                        <Link href={`/course-unit-lesson/${linkSlug}/unit/${data.id}`}>
-                            <Button variant="primary" className="uppercase text-sm">{data?.viewed_percentage === 0 ? "start unit" : "Continue" }</Button>
-                        </Link>
+
+                    <Link href={`/course-unit-lesson/${linkSlug}/unit/${data.id}`}>
+                        <Button variant="primary" className="uppercase text-sm">{data?.viewed_percentage === 0 ? "start unit" : "Continue"}</Button>
+                    </Link>
 
 
                 </div>

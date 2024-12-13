@@ -52,7 +52,7 @@ export default function Header() {
         {/* LOGO */}
         <Link href={'/'}>
         <div className="flex items-center cursor-pointer">
-          <Image src={COLORLOGOPATH} width={150} height={75} alt="logo" className="max-sm:w-[20vw] w-[150px] h-auto" />
+          <Image src={COLORLOGOPATH} width={150} height={75} alt="logo" className="max-sm:w-[30vw] w-[150px] h-auto" />
         </div>
         </Link>
         {/* Large screens List */}
@@ -88,9 +88,10 @@ export default function Header() {
           <div>
             <Popover className="" open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
               <PopoverTrigger asChild>
-                <Button variant="outline" className="p-2 rounded-full bg-[#F7F7F7] border-none" size="icon" ><div className="">
+                <Button variant="outline" className="max-sm:p-1 p-2 rounded-full bg-[#F7F7F7] border-none" size="icon" ><div className="">
                   <Image
                     src="/assets/svg/user.svg"
+                    className="max-sm:w-[3vw] max-md:w-[20px] max-sm:h-auto"
                     width={20}
                     height={20}
                     alt="user"
@@ -101,7 +102,7 @@ export default function Header() {
                 <div className="w-[150px] p-2 cursor-pointer">
                   {session ?
                     <ul>
-                      <Link onClick={closePopover} href="/profile" ><li className="w-full p-2 hover:bg-gradient-to-br from-white to-blue-100 from-20% rounded-[10px]">My Profiles</li></Link>
+                      <Link onClick={closePopover} href="/profile" ><li className="w-full p-2 hover:bg-gradient-to-br from-white to-blue-100 from-20% rounded-[10px] "><p>My Profiles</p></li></Link>
                       <li>
                         <LogoutModal PopovercloseHandling={closePopover} />
                       </li>
@@ -122,13 +123,13 @@ export default function Header() {
           {/* Mobile Menu Icon */}
           <Button
             variant="secondary"
-            className="rounded-md shadow-primary/20 shadow-lg px-1 py-[20px] border bg-white max-lg:flex hidden"
+            className=" shadow-primary/20 shadow-lg max-sm:p-2 p-3 border bg-white max-lg:flex hidden aspect-square rounded-full"
             onClick={handleMenuClick}
           >
             {menuOpen ? (
-              <FiX className="text-primary w-8 h-8" />
+              <FiX className="text-primary max-sm:w-[4vw] max-sm:h-auto  asp w-8 h-8" />
             ) : (
-              <FiMenu className="text-primary w-8 h-8" />
+              <FiMenu className="text-primary max-sm:w-[4vw] max-sm:h-auto  asp w-8 h-8" />
             )}
           </Button>
         </div>

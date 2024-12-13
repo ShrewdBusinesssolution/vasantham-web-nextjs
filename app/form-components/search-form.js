@@ -77,12 +77,12 @@ export default function SearchForm() {
                         className='absolute top-0 right-0 m-4 p-2 bg-primary rounded-full z-60'
                         onClick={toggleSearchForm}
                     >
-                        <IoClose className='w-6 h-6 text-white' />
+                        <IoClose className=' w-6 h-6 text-white' />
                     </button>
 
                     {/* Search Form */}
                     <div className='z-40 relative rounded-2xl p-[10px] flex items-center gap-2 border-[1px] border-primary/10 shadow-primary/20 shadow-lg w-full max-w-[70%]'>
-                        <GoSearch className='w-6 h-6 text-primary' />
+                        <GoSearch className=' w-6 h-6 text-primary' />
                         <input
                             onChange={handleInputChange}
                             type="text"

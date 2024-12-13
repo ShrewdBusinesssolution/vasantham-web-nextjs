@@ -79,7 +79,7 @@ const NewsletterSection = () => {
                   <FormItem className="text-start">
                     <FormLabel className="text-lg hidden">Email Address</FormLabel>
                     <FormControl>
-                      <div className="relative">
+                      <div className="relative flex flex-col gap-3 items-end">
                         <Input
                           className=" px-5 h-[52px] border border-[#E2E2E2] placeholder:text-[#B5B6B5] text-[16px] font-arial"
                           placeholder="Enter your email"
@@ -87,7 +87,7 @@ const NewsletterSection = () => {
                         />
                         <Button
                           variant="primary"
-                          className="absolute top-[5px] right-[5px] text-sm font-medium text-center text-white uppercase bg-primary rounded-md"
+                          className="absolute top-[5px] right-[5px] max-sm:relative max-sm:top-0 max-sm:right-0 text-sm font-medium text-center text-white uppercase bg-primary rounded-md"
                           type="submit"
                           disabled={form.formState.isSubmitting}
                         >

@@ -32,6 +32,26 @@ const Filter = ({ ResponseData, subject, board, standard }) => {
 
     const [pagination, setPagination] = useState(ResponseData?.pagination ?? {});
 
+
+    useEffect(() => {
+        DeletePageParam();
+    }, [])
+
+    const DeletePageParam = () => {
+        const NewParamData = new URLSearchParams(queryParams.toString());
+        NewParamData.delete('page'); // Delete the 'board' parameter
+
+        router.push(
+            `${pathname}?${NewParamData.toString()}`,
+            undefined,
+            { shallow: true, scroll: false } // `shallow: true` helps avoid data re-fetch
+        );
+
+        GetData(NewParamData.toString());
+
+    }
+
+
     //INFO STANDARD SECTION
     const [searchData, setSearchData] = useState('');
 
@@ -136,6 +156,7 @@ const Filter = ({ ResponseData, subject, board, standard }) => {
     const scrollRight = () => {
         scrollRef.current.scrollBy({ left: 100, behavior: 'smooth' });
     };
+
 
     const HandleParams = (type, data, dl = false) => {
         // Clone the queryParams to avoid direct mutation
@@ -307,7 +328,7 @@ const Filter = ({ ResponseData, subject, board, standard }) => {
                         </PopoverTrigger>
                         <PopoverContent className="w-fit p-0 rounded-xl">
                             <div className="w-[150px] p-2 text-sm text-black">
-                                <ScrollArea className="h-[200px] rounded-md ">
+                                <ScrollArea className={`${subjectList.length > 5 ? 'h-[200px]': 'h-fit'} rounded-md `}>
 
                                     <ul>
                                         {selectedSubject !== '' ?
@@ -342,7 +363,7 @@ const Filter = ({ ResponseData, subject, board, standard }) => {
                         </PopoverTrigger>
                         <PopoverContent className="w-fit p-0 rounded-xl">
                             <div className="w-[150px] p-2 text-sm text-black">
-                                <ScrollArea className="h-[200px] rounded-md ">
+                                <ScrollArea className={`${boardList.length > 5 ? 'h-[200px]': 'h-fit'} rounded-md `}>
 
                                     <ul>
                                         {selectedBoard !== '' ?
@@ -371,7 +392,7 @@ const Filter = ({ ResponseData, subject, board, standard }) => {
             </div>
 
             <div className='brand-container'>
-                <p className='font-semibold text-[16px] mt-5'>{pagination?.total ?? 0} Courses found</p>
+                <p className='font-semibold text-[16px] mt-5'>{filteredProducts.length} Courses found</p>
                 {filteredProducts.length === 0 ?
 
                     <div className='h-[50vh] w-full grid place-content-center'>
@@ -391,17 +412,10 @@ const Filter = ({ ResponseData, subject, board, standard }) => {
             {/* Button */}
             {pagination?.total_pages > 1 && pagination?.total_pages !== page ?
                 <div className='flex flex-col justify-center items-center py-5 md:py-8'>
-                    <Button disabled={loadMore} onClick={() => { HandleParams('pagination',page + 1) }} variant="primary" className="uppercase px-5 text-sm flex items-center gap-x-2">
+                    <Button disabled={loadMore} onClick={() => { HandleParams('pagination', page + 1) }} variant="primary" className="uppercase px-5 text-sm flex items-center gap-x-2">
                         Load More courses<IoReloadOutline className={`${loadMore ? 'animate-spin' : ''}`} size={20} />
                     </Button>
                 </div>
-                //   <div className="flex justify-center py-5">
-                //     <Button onClick={() => { getWishlistData(page + 1, true) }} variant="primary" className="flex gap-2 items-center">
-                //       Load More
-                //       {loadMore ? <LuLoader2 className="w-4 h-4 text-white animate-spin" />
-                //         : null}
-                //     </Button>
-                //   </div>
                 : null}
 
         </main>

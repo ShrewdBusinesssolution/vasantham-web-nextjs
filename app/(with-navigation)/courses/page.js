@@ -2,7 +2,7 @@ import { AboutBanner } from '@/app/utility/components/utility-components'
 import React from 'react'
 import Filter from './filter'
 import CourseService from '@/app/services/api-services/course-service';
-import { generateQueryString } from '@/app/utility/helper';
+import { generateQueryString, removePageFromQueryString } from '@/app/utility/helper';
 import { handlePageError } from '@/app/utility/errorHandler';
 
 export const metadata = {
@@ -14,7 +14,8 @@ export const metadata = {
 const Course = async ({ searchParams }) => {
   try {
     const respSearchParamQuery = generateQueryString(searchParams)
-    const CourseResponse = (await CourseService.list(respSearchParamQuery)).data;
+    const removedPage = removePageFromQueryString(respSearchParamQuery)
+    const CourseResponse = (await CourseService.list(removedPage)).data;
     const standard = searchParams['standard[]'] ?? [];
     return (
       <main>
