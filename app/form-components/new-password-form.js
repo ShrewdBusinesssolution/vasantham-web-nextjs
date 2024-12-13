@@ -33,15 +33,15 @@ const formSchema = z.object({
         .min(8, {
             message: "Password must be at least 8 characters long.",
         })
-        .max(20, {
-            message: "Password must be no more than 20 characters long.",
+        .max(16, {
+            message: "Password must be no more than 16 characters long.",
         }),
     confirmPassword: z.string()
         .min(8, {
             message: "Confirm password must be at least 8 characters long.",
         })
-        .max(20, {
-            message: "Confirm password must be no more than 20 characters long.",
+        .max(16, {
+            message: "Confirm password must be no more than 16 characters long.",
         })
         .refine((data) => data.password === data.confirmPassword, {
             path: ['confirmPassword'],

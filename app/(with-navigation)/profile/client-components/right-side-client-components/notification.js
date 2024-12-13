@@ -117,7 +117,7 @@ const EmptyHandling = () => {
       <div className='flex flex-col items-center gap-3  pt-20'>
         <Image src={'/assets/images/notify-empty.png'} width={200} height={200} alt='empty notification' className='h-[200px] w-auto' />
         <div className='flex flex-col items-center gap-5'>
-          <p className='text-center'>No notifications yet. Stay tuned for updates!</p>x         
+          <p className='text-center'>No notifications yet. Stay tuned for updates!</p>         
         </div>
       </div>
 

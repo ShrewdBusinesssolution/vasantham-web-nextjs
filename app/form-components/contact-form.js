@@ -31,12 +31,18 @@ const formSchema = z.object({
         .min(1, {
             message: "Name is required.",
         })
+        .min(3, {
+            message: "Name Should be Minimum 3 Character.",
+        })
         .max(100, {
             message: "First Name must be less than 100 characters.",
         }),
     last_name: z.string()
         .min(1, {
             message: "Last Name is required.",
+        })
+        .min(3, {
+            message: "Last Name Should be Minimum 3 Character.",
         })
         .max(100, {
             message: "Last Name must be less than 100 characters.",
@@ -153,7 +159,12 @@ export default function ContactForm() {
                         <FormItem className="text-start">
                             <FormLabel className="text-lg font-dm_serif_display">Phone Number</FormLabel>
                             <FormControl>
-                                <Input type="tel" pattern="[0-9]*" inputmode="numeric" className=" px-5 h-[52px] border border-[#E2E2E2] placeholder:text-[#B5B6B5] text-[16px]" placeholder="+ 91" {...field} />
+                                <Input type="tel" pattern="[0-9]*" maxLength="10" inputmode="numeric" className=" px-5 h-[52px] border border-[#E2E2E2] placeholder:text-[#B5B6B5] text-[16px]"
+                                 onInput={(e) => {
+                                    e.target.value = e.target.value.replace(/[^0-9]/g, ''); // Only allow numeric input
+                                    field.onChange(e); // Update form field value
+                                }}
+                                placeholder="+ 91" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -168,7 +179,7 @@ export default function ContactForm() {
                         <FormItem className="text-start">
                             <FormLabel className="text-lg pb-1 font-dm_serif_display">Subject</FormLabel>
                             <FormControl >
-                                <Textarea className=" p-5 border border-[#E2E2E2] placeholder:text-[#B5B6B5] text-[16px]" rows="7" placeholder="Type here..." {...field} />
+                                <Textarea maxLength="500" className=" p-5 border border-[#E2E2E2] placeholder:text-[#B5B6B5] text-[16px]" rows="7" placeholder="Type here..." {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>

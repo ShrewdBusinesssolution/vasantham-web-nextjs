@@ -24,6 +24,7 @@ import ProfileService from "../services/api-services/profile-service";
 const formSchema = z.object({
     name: z.string()
         .min(1, { message: "Name is required." })
+        .min(3, { message: "Name Minimum 3 character required." })
         .max(50, { message: "Name must be at most 50 characters." }),
 
     date_of_birth: z.string()
@@ -173,7 +174,13 @@ export default function ProfileUpdateForm({ DialogOpenHandler }) {
                                 <FormItem className="">
                                     <FormLabel className="font-semibold text-lg">Phone Number<small className="text-red-500"> *</small></FormLabel>
                                     <FormControl>
-                                        <Input type="tel" className="placeholder:text-[#B5B6B5] focus-visible:ring-0 focus-visible:ring-offset-0" placeholder="Enter your Phone" {...field} />
+                                        <Input
+                                        onInput={(e) => {
+                                            e.target.value = e.target.value.replace(/[^0-9]/g, ''); // Only allow numeric input
+                                            field.onChange(e); // Update form field value
+                                        }}
+                                        maxLength="10"
+                                        type="tel" className="placeholder:text-[#B5B6B5] focus-visible:ring-0 focus-visible:ring-offset-0" placeholder="Enter your Phone" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>

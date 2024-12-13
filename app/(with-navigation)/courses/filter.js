@@ -87,23 +87,27 @@ const Filter = ({ ResponseData, subject, board, standard }) => {
 
     const HandleStandard = (slug) => {
         setActiveClasses((prev) => {
+            if (!Array.isArray(prev)) {
+                console.error("Expected an array but got:", prev);
+                prev = []; // Fallback to an empty array
+            }
+    
             let updatedActiveClasses;
-
-            // If the slug is already in the array, remove it
+    
             if (prev.includes(slug)) {
+                // Remove slug if it already exists
                 updatedActiveClasses = prev.filter((item) => item !== slug);
             } else {
-                // If the slug is not in the array, add it
+                // Add slug if it doesn't exist
                 updatedActiveClasses = [...prev, slug];
             }
-
+    
             // Update the URL with the new set of standards
             HandleParams('standard', updatedActiveClasses);
-
+    
             return updatedActiveClasses;
         });
     };
-
 
 
     //INFO SUBJECT SECTION
@@ -229,39 +233,49 @@ const Filter = ({ ResponseData, subject, board, standard }) => {
         }
 
         // Push the updated query parameters to the router without scrolling or re-rendering unnecessarily
-        router.push(
-            `${pathname}?${newQueryParams.toString()}`,
-            undefined,
-            { shallow: true, scroll: false } // `shallow: true` helps avoid data re-fetch
-        );
+        // router.push(
+        //     `${pathname}?${newQueryParams.toString()}`,
+        //     undefined,
+        //     { shallow: true } // `shallow: true` helps avoid data re-fetch
+        // );
+
+        router.replace(`${pathname}?${newQueryParams.toString()}`, { scroll: false });
+
+
+
+        // Restore scroll position
 
         // Call GetData to fetch or process the new data without affecting the UI scroll
         GetData(newQueryParams.toString(), paginate);
     };
 
 
-    const GetData = async (paramData, fromPageination = false) => {
+    const GetData = async (paramData, fromPagination = false) => {
         try {
-            if (fromPageination) {
-                setLoadMore(true)
+            if (fromPagination) {
+                setLoadMore(true);
             }
+    
             const response = (await CourseService.list(paramData)).data;
-
-            if (fromPageination) {
-                setFilteredProducts(prevData => [...prevData, ...response?.courses ?? []]);
-            } else {
-                setFilteredProducts(response?.courses ?? [])
-            }
-            setPagination(response?.pagination ?? [])
-            setPage(response?.pagination?.current_page)
-
+    
+            setFilteredProducts(prevData => {
+                const newCourses = response?.courses ?? [];
+    
+                // If paginating, append new courses to the existing ones
+                return fromPagination ? [...prevData, ...newCourses] : newCourses;
+            });
+    
+            // Update pagination and page state
+            setPagination(response?.pagination ?? []);
+            setPage(response?.pagination?.current_page);
+    
         } catch (error) {
-
+            console.error("Error fetching data:", error);
         } finally {
             setLoading(false);
-            setLoadMore(false)
+            setLoadMore(false);
         }
-    }
+    };
 
 
 
@@ -328,7 +342,7 @@ const Filter = ({ ResponseData, subject, board, standard }) => {
                         </PopoverTrigger>
                         <PopoverContent className="w-fit p-0 rounded-xl">
                             <div className="w-[150px] p-2 text-sm text-black">
-                                <ScrollArea className={`${subjectList.length > 5 ? 'h-[200px]': 'h-fit'} rounded-md `}>
+                                <ScrollArea className={`${subjectList.length > 5 ? 'h-[200px]' : 'h-fit'} rounded-md `}>
 
                                     <ul>
                                         {selectedSubject !== '' ?
@@ -363,7 +377,7 @@ const Filter = ({ ResponseData, subject, board, standard }) => {
                         </PopoverTrigger>
                         <PopoverContent className="w-fit p-0 rounded-xl">
                             <div className="w-[150px] p-2 text-sm text-black">
-                                <ScrollArea className={`${boardList.length > 5 ? 'h-[200px]': 'h-fit'} rounded-md `}>
+                                <ScrollArea className={`${boardList.length > 5 ? 'h-[200px]' : 'h-fit'} rounded-md `}>
 
                                     <ul>
                                         {selectedBoard !== '' ?

@@ -21,6 +21,7 @@ import { isEmptyObject } from '../reusable-components/helper';
 import { toast } from 'sonner';
 import OrderService from '@/app/services/api-services/order-service';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const formSchema = z.object({
     phone_number: z.string()
@@ -62,7 +63,7 @@ const CheckOutClientComponent = () => {
         defaultValues: {
             phone_number: "",
             country: "India",
-            state: "Tamilnadu",
+            state: "",
         },
     })
 
@@ -164,6 +165,59 @@ const CheckOutClientComponent = () => {
         router.push('/order-success')
     }
 
+    const indianStatesAndUTs = [
+        // States
+        "Andhra Pradesh",
+        "Arunachal Pradesh",
+        "Assam",
+        "Bihar",
+        "Chhattisgarh",
+        "Goa",
+        "Gujarat",
+        "Haryana",
+        "Himachal Pradesh",
+        "Jharkhand",
+        "Karnataka",
+        "Kerala",
+        "Madhya Pradesh",
+        "Maharashtra",
+        "Manipur",
+        "Meghalaya",
+        "Mizoram",
+        "Nagaland",
+        "Odisha",
+        "Punjab",
+        "Rajasthan",
+        "Sikkim",
+        "Tamil Nadu",
+        "Telangana",
+        "Tripura",
+        "Uttar Pradesh",
+        "Uttarakhand",
+        "West Bengal",
+        "Andaman and Nicobar Islands",
+        "Chandigarh",
+        "Dadra and Nagar Haveli and Daman and Diu",
+        "Delhi",
+        "Jammu and Kashmir",
+        "Ladakh",
+        "Lakshadweep",
+        "Puducherry"
+    ];
+
+    if (cartData.length === 0) {
+        return (
+            <div className='brand-container py-20 flex  flex-col justify-center items-center gap-5 bg-white'>
+                <h6>Cart is Empty</h6>
+                <Link href={'/courses'} className='' >
+                    <Button variant="primary">
+                        Explore Course
+                    </Button>
+                </Link>
+            </div>
+        )
+    }
+
 
     return (
         <main className='bg-[#FCFCFC] py-10 md:px-6 lg:px-10'>
@@ -181,7 +235,13 @@ const CheckOutClientComponent = () => {
                                         <FormItem className="text-start">
                                             <FormLabel className="font-bold text-[18px]">Phone Number</FormLabel>
                                             <FormControl>
-                                                <Input className=" px-5 h-[52px] border border-[#E2E2E2] placeholder:text-[#B5B6B5] text-[16px] font-arial" placeholder="Enter Phone Number" {...field} />
+                                                <Input
+                                                    onInput={(e) => {
+                                                        e.target.value = e.target.value.replace(/[^0-9]/g, ''); // Only allow numeric input
+                                                        field.onChange(e); // Update form field value
+                                                    }}
+                                                    maxLength="10"
+                                                    className=" px-5 h-[52px] border border-[#E2E2E2] placeholder:text-[#B5B6B5] text-[16px] font-arial" placeholder="Enter Phone Number" {...field} />
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>
@@ -230,23 +290,26 @@ const CheckOutClientComponent = () => {
                                     control={form.control}
                                     name="state"
                                     render={({ field }) => (
-                                        <FormItem className=" gap-x-2  ">
+                                        <FormItem className="gap-x-2">
                                             <FormLabel className="font-bold text-[18px]">
-                                                Country
-                                                {/* <small className="text-primary">*</small> */}
+                                                State
                                             </FormLabel>
                                             <div className="flex flex-col">
                                                 <FormControl>
                                                     <Select
-                                                        className="bg-white rounded-lg "
+                                                        className="bg-white rounded-lg"
                                                         onValueChange={field.onChange}
                                                         defaultValue={field.value}
                                                     >
-                                                        <SelectTrigger className={`px-5 h-[52px] border border-[#E2E2E2]  text-[16px] font-arial ${field.value === "" ? 'text-[#B5B6B5]' : ''}`}>
+                                                        <SelectTrigger className={`px-5 h-[52px] border border-[#E2E2E2] text-[16px] font-arial ${field.value === "" ? 'text-[#B5B6B5]' : ''}`}>
                                                             <SelectValue placeholder="Choose State" />
                                                         </SelectTrigger>
                                                         <SelectContent>
-                                                            <SelectItem value="Tamilnadu">Tamilnadu</SelectItem>
+                                                            {indianStatesAndUTs.map((state) => (
+                                                                <SelectItem key={state} value={state}>
+                                                                    {state}
+                                                                </SelectItem>
+                                                            ))}
                                                         </SelectContent>
                                                     </Select>
                                                 </FormControl>
@@ -280,7 +343,12 @@ const CheckOutClientComponent = () => {
                                     <p className='font-semibold'>Total</p>
                                     <p className=' font-semibold'>₹ {cartSummary?.order_total ?? 0.00}</p>
                                 </div>
-                                <p className='text-[#535967] text-lg'>By completing your purchase you agree to these <span className='text-primary underline decoration-1'>Terms of Service.</span></p>
+                                <div className='flex gap-2 flex-wrap items-center'>
+                                    <p className='text-[#535967] text-lg'>By completing your purchase you agree to these </p>
+                                    <Link href="/terms-and-conditions" className="text-primary underline underline-offset-2 decoration-1">
+                                        Terms of Service.
+                                    </Link>
+                                </div>
                                 <Button type="submit" className="uppercase w-full mt-4" variant="primary">Proceed to Pay</Button>
                             </div>
                         </div>

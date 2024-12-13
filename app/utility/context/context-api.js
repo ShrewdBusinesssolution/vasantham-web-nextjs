@@ -55,7 +55,7 @@ export const AuthProvider = ({ children }) => {
 
     const getCompanyInformation = async () => {
         try {
-            setCompanyInfo((await BasicService.GetCompanyInfo()).data);
+            setCompanyInfo((await BasicService.GetCompanyInfo()));
         } catch (error) { 
         }
     };

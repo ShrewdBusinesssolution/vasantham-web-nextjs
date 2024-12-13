@@ -68,7 +68,7 @@ const Courses = () => {
           <main>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center'>
               {courseList?.map((item, index) => (
-                <ProductCard key={index} product={item} homePage={true} />
+                <ProductCard key={index} product={item} homePage={false} />
               ))}
             </div>
             {PaginationData?.total_pages > 1 && PaginationData?.total_pages !== page ?

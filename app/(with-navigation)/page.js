@@ -41,7 +41,7 @@ const Home = async () => {
                   Explore Courses
                 </Button>
               </Link>
-              <Link href={'/courses'}>
+              <Link href={'/about'}>
                 <Button variant="primary" size="lg" className="bg-[#07A889] rounded-sm uppercase">
                   Learn More
                 </Button>
