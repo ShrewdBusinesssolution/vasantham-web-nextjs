@@ -66,6 +66,8 @@ export default function Footer() {
 
       <div className="brand-container flex justify-between items-center flex-wrap gap-5 py-3">
         <p className="text-white text-sm">&copy; Copyright 2024 Vasantham E-Learning. All rights reserved.</p>
+        <p className="text-white text-sm">Developed and Maintained by Shrewd Business Solutions.</p>
+
         <div className="flex items-center gap-3">
           {socialLink.length > 0 ? (
             socialLink.map((item, index) => (
@@ -80,10 +82,10 @@ export default function Footer() {
       </div>
 
       <div className="w-fit h-fit fixed z-50 bottom-5 right-5">
-          <Link href="https://wa.me/1234567890" target="_blank" >
+        <Link href="https://wa.me/1234567890" target="_blank" >
           <Image src={`/assets/svg/whatsapp.svg`} width={32} height={32} alt={"whatsapp"} />
 
-          </Link>
+        </Link>
       </div>
     </footer>
 
