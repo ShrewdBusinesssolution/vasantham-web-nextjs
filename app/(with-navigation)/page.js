@@ -32,9 +32,9 @@ const Home = async () => {
 
         {/* Why Choose section */}
         <section className='bg-[#FCFCFC]'>
-          <div className='brand-container md:pb-6 lg:pb-16'>
+          <div className='brand-container'>
             <div className='py-6 md:py-12'>
-              <HeadingSection title="Why choose us" subtitle='Why choose our courses?' />
+              <HeadingSection title="Why choose us" subtitle='Why choose Vasantham?' />
             </div>
             <WhyChooseCard />
           </div>
