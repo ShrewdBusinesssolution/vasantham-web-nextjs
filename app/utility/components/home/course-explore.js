@@ -62,11 +62,11 @@ const CourseExploreSection = ({ standards, courses }) => {
           ))}
         </div>
           {/* Content section */}
-          <div className="py-10 max-sm:px-5 px-10">
+          <div className="py-10 max-sm:px-5 px-10 w-full flex justify-center items-center">
             {loading ? (
               <Spinner />
             ) : courseData?.length > 0 ? (
-              <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8'>
+              <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 w-full'>
 
                 {courseData?.map((product, index) => (
                   <ProductCard key={index} product={product} homePage={false} />
