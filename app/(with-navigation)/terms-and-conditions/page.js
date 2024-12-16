@@ -1,9 +1,7 @@
-import BasicService from "../../services/api-services/basic-service";
 import { handlePageError } from "../../utility/errorHandler";
 
 const Terms = async () => {
     try {
-        const data = (await BasicService.TermsCondition());
         return (
             <div className="brand-container py-10 space-y-3">
                 <Heading>

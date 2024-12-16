@@ -190,10 +190,10 @@ const ProductCard = ({ product, homePage, fromwalkingUser = true }) => {
         </button>
       )}
       <Link href={link}>
-        <div className="p-4 space-y-3 md:py-5 lg:py-8">
-          <h3 className="text-[13px] text-secondary font-semibold uppercase  line-clamp-1">
+        <div className="p-4 space-y-3 ">
+          {/* <h3 className="text-[13px] text-secondary font-semibold uppercase  line-clamp-1 ">
             {product?.subject?.name}
-            </h3>
+            </h3> */}
           {/* Reviews */}
           <div className="flex flex-row items-center space-x-1">
             <p className="text-sm mt-1">{product.ratings}</p>
@@ -202,7 +202,7 @@ const ProductCard = ({ product, homePage, fromwalkingUser = true }) => {
             </span>
             <span className="text-[#979797]">(22 reviews)</span>
           </div>
-          <h2 className="text-[16px] md:text-lg lg:text-[19px] leading-normal font-bold text-gray-800 max-sm:w-[80vw] line-clamp-1">
+          <h2 className="text-[16px] md:text-lg lg:text-[19px] leading-normal font-bold text-gray-800 max-sm:w-[80vw] line-clamp-2">
             {product.name}
           </h2>
           {/* Info */}

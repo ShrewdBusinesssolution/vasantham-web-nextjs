@@ -75,12 +75,13 @@ const About = async () => {
               join with us
             </div>
             <h2 className="text-lg md:text-[22px] lg:text-[24px] font-bold leading-normal text-center text-neutral-800 px-5 w-full">
-              Start today for getting Online Certification You can be your own
-              guiding star with our help!
+            Attend our assessment to get to know your subject knowledge
             </h2>
+            <Link href={'/courses'}>
             <Button variant="primary" className="w-fit text-sm font-medium text-center text-white uppercase bg-primary rounded-md">
               Get started now
             </Button>
+            </Link>
           </div>
         </div>
       </section>

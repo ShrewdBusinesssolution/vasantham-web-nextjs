@@ -34,14 +34,14 @@ export default function Footer() {
   return (
     <footer className="bg-[#2F2F2F]">
       <div className="brand-container py-10 flex justify-between flex-wrap gap-5">
-        <div className="space-y-4">
-          <Image src={WHITELOGOPATH} width={200} height={100} className="w-[200px] h-auto" alt="logo" />
-          <p className="text-white font-light lg:w-[450px] xl:w-[450px]">
+        <div className="">
+          <Image src={WHITELOGOPATH} width={200} height={100} className="w-[300px] h-auto" alt="logo" />
+          {/* <p className="text-white font-light lg:w-[450px] xl:w-[450px]">
             Veniam Sequi molestias aut necessitatibus optio magni at
             natus accusamus.Lorem ipsum dolor sit amet,
             consectetur adipisicin gelit, sed do eiusmod tempor
             incididunt .
-          </p>
+          </p> */}
         </div>
         <ul className="flex flex-col gap-3 text-white">
           <li><p className="text-white font-bold text-lg md:text-lg xl:text-xl mb-3">Explore</p></li>
@@ -50,16 +50,13 @@ export default function Footer() {
         </ul>
         <ul className="flex flex-col gap-3 text-white">
           <li><p className="text-white font-bold text-lg md:text-lg xl:text-xl mb-3">Courses</p></li>
-          <li><Link href={'/seo'}>SEO Business</Link></li>
-          <li><Link href={'/digital-marketing'}>Digital Marketing</Link></li>
-          <li><Link href={'/graphic-design'}>Graphic Design</Link></li>
-          <li><Link href={'/site-development'}>Site Development</Link></li>
-          <li><Link href={'/social-marketing'}>Social Marketing</Link></li>
+          <li><Link href={'/courses'}>Class 12</Link></li>
+          <li><Link href={'/courses'}>Class 10</Link></li>
           <li><Link href={'/courses'} className="underline text-[#07A889]">View All</Link></li>
         </ul>
         <ul className="flex flex-col gap-3 text-white">
           <li><p className="text-white font-bold text-lg md:text-lg xl:text-xl mb-3">Legal</p></li>
-          <li><Link href={'/terms-and-conditions'}>Terms & Condition</Link></li>
+          <li><Link href={'/terms-and-conditions'} scroll={false}>Terms & Condition</Link></li>
           <li><Link href={'/privacy-policy'}>Privacy Policy</Link></li>
           <li><Link href={'/return-policy'}>Return Policy</Link></li>
         </ul>

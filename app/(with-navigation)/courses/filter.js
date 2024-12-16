@@ -87,6 +87,7 @@ const Filter = ({ ResponseData, subject, board, standard }) => {
 
     const HandleStandard = (slug) => {
         setActiveClasses((prev) => {
+            // Ensure it's always an array
             if (!Array.isArray(prev)) {
                 console.error("Expected an array but got:", prev);
                 prev = []; // Fallback to an empty array
@@ -95,14 +96,14 @@ const Filter = ({ ResponseData, subject, board, standard }) => {
             let updatedActiveClasses;
     
             if (prev.includes(slug)) {
-                // Remove slug if it already exists
-                updatedActiveClasses = prev.filter((item) => item !== slug);
+                // If the current slug is already active, clear it
+                updatedActiveClasses = [];
             } else {
-                // Add slug if it doesn't exist
-                updatedActiveClasses = [...prev, slug];
+                // Set only the current slug as active
+                updatedActiveClasses = [slug];
             }
     
-            // Update the URL with the new set of standards
+            // Update the URL with the new standard
             HandleParams('standard', updatedActiveClasses);
     
             return updatedActiveClasses;
@@ -232,19 +233,7 @@ const Filter = ({ ResponseData, subject, board, standard }) => {
                 break;
         }
 
-        // Push the updated query parameters to the router without scrolling or re-rendering unnecessarily
-        // router.push(
-        //     `${pathname}?${newQueryParams.toString()}`,
-        //     undefined,
-        //     { shallow: true } // `shallow: true` helps avoid data re-fetch
-        // );
-
         router.replace(`${pathname}?${newQueryParams.toString()}`, { scroll: false });
-
-
-
-        // Restore scroll position
-
         // Call GetData to fetch or process the new data without affecting the UI scroll
         GetData(newQueryParams.toString(), paginate);
     };
