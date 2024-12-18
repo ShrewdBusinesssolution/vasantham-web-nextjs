@@ -34,7 +34,7 @@ export default async function CourseView({ params }) {
                             <h3 className="text-sm text-secondary uppercase">Fee Details</h3>
                             <p className="font-bold text-[26px] whitespace-nowrap">₹ {Response?.sale_price} <span className="pl-1 font-semibold text-lg line-through text-gray-400 whitespace-nowrap">₹ {Response?.price}</span></p>
                             <h3 className="text-sm text-secondary uppercase mt-2">Duration</h3>
-                            <p className="font-bold text-[26px]">24 Hrs</p>
+                            <p className="font-bold text-[26px]">{Response?.duration ?? 1} hrs</p>
                             {/* Button */}
                             <AddtoCartButton product_id={Response?.id ?? 1} bought={Response?.bought} slug={params.slug} />
                         </div>

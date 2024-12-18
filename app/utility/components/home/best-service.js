@@ -23,15 +23,14 @@ const servicesData = [
   },
 ];
 
-const ServiceCard = ({ title, value, description }) => (
-  <div className="relative bg-white flex flex-col gap-5 p-3 rounded-xl hover:bg-gradient-to-br from-white to-blue-100 from-20% transition-all duration-300">
-    <h3 className="text-[16px] font-bold text-[#222] line-clamp-1">{title}</h3>
+const ServiceCard = ({ title, value }) => (
+  <div className="relative bg-white flex flex-col gap-5 p-3 rounded-xl hover:bg-gradient-to-br from-white to-blue-100 from-20% transition-all duration-300 w-full">
+    <h3 className="text-[16px] font-bold text-[#222]  ">{title}</h3>
     <h2 className="text-primary">{value}</h2>
-    <p className="text-[15px] text-[#535967]">{description}</p>
   </div>
 );
 
-const BestService = () => {
+const BestService = ({ServiceCountdata}) => {
   return (
     <main>
       <div className="flex flex-col space-y-4">
@@ -45,12 +44,11 @@ const BestService = () => {
       </div>
       {/* Cards */}
       <div className="flex flex-col md:flex-row gap-4 md:gap-6 lg:gap-10 py-10 justify-between">
-        {servicesData.map((service, index) => (
+        {ServiceCountdata.map((service, index) => (
           <ServiceCard
             key={index}
-            title={service.title}
-            value={service.value}
-            description={service.description}
+            title={service.name}
+            value={service.count}
           />
         ))}
       </div>

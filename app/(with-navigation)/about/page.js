@@ -55,7 +55,7 @@ const About = async () => {
       <section className='bg-gradient-to-br from-[#fff] to-[#CCF4FF] from-0%'>
         {/* Heading */}
         <div className='py-10'>
-          <HeadingSection title="TE GUYS BEHIND THE CURTAINS" subtitle="Whose Inspirations You Love" />
+          <HeadingSection title="THE GUYS BEHIND THE CURTAINS" subtitle="Whose Inspirations You Love" />
         </div>
         {/* ProductCard */}
         <div className='brand-container'>

@@ -29,19 +29,19 @@ export const LeftListing = ({ onSelect }) => {
       id: 'favourites',
       icon: <GoHeart size={20} />,
       title: 'Favourites',
-      description: 'view your Favourites',
+      description: 'View your Favourites',
     },
     {
       id: 'courses',
       icon: <GoFileDirectory size={20} />,
       title: 'My Courses',
-      description: 'view your Orders',
+      description: 'View your Courses',
     },
     {
       id: 'notifications',
       icon: <IoMailOpenOutline size={20} />,
       title: 'My Notifications',
-      description: 'view Notifications',
+      description: 'View Notifications',
     },
   ];
 

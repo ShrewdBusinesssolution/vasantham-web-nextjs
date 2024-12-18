@@ -6,6 +6,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Image from "next/image";
 
 const testimonials = [
     {
@@ -27,7 +28,7 @@ const testimonials = [
   
 
 
-export default function HomeBannerSlider() {
+export default function HomeBannerSlider({bannerData}) {
     const swiperRef = useRef(null);
     const [activeIndex, setActiveIndex] = useState(0);
 
@@ -50,9 +51,15 @@ export default function HomeBannerSlider() {
                 onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)} // Track active slide
                 pagination={{ clickable: true }}
             >
-                {testimonials.map((testimonial, index) => (
+                {/* {testimonials.map((testimonial, index) => (
                     <SwiperSlide key={index}>
                         <BannerCard {...testimonial} />
+                    </SwiperSlide>
+                ))} */}
+                 {bannerData?.map((data, index) => (
+                    <SwiperSlide key={index}>
+                        {/* <BannerCard {...testimonial} /> */}
+                        <Image src={data.image} width={200} height={500} className="w-full max-md:h-auto h-[calc(100vh-200px)] object-cover object-top" alt={data.image} />
                     </SwiperSlide>
                 ))}
             </Swiper>
@@ -60,7 +67,7 @@ export default function HomeBannerSlider() {
             {/* Custom Pagination */}
             <div className="absolute bottom-0 right-0 left-0 grid place-items-center z-30 py-5">
             <div className="flex gap-2 justify-center mt-10">
-                {testimonials.map((_, index) => (
+                {bannerData.map((_, index) => (
                     <button
                         key={index}
                         className={`w-2 h-2 rounded-full transition-all duration-300 ${index === activeIndex ? "bg-secondary scale-150" : "bg-[#D6D6D6]"

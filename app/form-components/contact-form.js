@@ -212,10 +212,16 @@ export default function ContactForm() {
                             </FormItem>
                         )}
                     />
-                    <Button variant="primary" className="w-fit flex gap-2 rounded-md text-[16px] uppercase" type="submit" disabled={form.formState.isSubmitting}>
+                    <Button variant="primary" className="w-fit flex gap-2 items-center rounded-md text-[14px] font-semibold uppercase h-[45px]" type="submit" disabled={form.formState.isSubmitting}>
                         Send Enquiry
                         {form.formState.isSubmitting ?
-                            <LuLoader2 className="animate-spin" /> : <IoMdArrowUp />
+                            <LuLoader2 className="animate-spin" /> : 
+                            <Image 
+                                src={'assets/svg/up-arrow.svg'}
+                                width={15}
+                                height={15}
+                                alt="up-arrow"
+                            />
                         }
 
                     </Button>

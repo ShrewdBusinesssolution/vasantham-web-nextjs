@@ -72,15 +72,15 @@ const TestimonialsSection = ({ testimonialData }) => {
 export default TestimonialsSection;
 
 const TestimonialCard = ({ name, content }) => (
-  <div className="flex flex-col space-y-4 p-8 bg-white rounded-3xl min-h-[280px] group">
+  <div className="flex flex-col space-y-4 p-8 bg-white rounded-3xl min-h-[200px] group">
     <div className="flex justify-end">
-      <Image
+      {/* <Image
         src="/assets/basic/quotes.webp"
         width={50}
         height={50}
         alt="quotes"
         className="group-hover:scale-125 group-hover:-rotate-3 transition-all duration-300"
-      />
+      /> */}
     </div>
     <h4 className="text-2xl font-semibold text-primary mt-4">{name}</h4>
     <p className="text-[16px] leading-8 text-[#535967]">{content}</p>

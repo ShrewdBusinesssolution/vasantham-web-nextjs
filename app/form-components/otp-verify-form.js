@@ -37,7 +37,7 @@ const formSchema = z.object({
 export default function OtpVerifyForm() {
     const { signUpInformation, forgotPasswordemail, setForgotPasswordemailotpVerify } = useContext(AppContext);
     const router = useRouter()
-    const DefaultTime = 180; //seconds
+    const DefaultTime = 5; //seconds
 
     const form = useForm({
         resolver: zodResolver(formSchema),

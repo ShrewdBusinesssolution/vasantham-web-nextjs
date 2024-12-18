@@ -5,6 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import React, { useContext } from "react";
 import { AppContext } from "../utility/context/context-api";
+import { TruncateText } from "../utility/helper";
 
 
 export default function Footer() {
@@ -50,15 +51,15 @@ export default function Footer() {
         </ul>
         <ul className="flex flex-col gap-3 text-white">
           <li><p className="text-white font-bold text-lg md:text-lg xl:text-xl mb-3">Courses</p></li>
-          <li><Link href={'/courses'}>Class 12</Link></li>
-          <li><Link href={'/courses'}>Class 10</Link></li>
+          {companyInfo?.course?.map((item,index)=>(
+          <li key={index}><Link href={`/course-detail/${item.slug}`}>{TruncateText(item.name, 20)}</Link></li>
+          ))}
           <li><Link href={'/courses'} className="underline text-[#07A889]">View All</Link></li>
         </ul>
         <ul className="flex flex-col gap-3 text-white">
           <li><p className="text-white font-bold text-lg md:text-lg xl:text-xl mb-3">Legal</p></li>
           <li><Link href={'/terms-and-conditions'} scroll={false}>Terms & Condition</Link></li>
           <li><Link href={'/privacy-policy'}>Privacy Policy</Link></li>
-          <li><Link href={'/return-policy'}>Return Policy</Link></li>
         </ul>
       </div>
 

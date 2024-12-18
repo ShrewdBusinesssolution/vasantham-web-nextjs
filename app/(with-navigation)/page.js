@@ -27,8 +27,7 @@ const Home = async () => {
     return (
       <main>
         {/* Banner */}
-        <HomeBannerSlider />
-
+        <HomeBannerSlider bannerData={HomedataResponse.banner} />
 
         {/* Why Choose section */}
         <section className='bg-[#FCFCFC]'>
@@ -102,7 +101,7 @@ const Home = async () => {
         {/* Best Service */}
         <section className='bg-[#F9F9F9]'>
           <div className='brand-container px-5 md:px-10'>
-            <BestService />
+            <BestService ServiceCountdata={HomedataResponse.count} />
           </div>
         </section>
 

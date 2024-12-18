@@ -22,7 +22,7 @@ const SelectTrigger = React.forwardRef(({ className, children, ...props }, ref) 
     {...props}>
     {children}
     <SelectPrimitive.Icon asChild>
-      <ChevronDown className="h-4 w-4 opacity-50" />
+      <ChevronDown className="h-4 w-4" />
     </SelectPrimitive.Icon>
   </SelectPrimitive.Trigger>
 ))
@@ -33,7 +33,7 @@ const SelectScrollUpButton = React.forwardRef(({ className, ...props }, ref) => 
     ref={ref}
     className={cn("flex cursor-default items-center justify-center py-1", className)}
     {...props}>
-    <ChevronUp className="h-4 w-4" />
+    <ChevronUp className="h-4 w-4 " />
   </SelectPrimitive.ScrollUpButton>
 ))
 SelectScrollUpButton.displayName = SelectPrimitive.ScrollUpButton.displayName

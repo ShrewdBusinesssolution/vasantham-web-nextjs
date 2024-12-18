@@ -301,7 +301,7 @@ const CheckOutClientComponent = () => {
                                                         onValueChange={field.onChange}
                                                         defaultValue={field.value}
                                                     >
-                                                        <SelectTrigger className={`px-5 h-[52px] border border-[#E2E2E2] text-[16px] font-arial ${field.value === "" ? 'text-[#B5B6B5]' : ''}`}>
+                                                        <SelectTrigger className={`px-5 h-[52px] border border-[#E2E2E2] text-[16px] font-arial ${field.value === "" ? '' : ''}`}>
                                                             <SelectValue placeholder="Choose State" />
                                                         </SelectTrigger>
                                                         <SelectContent>

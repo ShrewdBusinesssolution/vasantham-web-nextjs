@@ -280,4 +280,39 @@ const AddtoCartButton = ({ product_id, bought = false, slug }) => {
   );
 };
 
-export { HeadingSection, AboutBanner, WorkingStaffs, StatCard, ProductCard, CourseBanner, CustomizedAlert, AddtoCartButton }
+const Heading = ({ children }) => {
+  return (
+      <h3>
+          {children}
+      </h3>
+  )
+}
+
+const SubHeading = ({ children }) => {
+  return (
+      <h5>
+          {children}
+      </h5>
+  )
+}
+
+const ParagraphHeading = ({ children }) => {
+  return (
+      <h6>
+          {children}
+      </h6>
+  )
+}
+
+const Paragraph = ({ children, className }) => {
+  return (
+      <p className={`text-justify ${className}`}>
+          {children}
+      </p>
+  )
+}
+
+export { HeadingSection, AboutBanner, WorkingStaffs, StatCard, ProductCard, CourseBanner, CustomizedAlert, AddtoCartButton,
+
+  Heading, SubHeading, ParagraphHeading, Paragraph
+ }

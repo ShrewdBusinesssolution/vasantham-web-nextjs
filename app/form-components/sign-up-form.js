@@ -139,7 +139,7 @@ export default function SignUpForm() {
                                             {passwordtype ? <VscEye size={20} className="hover:text-primary" /> : <PiEyeClosed size={20} className="hover:text-primary" />}
                                         </div>
                                     </div>
-                                    <Input type={!passwordtype ? 'password' : 'text'} maxLength={15} className={`text-md placeholder:text-[#B5B6B5] ${!passwordtype && field.value.length !== 0 ? 'text-3xl' : 'text-md'}`} placeholder="Enter Password" {...field} />
+                                    <Input type={!passwordtype ? 'password' : 'text'}  className={`text-md placeholder:text-[#B5B6B5] ${!passwordtype && field.value.length !== 0 ? 'text-3xl' : 'text-md'}`} placeholder="Enter Password" {...field} />
                                 </div>
 
                             </FormControl>
